@@ -245,9 +245,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b88b91706d29a48aa47f29d2bbad83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 5, y: 5}
-  startPos: 0
-  roomPrefab: {fileID: 2543547274887991777, guid: 1393311b6dd1c724fac40e4d13dd484a, type: 3}
+  size: {x: 10, y: 10}
+  startPos: 5
+  rooms:
+  - room: {fileID: 2543547274887991777, guid: 1393311b6dd1c724fac40e4d13dd484a, type: 3}
+    minPosition: {x: 0, y: 0}
+    maxPosition: {x: 5, y: 5}
+    obligatory: 0
+  - room: {fileID: 2543547274887991777, guid: 68c4c90f579b0014eb13627cce14725b, type: 3}
+    minPosition: {x: 5, y: 5}
+    maxPosition: {x: 8, y: 8}
+    obligatory: 0
+  - room: {fileID: 2543547274887991777, guid: 2cf3bbc3b761fa142b5d27e3634ce849, type: 3}
+    minPosition: {x: 8, y: 8}
+    maxPosition: {x: 10, y: 10}
+    obligatory: 0
   offset: {x: 10, y: 10}
 --- !u!4 &1417736902
 Transform:

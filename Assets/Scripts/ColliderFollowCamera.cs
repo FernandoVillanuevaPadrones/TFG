@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ColliderFollowCamera : MonoBehaviour
 {
-    [SerializeField] private GameObject Camera;
+    [SerializeField] private Transform Camera;
+    [SerializeField] private Transform feet;
 
     private void FixedUpdate()
     {
-        transform.position = Camera.transform.position;
+        gameObject.transform.position = new Vector3(Camera.position.x, feet.position.y, Camera.position.z);
     }
 }
