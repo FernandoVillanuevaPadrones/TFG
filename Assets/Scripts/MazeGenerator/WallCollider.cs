@@ -6,12 +6,13 @@ public class WallCollider : MonoBehaviour
 {
     private void Start()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.1f);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.2f);
 
         foreach (Collider collider in colliders)
         {
             if (collider.tag == "Wall")
             {
+                Debug.Log(name);
                 Destroy(gameObject);
                 return;
 
