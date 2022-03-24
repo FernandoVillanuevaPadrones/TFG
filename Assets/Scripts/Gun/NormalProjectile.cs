@@ -28,8 +28,20 @@ public class NormalProjectile : Projectile
     {
         if (other.transform.tag == "Enemy")
         {
+            //other.gameObject.GetComponent<BaseEnemy>().DoDamage(_weapon.GetDamage());
             
-            Debug.Log("Hit");
+
+            other.gameObject.GetComponentInParent<BaseEnemy>().DoDamage(_weapon.GetDamage());
+            Destroy(gameObject);
+        }
+        else if (other.transform.tag == "VelociRaptor")
+        {
+            var enemyScript = other.gameObject.GetComponentInParent<VelociRapt>();
+            enemyScript.DoDamage(_weapon.GetDamage());
+            if (enemyScript.currentState == VelociRapt.State.Idle)
+            {
+                enemyScript.GetAlerted();
+            }
         }
     }
 }

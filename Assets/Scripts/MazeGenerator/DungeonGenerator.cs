@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DungeonGenerator : MonoBehaviour
 {
+    public int level = 1;
+    private float levelRooms = 15;
+    private int currentRooms = 0;
     public class Cell
     {
         public bool visited = false;
@@ -40,9 +43,9 @@ public class DungeonGenerator : MonoBehaviour
 
     List<Cell> board;
 
-    // Start is called before the first frame update
     void Start()
     {
+        CalculateRooms();
         MazeGenerator();
     }
 
@@ -89,7 +92,7 @@ public class DungeonGenerator : MonoBehaviour
 
                     var newRoom = Instantiate(rooms[randomRoom].room, new Vector3(i * offset.x, transform.position.y, -j * offset.y), Quaternion.identity, transform).GetComponent<RoomScript>();
                     newRoom.UpdateRoom(currentCell.status);
-                    newRoom.name += " " + i + "-" + j;
+                    newRoom.name += " " + i + "-" + j ;
 
                 }
             }
@@ -121,10 +124,17 @@ public class DungeonGenerator : MonoBehaviour
 
             board[currentCell].visited = true;
 
-            if (currentCell == board.Count - 1)
+            /*
+            if (currentCell == board.Count - 1 || currentRooms + 1 >= totalRooms)
+            {
+                break;
+            }*/
+
+            if (currentRooms + 1 >= levelRooms)
             {
                 break;
             }
+            currentRooms++;
 
             //Check the cell's neighbors
             List<int> neighbors = CheckNeighbors(currentCell);
@@ -142,6 +152,7 @@ public class DungeonGenerator : MonoBehaviour
             }
             else
             {
+                
                 path.Push(currentCell);
 
                 int newCell = neighbors[Random.Range(0, neighbors.Count)];
@@ -214,5 +225,11 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         return neighbors;
+    }
+
+
+    private void CalculateRooms() {
+        levelRooms = 5 + level + Random.Range(2, 3);
+        Debug.Log("TotalRooms: " + levelRooms);    
     }
 }

@@ -22,15 +22,26 @@ public class Player : MonoBehaviour
     public InputActionReference _useObjectInput;
 
 
+    private float _currentHealth;
+    private float _currentSpeed;
+
     private void Start()
     {
-        _actionContinuous.moveSpeed = _speed;
+        _currentHealth = _health;
+        _currentSpeed = _speed;
+
+        _actionContinuous.moveSpeed = _currentSpeed;
         _useObjectInput.action.started += UseObject;
         
+
     }
 
     private void UseObject(InputAction.CallbackContext obj)
     {
+        if (!_directInteractor.hasSelection)
+        {
+            return;
+        }
         Object _currentObject = _directInteractor.selectTarget.GetComponent<Object>();
         float _amountChange = _currentObject._ammountToChange;
 
@@ -84,13 +95,22 @@ public class Player : MonoBehaviour
 
     public void ChangeHealth(float num)
     {
-        _health += num;
-        _health = Mathf.Clamp(_health, 0f, 100f);
+        _currentHealth += num;
+        Debug.Log("Current health: " + _currentHealth);       
+        _currentHealth = Mathf.Clamp(_currentHealth, 0f, 100f);
 
-        if (_health <= 0f)
+        if (_currentHealth <= 0f)
         {
             Debug.Log("MUERTO, HACER CODIGO");
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag("Room"))
+        {
+            other.transform.GetComponentInParent<RoomScript>().CloseDoors();
+        }
     }
 }

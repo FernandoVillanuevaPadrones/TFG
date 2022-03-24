@@ -32,7 +32,13 @@ public class Weapon : MonoBehaviour
     //---------- Shoot Changes --------------
     [Range(1,3)]
     [SerializeField]private int _numberShoots = 1;
-    
+
+
+
+    private float _currentDamage;
+    private float _currentShootForce;
+    private float _currentFireRate;
+
 
     protected virtual void Awake()
     {
@@ -42,12 +48,12 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         _waitShoot = new WaitForSeconds(1 / _fireRate);
-        
+
+        RestartStats();
     }
 
     private void ShootTrigger(InputAction.CallbackContext obj)
-    {
-        
+    {        
         StartCoroutine(Shoot());
     }
     private void StopTrigger(InputAction.CallbackContext obj)
@@ -92,21 +98,28 @@ public class Weapon : MonoBehaviour
     }
     public float GetShootingForce()
     {
-        return _shootForce;
+        return _currentShootForce;
     }
     public float GetDamage()
     {
-        return _damage;
+        return _currentDamage;
     }
     public void ChangeNumberShoots(int num)
     {
         _numberShoots = Mathf.Clamp(num, 1, 3);
     }
     public void ChangeFireRate(float num) {
-        _fireRate += num;
+        _currentFireRate += num;
         _waitShoot = new WaitForSeconds(1 / _fireRate);
     }
     public void ChangeDamage(float num) {
-        _damage += num;
+        _currentDamage += num;
+    }
+
+    public void RestartStats()
+    {
+        _currentDamage = _damage;
+        _currentShootForce = _shootForce;
+        _currentFireRate = _fireRate;
     }
 }

@@ -12,7 +12,6 @@ public class WallCollider : MonoBehaviour
         {
             if (collider.tag == "Wall")
             {
-                Debug.Log(name);
                 Destroy(gameObject);
                 return;
 

@@ -8,6 +8,46 @@ public class RoomScript : MonoBehaviour
     public GameObject[] walls;
     public GameObject[] doors;
 
+    [SerializeField] private Animator[] doorsAnimators; 
+
+    private bool doorsOpen = false;
+    private bool playerInRoom = false;
+    private GameObject enemiesGB;
+
+    private void Start()
+    {
+        enemiesGB = transform.Find("Enemies").gameObject;
+    }
+    private void Update()
+    {
+        if (playerInRoom)
+        {
+            if (enemiesGB.transform.childCount == 0)
+            {
+                OpenDoors();
+                playerInRoom = false;
+            }
+        }
+    }
+    public void OpenDoors()
+    {
+        foreach (var door in doorsAnimators)
+        {
+            door.GetComponent<Animator>().SetBool("OpenDoor", true);
+            door.GetComponent<Animator>().SetBool("CloseDoor", false);
+        }
+    }
+    public void CloseDoors()
+    {
+        foreach (var door in doorsAnimators)
+        {
+            door.GetComponent<Animator>().SetBool("CloseDoor", true);
+            door.GetComponent<Animator>().SetBool("OpenDoor", false);
+        }
+
+        playerInRoom = true;
+    }
+
     public void UpdateRoom(bool[] status) {
         for (int i = 0; i < status.Length; i++)
         {
@@ -15,4 +55,5 @@ public class RoomScript : MonoBehaviour
             doors[i].SetActive(status[i]);
         }
     }
+
 }

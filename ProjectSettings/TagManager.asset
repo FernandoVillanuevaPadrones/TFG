@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Wall
+  - VelociRaptor
+  - VelociRaptorMain
+  - Room
   layers:
   - Default
   - TransparentFX
