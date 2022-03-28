@@ -8,6 +8,8 @@ public class VelociRapt : BaseEnemy
     [SerializeField] private float alertRadius = 1f;
     [SerializeField] private float turnSpeed = 1f;
     [SerializeField] private float timeToTurn;
+    [SerializeField] private float showSpeed = 0.1f;
+    [SerializeField] private Material velociMaterial;
    
 
 
@@ -20,12 +22,11 @@ public class VelociRapt : BaseEnemy
     private string runString = "Run";
     private Vector3 objetivePos;
 
-
     public override void Start()
     {
         base.Start();
         animator = GetComponent<Animator>();
-
+        velociMaterial.SetFloat("DissolveProgressFloat", 1f);
     }
 
     void Update()
@@ -84,6 +85,19 @@ public class VelociRapt : BaseEnemy
         animator.SetBool(runString, true);
     }
 
+    public IEnumerator Show()
+    {
+        var currentFloat = velociMaterial.GetFloat("DissolveProgressFloat");
+        while (currentFloat >= 0.01f)
+        {
+            currentFloat = velociMaterial.GetFloat("DissolveProgressFloat");
+            velociMaterial.SetFloat("DissolveProgressFloat", currentFloat - showSpeed);
+            yield return new WaitForSeconds(0f);
+        }
+        Debug.Log("MUERTO, HACER CODIGO");
+
+        yield return null;
+    }
     
 
     public void GetAlerted()
@@ -130,4 +144,5 @@ public class VelociRapt : BaseEnemy
         }
     }
 
+    
 }

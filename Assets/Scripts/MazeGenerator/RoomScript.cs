@@ -10,7 +10,7 @@ public class RoomScript : MonoBehaviour
 
     [SerializeField] private Animator[] doorsAnimators; 
 
-    private bool doorsOpen = false;
+    private bool enemiesShown = false;
     private bool playerInRoom = false;
     private GameObject enemiesGB;
 
@@ -26,6 +26,23 @@ public class RoomScript : MonoBehaviour
             {
                 OpenDoors();
                 playerInRoom = false;
+                GameManager.HideVelociraptos();
+            }
+            else
+            {
+                if (!enemiesShown)
+                {
+                    enemiesShown = true;
+                    for (int i = 0; i < enemiesGB.transform.childCount; i++)
+                    {
+                        Debug.Log("Hijos: " + enemiesGB.transform.childCount);
+                        if (enemiesGB.transform.GetChild(i).tag == "VelociRaptorMain")
+                        {
+                            StartCoroutine(enemiesGB.transform.GetChild(i).GetComponent<VelociRapt>().Show());
+                            break;
+                        }                   
+                    }
+                }
             }
         }
     }
