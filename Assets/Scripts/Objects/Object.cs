@@ -10,7 +10,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Object : MonoBehaviour
 {
     public enum ObjectType { fireRate, damage, speed, health, cooldown, special}
-    public enum SpecialType { Nothing ,DoubleShoot, TripleShoot, Infinity, BombShoot}
+    public enum SpecialType { Nothing, DoubleShoot, TripleShoot, Infinity, BombShoot, HolyShoot}
 
     public ObjectType type = ObjectType.fireRate;
     public SpecialType special = SpecialType.Nothing;

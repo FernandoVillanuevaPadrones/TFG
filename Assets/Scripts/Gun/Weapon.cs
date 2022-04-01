@@ -22,8 +22,6 @@ public class Weapon : MonoBehaviour
     [Header("Bullet Prefabs")]
     [SerializeField] private Projectile _bulletPrefab;
 
-    [Header("Controls")]
-    [SerializeField] private InputActionReference _shootInput;
 
 
     private WaitForSeconds _waitShoot;
@@ -38,27 +36,40 @@ public class Weapon : MonoBehaviour
     private float _currentDamage;
     private float _currentShootForce;
     private float _currentFireRate;
+    private bool _shooting = false;
 
+    private GameObject leftBoquilla;
+    private GameObject rightBoquilla;
 
     protected virtual void Awake()
     {
-        _shootInput.action.started += ShootTrigger;
-        _shootInput.action.canceled += StopTrigger;
+        
     }
     private void Start()
     {
         _waitShoot = new WaitForSeconds(1 / _fireRate);
 
         RestartStats();
+
+        leftBoquilla = transform.Find("BoquillaIzq").gameObject;
+        rightBoquilla = transform.Find("BoquillaDer").gameObject;
+
+        leftBoquilla.SetActive(false);
+        rightBoquilla.SetActive(false);
     }
 
-    private void ShootTrigger(InputAction.CallbackContext obj)
-    {        
-        StartCoroutine(Shoot());
+    public void ShootTrigger()
+    {
+        if (!_shooting)
+        {
+            _shooting = true;
+            StartCoroutine(Shoot());
+        }
     }
-    private void StopTrigger(InputAction.CallbackContext obj)
+    public void StopTrigger()
     {
         StopAllCoroutines();
+        _shooting = false;
     }
     private IEnumerator Shoot()
     {
@@ -106,7 +117,20 @@ public class Weapon : MonoBehaviour
     }
     public void ChangeNumberShoots(int num)
     {
+        if (_numberShoots == 1 && num != 1)
+        {
+            leftBoquilla.SetActive(true);
+            rightBoquilla.SetActive(true);
+        }
+        else if (_numberShoots != 1 && num == 1)
+        {
+            leftBoquilla.SetActive(false);
+            rightBoquilla.SetActive(false);
+        }
+
         _numberShoots = Mathf.Clamp(num, 1, 3);
+
+        
     }
     public void ChangeFireRate(float num) {
         _currentFireRate += num;
