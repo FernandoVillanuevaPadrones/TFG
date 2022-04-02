@@ -462,7 +462,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4531159905885198315}
-  - component: {fileID: 763753719704945703}
   m_Layer: 0
   m_Name: Up Door
   m_TagString: Untagged
@@ -489,18 +488,6 @@ Transform:
   m_Father: {fileID: 3221015211491911955}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &763753719704945703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 629008842022282744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78ed6511d8b09c44ba2b2013af5d493e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &638877806652946115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,7 +1251,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4442563153035956964}
-  - component: {fileID: 2754634438424438866}
   m_Layer: 0
   m_Name: Left Door
   m_TagString: Untagged
@@ -1291,18 +1277,6 @@ Transform:
   m_Father: {fileID: 3221015211491911955}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2754634438424438866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863704310517883127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78ed6511d8b09c44ba2b2013af5d493e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1012811377015531912
 GameObject:
   m_ObjectHideFlags: 0
@@ -3300,6 +3274,7 @@ Transform:
   - {fileID: 2667281673451933538}
   - {fileID: 2667281674045166359}
   - {fileID: 2667281673364795135}
+  - {fileID: 6101321230443438989}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4997,6 +4972,36 @@ Transform:
   - {fileID: 7367121190718945584}
   m_Father: {fileID: 3221015211491911955}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5071906752076237886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6101321230443438989}
+  m_Layer: 0
+  m_Name: Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6101321230443438989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5071906752076237886}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3221015211448598840}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5083615743397658109
 GameObject:
@@ -7164,7 +7169,6 @@ GameObject:
   - component: {fileID: 3131858277560749006}
   - component: {fileID: 8667760128812644151}
   - component: {fileID: 7628725276095331100}
-  - component: {fileID: 121626566408837949}
   m_Layer: 0
   m_Name: Up Wall
   m_TagString: Untagged
@@ -7248,18 +7252,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.300006, y: 9.000003, z: 6.0000024}
   m_Center: {x: 0.0000022947788, y: 4.4999995, z: 3.0000012}
---- !u!114 &121626566408837949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6950962862893941739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78ed6511d8b09c44ba2b2013af5d493e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7007241486939213780
 GameObject:
   m_ObjectHideFlags: 0
@@ -7856,7 +7848,6 @@ GameObject:
   - component: {fileID: 2750866901520465769}
   - component: {fileID: 8435668386247754640}
   - component: {fileID: 7243265281333989307}
-  - component: {fileID: 930988288455290778}
   m_Layer: 0
   m_Name: Left Wall
   m_TagString: Untagged
@@ -7940,18 +7931,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.300006, y: 9.000003, z: 6.0000024}
   m_Center: {x: 0.0000022947788, y: 4.4999995, z: 3.0000012}
---- !u!114 &930988288455290778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7867038375815444300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78ed6511d8b09c44ba2b2013af5d493e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7960680515013870132
 GameObject:
   m_ObjectHideFlags: 0
@@ -8172,7 +8151,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1809242631417462030}
-  - component: {fileID: 1222911812445366053}
   m_Layer: 0
   m_Name: Up Door (1)
   m_TagString: Untagged
@@ -8197,18 +8175,6 @@ Transform:
   m_Father: {fileID: 4531159905885198315}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1222911812445366053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8610772282073181524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78ed6511d8b09c44ba2b2013af5d493e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8653350607392906447
 GameObject:
   m_ObjectHideFlags: 0

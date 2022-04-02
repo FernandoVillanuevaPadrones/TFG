@@ -112,5 +112,9 @@ public class Player : MonoBehaviour
         {
             other.transform.GetComponentInParent<RoomScript>().CloseDoors();
         }
+        else if (other.transform.CompareTag("Capsule"))
+        {
+
+        }
     }
 }

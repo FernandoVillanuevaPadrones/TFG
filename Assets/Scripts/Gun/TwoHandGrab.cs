@@ -99,6 +99,8 @@ public class TwoHandGrab : XRGrabInteractable
     protected override void OnSelectExited(XRBaseInteractor interactor)
     {
         secondInteractor = null;
+
+
         //Change the rotations to retain them
         rightAttachTransform.localRotation = initialRightRotation;
         leftAttachTransform.localRotation = initialLeftRotation;
