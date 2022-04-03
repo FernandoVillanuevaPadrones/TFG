@@ -94,7 +94,6 @@ public class VelociRapt : BaseEnemy
             velociMaterial.SetFloat("DissolveProgressFloat", currentFloat - showSpeed);
             yield return new WaitForSeconds(0f);
         }
-        Debug.Log("MUERTO, HACER CODIGO");
 
         yield return null;
     }
@@ -136,8 +135,6 @@ public class VelociRapt : BaseEnemy
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("entra");
-        Debug.Log(other.transform.tag);
         if (other.transform.CompareTag("Player"))
         {
             other.gameObject.GetComponentInParent<Player>().ChangeHealth(base.GetCurrentDamageStat());

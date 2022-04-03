@@ -9,6 +9,7 @@ TagManager:
   - VelociRaptor
   - VelociRaptorMain
   - Room
+  - Capsule
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Water
   - UI
   - Grab
-  - 
+  - Player
   - SecondGrab
   - 
   - 

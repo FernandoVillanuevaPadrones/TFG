@@ -224,29 +224,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
-      propertyPath: room.Array.size
-      value: 2
+      propertyPath: maxRooms
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
-      propertyPath: room.Array.data[1]
-      value: 
-      objectReference: {fileID: 3221015211448598843, guid: e6284d1b4a8417340bff6015df1d06ef, type: 3}
-    - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
-      propertyPath: room.Array.data[2]
-      value: 
-      objectReference: {fileID: 3221015211448598843, guid: e6284d1b4a8417340bff6015df1d06ef, type: 3}
-    - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
-      propertyPath: bossRoom.Array.size
-      value: 1
+      propertyPath: minRooms
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
-      propertyPath: bossRoom.Array.data[0]
-      value: 
-      objectReference: {fileID: 1707813615248156805, guid: 3f2148dd170e04e438f8b38137cd5b12, type: 3}
+      propertyPath: currentSeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
-      propertyPath: bossRoom.Array.data[1]
-      value: 
-      objectReference: {fileID: 1707813615248156805, guid: 3f2148dd170e04e438f8b38137cd5b12, type: 3}
+      propertyPath: roomOffset.x
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
+      propertyPath: roomOffset.y
+      value: 23.8
+      objectReference: {fileID: 0}
     - target: {fileID: 1740122262274448705, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
       propertyPath: m_Name
       value: Generator

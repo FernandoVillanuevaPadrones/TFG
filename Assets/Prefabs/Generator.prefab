@@ -49,10 +49,8 @@ MonoBehaviour:
   minRooms: 2
   maxRooms: 6
   room:
-  - {fileID: 5245182667333409638, guid: a9eda2b4fbb53e64987cae956915f00d, type: 3}
-  - {fileID: 1707813615248156805, guid: 3f2148dd170e04e438f8b38137cd5b12, type: 3}
-  startRoom: {fileID: 8485082216667826199, guid: 9227fe1dd5b58ff43aeb1c9211e5af92, type: 3}
+  - {fileID: 3394120307819553891, guid: 379f82ae1d649684082b0bdbda7322aa, type: 3}
+  - {fileID: 4119189995694916109, guid: 1613f8e019fe39345a09011d814e328d, type: 3}
+  startRoom: {fileID: 3924194409187397504, guid: bf5b4c2c79738c64d9d554a222b82d33, type: 3}
   bossRoom:
-  - {fileID: 3221015211448598843, guid: e6284d1b4a8417340bff6015df1d06ef, type: 3}
-  door: {fileID: 5871696744842506867, guid: 37b7c92e5476a7940bee8ccdc6d06d4f, type: 3}
-  node: {fileID: 3468162283021438807, guid: 4c24d3a711626c54e842d62959882cb9, type: 3}
+  - {fileID: 1886895783488081112, guid: 74a4cb57d3b0115448e5a1ced034c56d, type: 3}

@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
         }
         else if (other.transform.CompareTag("Capsule"))
         {
-
+            other.transform.GetComponentInParent<Capsule>().NextAnimState();
         }
     }
 }

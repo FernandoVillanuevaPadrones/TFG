@@ -9,7 +9,15 @@ public class TwoHandGrab : XRGrabInteractable
     [Header("Second Hand Grab Interactable")]
     [SerializeField] private XRSimpleInteractable secondHandGrab;
     private XRBaseInteractor secondInteractor;
+    public Vector3 offset;
 
+    [Header("Prefabs Hands")]
+    [SerializeField] private GameObject rightHandPlayerGB;
+    [SerializeField] private GameObject leftHandPlayerGB;
+    [SerializeField] private GameObject rightHandMainObjectGB;
+    [SerializeField] private GameObject leftHandMainObjectGB;
+    [SerializeField] private GameObject rightHandSecondGunGB;
+    [SerializeField] private GameObject leftHandSecondGunGB;
     [SerializeField] private enum TwoHandRotationType { None, First, Second}
     [Header("Type Of Rotation")]
     [SerializeField] private TwoHandRotationType twoHandRotationType;
@@ -22,6 +30,8 @@ public class TwoHandGrab : XRGrabInteractable
 
     private Quaternion initialRightRotation;
     private Quaternion initialLeftRotation;
+    private string lastMainSelector = "";
+    private string lastSecondSelector = "";
 
     private void Start()
     {
@@ -43,12 +53,35 @@ public class TwoHandGrab : XRGrabInteractable
             rightAttachTransform.localRotation = initialRightRotation;
             leftAttachTransform.localRotation = initialLeftRotation;
         }
-        
+
+        if (lastSecondSelector == "RightHand Controller")
+        {
+            rightHandSecondGunGB.SetActive(false);
+            rightHandPlayerGB.SetActive(true);
+        }
+        else if (lastSecondSelector == "LeftHand Controller")
+        {
+            leftHandSecondGunGB.SetActive(false);
+            leftHandPlayerGB.SetActive(true);
+        }
     }
 
     private void OnSecondHandGrab(XRBaseInteractor interactor)
     {        
         secondInteractor = interactor;
+        lastSecondSelector = interactor.gameObject.name;
+
+
+        if (lastSecondSelector == "RightHand Controller")
+        {
+            rightHandSecondGunGB.SetActive(true);
+            rightHandPlayerGB.SetActive(false);
+        }
+        else if (lastSecondSelector == "LeftHand Controller")
+        {
+            leftHandSecondGunGB.SetActive(true);
+            leftHandPlayerGB.SetActive(false);
+        }
     }
 
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
@@ -74,15 +107,15 @@ public class TwoHandGrab : XRGrabInteractable
 
         if (twoHandRotationType == TwoHandRotationType.None)
         {
-            targetRotation = Quaternion.LookRotation(secondInteractor.attachTransform.position - selectingInteractor.transform.position);
+            targetRotation = Quaternion.LookRotation(secondInteractor.attachTransform.position + offset - selectingInteractor.transform.position);
         }
         else if (twoHandRotationType == TwoHandRotationType.First)
         {
-            targetRotation = Quaternion.LookRotation(secondInteractor.attachTransform.position - selectingInteractor.transform.position, selectingInteractor.transform.up);
+            targetRotation = Quaternion.LookRotation(secondInteractor.attachTransform.position + offset - selectingInteractor.transform.position, selectingInteractor.transform.up);
         }
         else
         {
-            targetRotation = Quaternion.LookRotation(secondInteractor.attachTransform.position - selectingInteractor.transform.position, secondInteractor.attachTransform.up);
+            targetRotation = Quaternion.LookRotation(secondInteractor.attachTransform.position + offset - selectingInteractor.transform.position, secondInteractor.attachTransform.up);
 
         }
         return targetRotation;
@@ -94,6 +127,22 @@ public class TwoHandGrab : XRGrabInteractable
         //Store the initial rotation states;
         initialRightRotation = rightAttachTransform.localRotation;
         initialLeftRotation = leftAttachTransform.localRotation;
+
+        if (selectingInteractor != null)
+        {
+            lastMainSelector = selectingInteractor.transform.name;
+            if (lastMainSelector == "RightHand Controller")
+            {
+                rightHandMainObjectGB.SetActive(true);
+                rightHandPlayerGB.SetActive(false);
+            }
+            else if (lastMainSelector == "LeftHand Controller")
+            {
+                leftHandMainObjectGB.SetActive(true);
+                leftHandPlayerGB.SetActive(false);
+            }
+
+        }
     }
 
     protected override void OnSelectExited(XRBaseInteractor interactor)
@@ -105,6 +154,17 @@ public class TwoHandGrab : XRGrabInteractable
         rightAttachTransform.localRotation = initialRightRotation;
         leftAttachTransform.localRotation = initialLeftRotation;
         base.OnSelectExited(interactor);
+
+        if (lastMainSelector == "RightHand Controller")
+        {
+            rightHandMainObjectGB.SetActive(false);
+            rightHandPlayerGB.SetActive(true);
+        }
+        else if (lastMainSelector == "LeftHand Controller")
+        {
+            leftHandMainObjectGB.SetActive(false);
+            leftHandPlayerGB.SetActive(true);
+        }
     }
 
     /// <summary>

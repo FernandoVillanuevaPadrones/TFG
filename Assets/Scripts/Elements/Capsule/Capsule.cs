@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Capsule : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Animator capsuleAnimator;
+
+    private void Start()
     {
-        
+        capsuleAnimator = transform.GetComponent<Animator>();
+    }
+    public void NextAnimState()
+    {
+        capsuleAnimator.SetBool("NextAnim", true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StopNextAnimState()
     {
-        
+        capsuleAnimator.SetBool("NextAnim", false);
     }
+
 }

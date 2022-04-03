@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    private Vector2 roomOffset = new Vector2(24.22f, 24.22f);
+    [SerializeField] private Vector2 roomOffset = new Vector2(24.22f, 24.22f);
 
     private string Seed;
     [SerializeField] private int currentSeed = 0;
@@ -242,14 +242,26 @@ public class MapGenerator : MonoBehaviour
         }
 
         Vector3 maxValue = Vector3.zero;
+        Vector3 minValue = new Vector3(0, 0, 100);    
+
         for (int i = 0; i < gridDimensionX * 2 - 1; i = i + 2)
         {
             for (int j = 0; j < gridDimensionZ * 2 - 1; j = j + 2)
             {
-                if (maxValue.z < Matrix[i, j])
+                if (Matrix[i, j] != 0)
                 {
-                    maxValue = new Vector3(i, j, Matrix[i, j]);
+                    Debug.Log("Pos: " + i + " " + j + "Val: " + Matrix[i, j]);
+                    if (maxValue.z < Matrix[i, j])
+                    {
+                        maxValue = new Vector3(i, j, Matrix[i, j]);
+                    }
+                    else if (minValue.z > Matrix[i,j])
+                    {
+                        minValue = new Vector3(i, j, Matrix[i, j]);
+                    
+                    }
                 }
+                
             }
         }
 
@@ -266,19 +278,22 @@ public class MapGenerator : MonoBehaviour
                 else if (Matrix[i, j] != 0)
                 {
 
-                    if (i == startRoomI && j == startRoomJ)
+                    if (minValue.x == i && minValue.y == j)
                     {
                         roomsGBMatrix[i, j] = Instantiate(startRoom, new Vector3((i * roomOffset.x) / 2f, 0, (j * roomOffset.y) / 2f), Quaternion.identity, rooms.transform);
+                        roomsGBMatrix[i, j].name = "Start: "+ i + " " + j;
                     }
                     else if (maxValue.x == i && maxValue.y == j)
                     {
-                        var posRoom = Random.Range(0, room.Length);
+                        var posRoom = Random.Range(0, bossRoom.Length);                      
                         roomsGBMatrix[i, j] = Instantiate(bossRoom[posRoom], new Vector3((i * roomOffset.x) / 2f, 0, (j * roomOffset.y) / 2f), Quaternion.identity, rooms.transform);
+                        roomsGBMatrix[i, j].name = "Boss: " + i + " " + j;
                     }
                     else
                     {
                         var posRoom = Random.Range(0, room.Length);
                         roomsGBMatrix[i, j] = Instantiate(room[posRoom], new Vector3((i * roomOffset.x) / 2f, 0, (j * roomOffset.y) / 2f), Quaternion.identity, rooms.transform);
+                        roomsGBMatrix[i, j].name = "Normal: " + i + " " + j;
                     }
                     
                     

@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GlooveGrip
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: elbow mesh
+    m_Weight: 0
+  - m_Path: elbow mesh.001
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton/hand_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton/hand_R/index00_R 1
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton/hand_R/index00_R 1/index01_R 1
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton/hand_R/index00_R 1/index01_R 1/index02_R 1
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton/hand_R/index00_R 1/index01_R 1/index02_R 1/index03_R
+      1
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton/hand_R/index00_R 1/index01_R 1/index02_R 1/index03_R
+      1/index03_R_end 1
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton/hand_R/middle00_R 1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/middle00_R 1/middle01_R 1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/middle00_R 1/middle01_R 1/middle02_R 1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/middle00_R 1/middle01_R 1/middle02_R 1/middle03_R
+      1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/middle00_R 1/middle01_R 1/middle02_R 1/middle03_R
+      1/middle03_R_end 1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/pinky00_R 1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/pinky00_R 1/pinky01_R 1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/pinky00_R 1/pinky01_R 1/pinky02_R 1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/pinky00_R 1/pinky01_R 1/pinky02_R 1/pinky03_R
+      1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/pinky00_R 1/pinky01_R 1/pinky02_R 1/pinky03_R
+      1/pinky03_R_end 1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/ring00_R 1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/ring00_R 1/ring01_R 1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/ring00_R 1/ring01_R 1/ring02_R 1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/ring00_R 1/ring01_R 1/ring02_R 1/ring03_R 1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/ring00_R 1/ring01_R 1/ring02_R 1/ring03_R 1/ring03_R_end
+      1
+    m_Weight: 1
+  - m_Path: m_ca01_skeleton/hand_R/thumb01_R 1
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton/hand_R/thumb01_R 1/thumb02_R 1
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton/hand_R/thumb01_R 1/thumb02_R 1/thumb03_R 1
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton/hand_R/thumb01_R 1/thumb02_R 1/thumb03_R 1/thumb03_R_end
+      1
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/index00_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/index00_R/index01_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/index00_R/index01_R/index02_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/index00_R/index01_R/index02_R/index03_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/index00_R/index01_R/index02_R/index03_R/index03_R_end
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/middle00_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/middle00_R/middle01_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/middle00_R/middle01_R/middle02_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/middle00_R/middle01_R/middle02_R/middle03_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/middle00_R/middle01_R/middle02_R/middle03_R/middle03_R_end
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/pinky00_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/pinky00_R/pinky01_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/pinky00_R/pinky01_R/pinky02_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/pinky00_R/pinky01_R/pinky02_R/pinky03_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/pinky00_R/pinky01_R/pinky02_R/pinky03_R/pinky03_R_end
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/ring00_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/ring00_R/ring01_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/ring00_R/ring01_R/ring02_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/ring00_R/ring01_R/ring02_R/ring03_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/ring00_R/ring01_R/ring02_R/ring03_R/ring03_R_end
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/thumb01_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/thumb01_R/thumb02_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/thumb01_R/thumb02_R/thumb03_R
+    m_Weight: 0
+  - m_Path: m_ca01_skeleton.001/hand_R 1/thumb01_R/thumb02_R/thumb03_R/thumb03_R_end
+    m_Weight: 0

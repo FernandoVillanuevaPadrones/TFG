@@ -30,7 +30,7 @@ public class BaseEnemy : MonoBehaviour
     public void DoDamage(float damage) {
 
         _currentHealth -= damage;
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, _currentHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, _health);
 
         if (_currentHealth == 0)
         {
