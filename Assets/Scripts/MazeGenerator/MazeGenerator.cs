@@ -4,15 +4,12 @@ using UnityEngine;
 
 
 
-public class MapGenerator : MonoBehaviour
+public class MazeGenerator : MonoBehaviour
 {
-    [SerializeField] private Vector2 roomOffset = new Vector2(24.22f, 24.22f);
 
-    private string Seed;
+    [Header("MAP SETTINGS")]
+    [SerializeField] private Vector2 roomOffset = new Vector2(24.22f, 24.22f);    
     [SerializeField] private int currentSeed = 0;
-
-    const string glyphs = "abcdefghijklmnopqrstuvwxyz0123456789";
-
     [SerializeField] private int gridDimensionX;
     [SerializeField] private int gridDimensionZ;
 
@@ -22,19 +19,34 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GameObject[] room;
     [SerializeField] private GameObject startRoom;
     [SerializeField] private GameObject[] bossRoom;
-    //[SerializeField] private GameObject door;
-    //[SerializeField] private GameObject node;
+
+
+    [Header("MAP SETTINGS")]
+    [SerializeField] private Vector2 mapOffset = new Vector2(0.05f, 0.05f);
+    [SerializeField] private Vector2 doorOffset = new Vector2(0.05f, 0.05f);
+    [SerializeField] private GameObject mapObject;
+    [SerializeField] private GameObject roomMap;
+    [SerializeField] private GameObject startRoomMap;
+    [SerializeField] private GameObject bossRoomMap;
+    [SerializeField] private GameObject doorMap;
+    [SerializeField] private GameObject nodeMap;
+
+    [Header("PLAYER IN MAP SETTINGS")]
+    [SerializeField] private GameObject playerMapGB;
+    [SerializeField] private float playerOffset = 0.001f;
+
 
     private int[,] Matrix;
     private int leftRooms;
 
-    private int startRoomI = 20;
-    private int startRoomJ = 12;
+    private string Seed;
+    const string glyphs = "abcdefghijklmnopqrstuvwxyz0123456789";
 
     private GameObject[,] roomsGBMatrix;
 
     void Start()
     {
+
         GetSeeds();
 
         GenerateMatrix();
@@ -89,7 +101,7 @@ public class MapGenerator : MonoBehaviour
 
                 if (Matrix[i,j] != 0)
                 {
-                    int random = Random.Range(0, 108);
+                    int random = Random.Range(0, 80);
 
                     if (random < 20)
                     {
@@ -130,7 +142,7 @@ public class MapGenerator : MonoBehaviour
                             Matrix[i, j + 1] = 1; //puerta por si hay una sala al lado 
                         }
                     }
-                    else if (random < 80)
+                    else
                     {
                         if (Matrix[i, j - 2] == 0)
                         {
@@ -143,62 +155,6 @@ public class MapGenerator : MonoBehaviour
                             Matrix[i, j - 1] = 1; //puerta por si hay una sala al lado 
                         }
                     }
-                    
-                    else if (random < 100)
-                    {
-
-                    }/*
-                    else if (random < 102)
-                    {   
-                        if (Matrix[i + 2, j] == 0)
-                        {
-                            Matrix[i + 2, j] = Matrix[i, j]; 
-                            Matrix[i + 1, j] = Matrix[i, j];  
-                        }
-                        else
-                        {
-                            Matrix[i + 1, j] = 1; 
-                        }
-                    }
-                    else if (random < 104)
-                    {   
-                        
-                        if (Matrix[i - 2, j] == 0)
-                        {
-                            Matrix[i - 2, j] = Matrix[i, j];
-                            Matrix[i - 1, j] = Matrix[i, j];  
-                        }
-                        else
-                        {
-                            Matrix[i - 1, j] = 1; 
-                        }
-                    }
-                    else if (random < 106)
-                    {
-                        if (Matrix[i, j + 2] == 0)
-                        {
-                            Matrix[i, j + 2] = Matrix[i, j];
-                            Matrix[i, j + 1] = Matrix[i, j];  
-                        }
-                        else
-                        {
-                            Matrix[i, j + 1] = 1; 
-                        }
-                    }
-                    else
-                    {
-                        
-                        if (Matrix[i, j - 2] == 0)
-                        {
-                            Matrix[i, j - 2] = Matrix[i, j];
-                            Matrix[i, j - 1] = Matrix[i, j];  
-                        }
-                        else
-                        {
-                            Matrix[i, j - 1] = 1; 
-                        }
-                        
-                    }*/
 
                     if (leftRooms <= 0 )
                     {
@@ -218,31 +174,38 @@ public class MapGenerator : MonoBehaviour
 
     private void Generate()
     {
-
+        //---------MAZE-----------
         GameObject rooms = new GameObject();
         rooms.name = "Rooms";
         rooms.transform.position = Vector3.zero;
                
-        GameObject doors = new GameObject();
-        doors.name = "Doors";
-        doors.transform.position = Vector3.zero;
 
-        GameObject nodes = new GameObject();
-        nodes.name = "Nodes";
-        nodes.transform.position = Vector3.zero;
+        //---------MAP-----------
+        GameObject roomsMap = new GameObject();
+        roomsMap.name = "RoomsMap";
+        roomsMap.transform.position = Vector3.zero;
+        roomsMap.transform.parent = mapObject.transform;
 
-        //Nodes
+        GameObject doorsMap = new GameObject();
+        doorsMap.name = "DoorsMap";
+        doorsMap.transform.position = Vector3.zero;
+        doorsMap.transform.parent = mapObject.transform;
 
-        for (int i = 0; i < gridDimensionX * 2 -1; i = i + 2)
-        {
-            for (int j = 0; j < gridDimensionZ * 2 - 1; j = j + 2)
-            {
-                //Instantiate(node, new Vector3(i / 2f, 0, j / 2f), Quaternion.identity, nodes.transform);
-            }
-        }
+        GameObject nodesMap = new GameObject();
+        nodesMap.name = "NodesMap";
+        nodesMap.transform.position = Vector3.zero;
+        nodesMap.transform.parent = mapObject.transform;
+        
+        GameObject playerMap = new GameObject();
+        playerMap.name = "playerMap";
+        playerMap.transform.position = Vector3.zero;
+        playerMap.transform.parent = mapObject.transform;
+
+
 
         Vector3 maxValue = Vector3.zero;
         Vector3 minValue = new Vector3(0, 0, 100);    
+
 
         for (int i = 0; i < gridDimensionX * 2 - 1; i = i + 2)
         {
@@ -255,15 +218,29 @@ public class MapGenerator : MonoBehaviour
                     {
                         maxValue = new Vector3(i, j, Matrix[i, j]);
                     }
-                    else if (minValue.z > Matrix[i,j])
+                    if (minValue.z > Matrix[i,j])
                     {
                         minValue = new Vector3(i, j, Matrix[i, j]);
-                    
+                        
                     }
+                    
                 }
                 
             }
         }
+
+        //mapGenerator.GetMatrix(Matrix, minValue, maxValue);
+
+        //Nodes
+
+        for (int i = 0; i < gridDimensionX * 2 - 1; i = i + 2)
+        {
+            for (int j = 0; j < gridDimensionZ * 2 - 1; j = j + 2)
+            {
+                //Instantiate(nodeMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, nodesMap.transform);
+            }
+        }
+
 
 
         for (int i = 0; i < gridDimensionX * 2 - 1; i++)
@@ -272,28 +249,41 @@ public class MapGenerator : MonoBehaviour
             {
                 if (Matrix[i,j] == 1)
                 {
-                    //var gameobject = Instantiate(door, new Vector3(i  / 2f, 0, j  / 2f), Quaternion.identity, doors.transform);
-                    //gameobject.name = i + " " + j;
+
                 }
                 else if (Matrix[i, j] != 0)
                 {
 
                     if (minValue.x == i && minValue.y == j)
                     {
+                        //------MAZE--------
                         roomsGBMatrix[i, j] = Instantiate(startRoom, new Vector3((i * roomOffset.x) / 2f, 0, (j * roomOffset.y) / 2f), Quaternion.identity, rooms.transform);
                         roomsGBMatrix[i, j].name = "Start: "+ i + " " + j;
+
+                        //------MAP--------
+                        Instantiate(startRoomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
+                        Instantiate(playerMapGB, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, playerMap.transform);
                     }
                     else if (maxValue.x == i && maxValue.y == j)
                     {
+                        //------MAZE--------
                         var posRoom = Random.Range(0, bossRoom.Length);                      
                         roomsGBMatrix[i, j] = Instantiate(bossRoom[posRoom], new Vector3((i * roomOffset.x) / 2f, 0, (j * roomOffset.y) / 2f), Quaternion.identity, rooms.transform);
                         roomsGBMatrix[i, j].name = "Boss: " + i + " " + j;
+
+                        //------MAP--------
+                        Instantiate(bossRoomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
                     }
                     else
                     {
+                        //------MAZE--------
                         var posRoom = Random.Range(0, room.Length);
                         roomsGBMatrix[i, j] = Instantiate(room[posRoom], new Vector3((i * roomOffset.x) / 2f, 0, (j * roomOffset.y) / 2f), Quaternion.identity, rooms.transform);
                         roomsGBMatrix[i, j].name = "Normal: " + i + " " + j;
+
+                        //------MAP--------
+                        var gameobject = Instantiate(roomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
+                        gameobject.name = i+ " " + j;
                     }
                     
                     
@@ -301,23 +291,9 @@ public class MapGenerator : MonoBehaviour
                     
                 }
 
-                //Debug.Log("Sala: " + i + " " + j + "Valor: " + Matrix[i, j]);
+                
             }
         }
-
-
-
-        //Instantiate(bossRoom, new Vector3(maxValue.x / 2f, 0, maxValue.y / 2f), Quaternion.identity, rooms.transform);
-
-        //Instantiate(startRoom, new Vector3((gridDimensionX - 1) / 2f, 0, (gridDimensionZ - 1) / 2f), Quaternion.identity, rooms.transform);
-
-        
-
-        //Centrar
-
-        rooms.transform.position = new Vector3(-gridDimensionX * roomOffset.x / 2, 0, -gridDimensionZ * roomOffset.y / 2);
-        doors.transform.position = new Vector3(-gridDimensionX * roomOffset.x / 2, 0, -gridDimensionZ * roomOffset.y / 2);
-        nodes.transform.position = new Vector3(-gridDimensionX * roomOffset.x / 2, 0, -gridDimensionZ * roomOffset.y / 2);
 
         for (int i = 2; i < gridDimensionX * 2 - 3; i = i + 2)
         {
@@ -332,9 +308,17 @@ public class MapGenerator : MonoBehaviour
                 // Si la de la izq tiene sala pongo puerta sino se pone pared
                 if (Matrix[i -2, j] != 0)
                 {
+
+
                     doorStatus[3] = true;
                     wallStatus[3] = false;
 
+                    if(Matrix[i, j] != 0)
+                    {
+                        var gameobject = Instantiate(doorMap, new Vector3(((i - 1) * doorOffset.x) / 2f, (j * doorOffset.y) / 2f, 0), Quaternion.identity, doorsMap.transform);
+                        gameobject.name = i - 1 + " " + j;
+                    }
+                    
                 }
                 else
                 {
@@ -347,6 +331,12 @@ public class MapGenerator : MonoBehaviour
                 {
                     doorStatus[0] = true;
                     wallStatus[0] = false;
+
+                    if (Matrix[i, j] != 0)
+                    {
+                        Instantiate(doorMap, new Vector3((i * doorOffset.x) / 2f, ((j + 1) * doorOffset.y) / 2f, 0), Quaternion.identity, doorsMap.transform);
+
+                    }
                 }
                 else
                 {
@@ -358,6 +348,7 @@ public class MapGenerator : MonoBehaviour
                 if (Matrix[i + 2, j] != 0)
                 {
                     wallStatus[2] = false;
+
                 }
                 else
                 {
@@ -368,6 +359,7 @@ public class MapGenerator : MonoBehaviour
                 if (Matrix[i, j - 2] != 0)
                 {
                     wallStatus[1] = false;
+
                 }
                 else
                 {
@@ -383,8 +375,26 @@ public class MapGenerator : MonoBehaviour
                     roomsGBMatrix[i, j].GetComponent<RoomScript>().WallStatus(wallStatus);
                 }
 
+
+
+
+
+
+
             }
         }
+
+
+        //Centrar
+
+        //-------MAZE---------
+        rooms.transform.position = new Vector3(-gridDimensionX * roomOffset.x / 2, 0, -gridDimensionZ * roomOffset.y / 2);
+
+        //-------MAp----------
+        roomsMap.transform.position = new Vector3(-gridDimensionX * mapOffset.x / 2, 0, -gridDimensionZ * mapOffset.y / 2);
+        doorsMap.transform.position = new Vector3(-gridDimensionX * doorOffset.x / 2, 0, -gridDimensionZ * doorOffset.y / 2);
+        nodesMap.transform.position = new Vector3(-gridDimensionX * mapOffset.x / 2, 0, -gridDimensionZ * mapOffset.y / 2);
+        playerMap.transform.position = new Vector3(-gridDimensionX * mapOffset.x / 2, 0, (-gridDimensionZ * mapOffset.y / 2) + playerOffset);
 
     }
 
