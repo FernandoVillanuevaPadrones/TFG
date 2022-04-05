@@ -6,8 +6,13 @@ using UnityEngine;
 
 public class MazeGenerator : MonoBehaviour
 {
+    [Header("Objects")]
+    [SerializeField]
+    private GameObject playerGB;
+    [SerializeField]
+    private GameObject gunGB;
 
-    [Header("MAP SETTINGS")]
+    [Header("MAZE SETTINGS")]
     [SerializeField] private Vector2 roomOffset = new Vector2(24.22f, 24.22f);    
     [SerializeField] private int currentSeed = 0;
     [SerializeField] private int gridDimensionX;
@@ -22,6 +27,7 @@ public class MazeGenerator : MonoBehaviour
 
 
     [Header("MAP SETTINGS")]
+    public bool hideRooms = true;
     [SerializeField] private Vector2 mapOffset = new Vector2(0.05f, 0.05f);
     [SerializeField] private Vector2 doorOffset = new Vector2(0.05f, 0.05f);
     [SerializeField] private GameObject mapObject;
@@ -43,6 +49,10 @@ public class MazeGenerator : MonoBehaviour
     const string glyphs = "abcdefghijklmnopqrstuvwxyz0123456789";
 
     private GameObject[,] roomsGBMatrix;
+    private GameObject[,] mapGBMatrix;
+
+    private int startRoomPosI, startRoomPosJ;
+    
 
     void Start()
     {
@@ -79,6 +89,7 @@ public class MazeGenerator : MonoBehaviour
         // 0 nada 1 puerta +1 sala
         Matrix = new int[gridDimensionX * 2 - 1, gridDimensionZ * 2 - 1];
         roomsGBMatrix = new GameObject[gridDimensionX * 2 - 1, gridDimensionZ * 2 - 1];
+        mapGBMatrix = new GameObject[gridDimensionX * 2 - 1, gridDimensionZ * 2 - 1];
 
         //Base room
         Matrix[gridDimensionX - 1, gridDimensionZ - 1] = 2;
@@ -178,9 +189,12 @@ public class MazeGenerator : MonoBehaviour
         GameObject rooms = new GameObject();
         rooms.name = "Rooms";
         rooms.transform.position = Vector3.zero;
-               
+        rooms.transform.parent = transform;
+
 
         //---------MAP-----------
+    
+
         GameObject roomsMap = new GameObject();
         roomsMap.name = "RoomsMap";
         roomsMap.transform.position = Vector3.zero;
@@ -229,20 +243,7 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
-        //mapGenerator.GetMatrix(Matrix, minValue, maxValue);
-
-        //Nodes
-
-        for (int i = 0; i < gridDimensionX * 2 - 1; i = i + 2)
-        {
-            for (int j = 0; j < gridDimensionZ * 2 - 1; j = j + 2)
-            {
-                //Instantiate(nodeMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, nodesMap.transform);
-            }
-        }
-
-
-
+        
         for (int i = 0; i < gridDimensionX * 2 - 1; i++)
         {
             for (int j = 0; j < gridDimensionZ * 2 - 1; j++)
@@ -259,10 +260,19 @@ public class MazeGenerator : MonoBehaviour
                         //------MAZE--------
                         roomsGBMatrix[i, j] = Instantiate(startRoom, new Vector3((i * roomOffset.x) / 2f, 0, (j * roomOffset.y) / 2f), Quaternion.identity, rooms.transform);
                         roomsGBMatrix[i, j].name = "Start: "+ i + " " + j;
+                        var roomScript = roomsGBMatrix[i, j].GetComponent<RoomScript>();
+                        roomScript.posI = i;
+                        roomScript.posJ = j;
 
                         //------MAP--------
-                        Instantiate(startRoomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
+                        mapGBMatrix[i, j] = Instantiate(startRoomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
+                        mapGBMatrix[i, j].name = "Start: " + i + " " + j;
+
                         Instantiate(playerMapGB, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, playerMap.transform);
+
+                        startRoomPosI = i;
+                        startRoomPosJ = j;
+
                     }
                     else if (maxValue.x == i && maxValue.y == j)
                     {
@@ -270,9 +280,20 @@ public class MazeGenerator : MonoBehaviour
                         var posRoom = Random.Range(0, bossRoom.Length);                      
                         roomsGBMatrix[i, j] = Instantiate(bossRoom[posRoom], new Vector3((i * roomOffset.x) / 2f, 0, (j * roomOffset.y) / 2f), Quaternion.identity, rooms.transform);
                         roomsGBMatrix[i, j].name = "Boss: " + i + " " + j;
+                        var roomScript = roomsGBMatrix[i, j].GetComponent<RoomScript>();
+                        roomScript.posI = i;
+                        roomScript.posJ = j;
+
 
                         //------MAP--------
-                        Instantiate(bossRoomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
+                        mapGBMatrix[i, j] = Instantiate(bossRoomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
+                        mapGBMatrix[i, j].name = "Boss: " + i + " " + j;
+
+                        if (hideRooms)
+                        {
+                            mapGBMatrix[i, j].SetActive(false);
+
+                        }
                     }
                     else
                     {
@@ -280,25 +301,30 @@ public class MazeGenerator : MonoBehaviour
                         var posRoom = Random.Range(0, room.Length);
                         roomsGBMatrix[i, j] = Instantiate(room[posRoom], new Vector3((i * roomOffset.x) / 2f, 0, (j * roomOffset.y) / 2f), Quaternion.identity, rooms.transform);
                         roomsGBMatrix[i, j].name = "Normal: " + i + " " + j;
+                        var roomScript = roomsGBMatrix[i, j].GetComponent<RoomScript>();
+                        roomScript.posI = i;
+                        roomScript.posJ = j;
 
                         //------MAP--------
-                        var gameobject = Instantiate(roomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
-                        gameobject.name = i+ " " + j;
-                    }
-                    
-                    
-                    
-                    
-                }
+                        mapGBMatrix[i, j] = Instantiate(roomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
+                        mapGBMatrix[i, j].name = "Normal: " + i + " " + j;
 
-                
+                        if (hideRooms)
+                        {
+                            mapGBMatrix[i, j].SetActive(false);
+
+                        }
+                    }                                                                             
+                }                
             }
         }
 
-        for (int i = 2; i < gridDimensionX * 2 - 3; i = i + 2)
+        for (int i = 0; i < gridDimensionX * 2 - 1; i = i + 2)
         {
-            for (int j = 2; j < gridDimensionZ * 2 - 3; j = j + 2)
+            for (int j = 0; j < gridDimensionZ * 2 - 1; j = j + 2)
             {
+                Debug.Log("Pos: " + i + " " + j);
+
                 //0 = Up, 1= Down, 2 = Right, 3 = Left
                 // true = puerta false = pared
 
@@ -306,7 +332,7 @@ public class MazeGenerator : MonoBehaviour
                 bool[] wallStatus = new bool[4];
 
                 // Si la de la izq tiene sala pongo puerta sino se pone pared
-                if (Matrix[i -2, j] != 0)
+                if ( i != 0 && Matrix[i -2, j] != 0)
                 {
 
 
@@ -315,8 +341,14 @@ public class MazeGenerator : MonoBehaviour
 
                     if(Matrix[i, j] != 0)
                     {
-                        var gameobject = Instantiate(doorMap, new Vector3(((i - 1) * doorOffset.x) / 2f, (j * doorOffset.y) / 2f, 0), Quaternion.identity, doorsMap.transform);
-                        gameobject.name = i - 1 + " " + j;
+                        mapGBMatrix[i - 1, j] = Instantiate(doorMap, new Vector3(((i - 1) * doorOffset.x) / 2f, (j * doorOffset.y) / 2f, 0), Quaternion.identity, doorsMap.transform);
+                        mapGBMatrix[i - 1, j].name = i - 1 + " " + j;
+
+                        if (hideRooms)
+                        {
+                            mapGBMatrix[i - 1, j].SetActive(false);
+
+                        }
                     }
                     
                 }
@@ -327,14 +359,23 @@ public class MazeGenerator : MonoBehaviour
 
                 }
                 // si la de arriba tiene sala pongo puerta sino se pone pared
-                if (Matrix[i , j + 2] != 0)
+                // Y si no estamos en la ultima sala posible
+                if ((j != gridDimensionZ * 2 - 2) && (Matrix[i , j + 2] != 0))
                 {
                     doorStatus[0] = true;
                     wallStatus[0] = false;
 
                     if (Matrix[i, j] != 0)
                     {
-                        Instantiate(doorMap, new Vector3((i * doorOffset.x) / 2f, ((j + 1) * doorOffset.y) / 2f, 0), Quaternion.identity, doorsMap.transform);
+                        mapGBMatrix[i, j + 1] = Instantiate(doorMap, new Vector3((i * doorOffset.x) / 2f, ((j + 1) * doorOffset.y) / 2f, 0), Quaternion.identity, doorsMap.transform);
+                        mapGBMatrix[i, j + 1].name = i + " " + j + 1;
+                        mapGBMatrix[i, j + 1].transform.Rotate(0f, 0f, 90f);
+
+                        if (hideRooms)
+                        {
+                            mapGBMatrix[i, j + 1].SetActive(false);
+
+                        }
 
                     }
                 }
@@ -345,7 +386,7 @@ public class MazeGenerator : MonoBehaviour
                 }
                 
                 // Si la de la derecha tiene sala quito pared sino se pone, pero la puerta se quita siempre ya que la pone la otra sala
-                if (Matrix[i + 2, j] != 0)
+                if ((i != gridDimensionX * 2 - 2) && Matrix[i + 2, j] != 0)
                 {
                     wallStatus[2] = false;
 
@@ -356,7 +397,7 @@ public class MazeGenerator : MonoBehaviour
                 }
 
                 // si la de abajo tiene sala quito pared sino se pone , pero la puerta se quita siempre
-                if (Matrix[i, j - 2] != 0)
+                if ( j != 0 && Matrix[i, j - 2] != 0)
                 {
                     wallStatus[1] = false;
 
@@ -374,15 +415,23 @@ public class MazeGenerator : MonoBehaviour
                     roomsGBMatrix[i, j].GetComponent<RoomScript>().DoorStatus(doorStatus);
                     roomsGBMatrix[i, j].GetComponent<RoomScript>().WallStatus(wallStatus);
                 }
-
-
-
-
-
-
-
             }
         }
+
+        //Nodes
+        /*
+        for (int i = 0; i < gridDimensionX * 2 - 1; i++)
+        {
+            for (int j = 0; j < gridDimensionZ * 2 - 1; j++)
+            {
+                if (mapGBMatrix[i, j] == null)
+                {
+                    Instantiate(nodeMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, nodesMap.transform);
+                }
+            }
+        }*/
+
+
 
 
         //Centrar
@@ -390,12 +439,54 @@ public class MazeGenerator : MonoBehaviour
         //-------MAZE---------
         rooms.transform.position = new Vector3(-gridDimensionX * roomOffset.x / 2, 0, -gridDimensionZ * roomOffset.y / 2);
 
+        var startRoomPos = roomsGBMatrix[startRoomPosI, startRoomPosJ].transform.position;
+        playerGB.transform.position = new Vector3(startRoomPos.x, 1, startRoomPos.z);
+        mapObject.transform.position = new Vector3(startRoomPos.x, 1, startRoomPos.z + 0.5f);
+        gunGB.transform.position = new Vector3(startRoomPos.x, 1, startRoomPos.z);
+
+
         //-------MAp----------
-        roomsMap.transform.position = new Vector3(-gridDimensionX * mapOffset.x / 2, 0, -gridDimensionZ * mapOffset.y / 2);
-        doorsMap.transform.position = new Vector3(-gridDimensionX * doorOffset.x / 2, 0, -gridDimensionZ * doorOffset.y / 2);
-        nodesMap.transform.position = new Vector3(-gridDimensionX * mapOffset.x / 2, 0, -gridDimensionZ * mapOffset.y / 2);
-        playerMap.transform.position = new Vector3(-gridDimensionX * mapOffset.x / 2, 0, (-gridDimensionZ * mapOffset.y / 2) + playerOffset);
+        
+        roomsMap.transform.localPosition = new Vector3(-gridDimensionX * mapOffset.x / 2, 0, -gridDimensionZ * mapOffset.y / 2);
+        doorsMap.transform.localPosition = new Vector3(-gridDimensionX * doorOffset.x / 2, 0, -gridDimensionZ * doorOffset.y / 2);
+        nodesMap.transform.localPosition = new Vector3(-gridDimensionX * mapOffset.x / 2, 0, -gridDimensionZ * mapOffset.y / 2);
+        playerMap.transform.localPosition = new Vector3(-gridDimensionX * mapOffset.x / 2, 0, (-gridDimensionZ * mapOffset.y / 2) + playerOffset);
+
+
+        
+
+        
 
     }
+
+    public void UpdateMap(int i, int j)
+    {
+        // Si la de la izq tiene sala pongo puerta sino se pone pared
+        if (mapGBMatrix[i - 2, j] != null)
+        {
+            mapGBMatrix[i - 2, j].SetActive(true);
+            mapGBMatrix[i - 1, j].SetActive(true);
+        }
+        // si la de arriba tiene sala pongo puerta sino se pone pared
+        if (mapGBMatrix[i, j + 2] != null)
+        {
+            mapGBMatrix[i, j + 2].SetActive(true);
+            mapGBMatrix[i, j + 1].SetActive(true);
+        }
+        // Si la de la derecha tiene sala quito pared sino se pone, pero la puerta se quita siempre ya que la pone la otra sala
+        if (Matrix[i + 2, j] != 0)
+        {
+            mapGBMatrix[i + 2, j].SetActive(true);
+            mapGBMatrix[i + 1, j].SetActive(true);
+        }
+        // si la de abajo tiene sala quito pared sino se pone , pero la puerta se quita siempre
+        if (Matrix[i, j - 2] != 0)
+        {
+            mapGBMatrix[i, j - 2].SetActive(true);
+            mapGBMatrix[i, j - 1].SetActive(true);
+        }
+    }
+
+
 
 }

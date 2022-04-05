@@ -8,11 +8,16 @@ public class RoomScript : MonoBehaviour
     public GameObject[] walls;
     public GameObject[] doors;
 
-    [SerializeField] private Animator[] doorsAnimators; 
+    [SerializeField] private Animator[] doorsAnimators;
+
+    [HideInInspector]
+    public int posI, posJ;
 
     private bool enemiesShown = false;
     private bool playerInRoom = false;
     private GameObject enemiesGB;
+
+    private bool mapUpdated = false;
 
     private void Start()
     {
@@ -22,16 +27,24 @@ public class RoomScript : MonoBehaviour
     {
         if (playerInRoom)
         {
+            if (!mapUpdated)
+            {
+                transform.parent.GetComponentInParent<MazeGenerator>().UpdateMap(posI, posJ);
+                mapUpdated = true;
+
+            }
             if (enemiesGB.transform.childCount == 0)
             {
                 OpenDoors();
                 playerInRoom = false;
-                GameManager.HideVelociraptos();
+                GameManager.HideVelociraptos(); 
             }
             else
             {
                 if (!enemiesShown)
                 {
+                    
+
                     enemiesShown = true;
                     for (int i = 0; i < enemiesGB.transform.childCount; i++)
                     {

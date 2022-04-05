@@ -43,18 +43,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c39d0d05e2a4944b71f6d0701473d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerGB: {fileID: 0}
   roomOffset: {x: 24, y: 23.8}
-  currentSeed: 0
+  currentSeed: 946044210
   gridDimensionX: 21
   gridDimensionZ: 11
-  minRooms: 3
-  maxRooms: 30
+  minRooms: 120
+  maxRooms: 150
   room:
   - {fileID: 3394120307819553891, guid: 379f82ae1d649684082b0bdbda7322aa, type: 3}
   - {fileID: 4119189995694916109, guid: 1613f8e019fe39345a09011d814e328d, type: 3}
   startRoom: {fileID: 3924194409187397504, guid: bf5b4c2c79738c64d9d554a222b82d33, type: 3}
   bossRoom:
   - {fileID: 1886895783488081112, guid: 74a4cb57d3b0115448e5a1ced034c56d, type: 3}
+  hideRooms: 0
   mapOffset: {x: 0.02, y: 0.02}
   doorOffset: {x: 0.02, y: 0.02}
   mapObject: {fileID: 0}
@@ -64,3 +66,4 @@ MonoBehaviour:
   doorMap: {fileID: 7771007238212058526, guid: 5ca26130e02ab4d4b934d5a2cecae38e, type: 3}
   nodeMap: {fileID: 7769390966710329809, guid: d0f7e7681cd6d9d428903df5482e12ef, type: 3}
   playerMapGB: {fileID: 3931503043334157547, guid: 188c84df02a01ae46b1d51e84545e6a7, type: 3}
+  playerOffset: -0.005

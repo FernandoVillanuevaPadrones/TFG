@@ -2386,7 +2386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4398803565603237087
 Transform:
   m_ObjectHideFlags: 0
@@ -3220,6 +3220,8 @@ MonoBehaviour:
   - {fileID: 8968460821292897087}
   - {fileID: 8968460822231759592}
   - {fileID: 8968460822368651466}
+  posI: 0
+  posJ: 0
 --- !u!1 &8968460821016604648
 GameObject:
   m_ObjectHideFlags: 0
@@ -5069,6 +5071,10 @@ PrefabInstance:
     - target: {fileID: 6867664150363262528, guid: 28b3510d23180014fb48508be14b14dc, type: 3}
       propertyPath: m_Name
       value: ARX-160
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867664150363262528, guid: 28b3510d23180014fb48508be14b14dc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7012059497977706816, guid: 28b3510d23180014fb48508be14b14dc, type: 3}
       propertyPath: leftAttachTransform
