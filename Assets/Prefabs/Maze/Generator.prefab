@@ -44,24 +44,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerGB: {fileID: 0}
+  gunGB: {fileID: 0}
   roomOffset: {x: 24, y: 23.8}
-  currentSeed: 946044210
+  currentSeed: 0
   gridDimensionX: 21
   gridDimensionZ: 11
-  minRooms: 120
-  maxRooms: 150
+  minRooms: 5
+  maxRooms: 10
   room:
   - {fileID: 3394120307819553891, guid: 379f82ae1d649684082b0bdbda7322aa, type: 3}
   - {fileID: 4119189995694916109, guid: 1613f8e019fe39345a09011d814e328d, type: 3}
   startRoom: {fileID: 3924194409187397504, guid: bf5b4c2c79738c64d9d554a222b82d33, type: 3}
+  chestRoom: {fileID: 7682433591725417534, guid: d3dc8e4369a42384491cf5076f567524, type: 3}
   bossRoom:
   - {fileID: 1886895783488081112, guid: 74a4cb57d3b0115448e5a1ced034c56d, type: 3}
-  hideRooms: 0
+  hideRooms: 1
   mapOffset: {x: 0.02, y: 0.02}
   doorOffset: {x: 0.02, y: 0.02}
   mapObject: {fileID: 0}
+  mapScale: 0.7
   roomMap: {fileID: 8185283749446541897, guid: 77513a13659083c46b197e9933cd076f, type: 3}
   startRoomMap: {fileID: 3931503043334157547, guid: 6ae78596f48bccf45b81931e16eaaf9e, type: 3}
+  chestRoomMap: {fileID: 5977336929224707844, guid: c790bca875a52c043bce74221095522c, type: 3}
   bossRoomMap: {fileID: 470781900361930687, guid: 977b3cb7d83fd4748a72c4c883c1e9cd, type: 3}
   doorMap: {fileID: 7771007238212058526, guid: 5ca26130e02ab4d4b934d5a2cecae38e, type: 3}
   nodeMap: {fileID: 7769390966710329809, guid: d0f7e7681cd6d9d428903df5482e12ef, type: 3}

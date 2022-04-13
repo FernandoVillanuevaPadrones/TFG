@@ -33,6 +33,7 @@ public class TwoHandGrab : XRGrabInteractable
     private string lastMainSelector = "";
     private string lastSecondSelector = "";
 
+    
     private void Start()
     {
         secondHandGrab.onSelectEntered.AddListener(OnSecondHandGrab);

@@ -19,7 +19,11 @@ public class Player : MonoBehaviour
     private XRDirectInteractor _directInteractor => gameObject.transform.Find("Camera Offset/LeftHand/LeftHand Controller").GetComponent<XRDirectInteractor>();
 
     [Header("Inputs")]
-    public InputActionReference _useObjectInput;
+    [SerializeField] private InputActionReference _useObjectInput;
+    [SerializeField] private InputActionReference _menuInput;
+
+    [Header("Menu")]
+    [SerializeField] private GameObject menuGB;
 
 
     private float _currentHealth;
@@ -32,16 +36,41 @@ public class Player : MonoBehaviour
 
         _actionContinuous.moveSpeed = _currentSpeed;
         _useObjectInput.action.started += UseObject;
-        
 
+        _menuInput.action.started += PauseMenu;
+    
+
+    }
+
+    private void PauseMenu(InputAction.CallbackContext obj)
+    {
+        menuGB.SetActive(!menuGB.activeSelf);
+
+        if (menuGB.activeSelf)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
     }
 
     private void UseObject(InputAction.CallbackContext obj)
     {
-        if (!_directInteractor.hasSelection)
+        if (!_directInteractor.hasSelection || !_directInteractor.interactablesSelected[0].transform.CompareTag("ConsumableObject"))
         {
             return;
         }
+
+        
+       
+
         Object _currentObject = _directInteractor.selectTarget.GetComponent<Object>();
         float _amountChange = _currentObject._ammountToChange;
 
@@ -110,6 +139,7 @@ public class Player : MonoBehaviour
     {
         if (other.transform.CompareTag("Room"))
         {
+            
             other.transform.GetComponentInParent<RoomScript>().CloseDoors();
         }
         else if (other.transform.CompareTag("Capsule"))

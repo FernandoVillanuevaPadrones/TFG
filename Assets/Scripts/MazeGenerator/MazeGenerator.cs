@@ -23,6 +23,7 @@ public class MazeGenerator : MonoBehaviour
 
     [SerializeField] private GameObject[] room;
     [SerializeField] private GameObject startRoom;
+    [SerializeField] private GameObject chestRoom;
     [SerializeField] private GameObject[] bossRoom;
 
 
@@ -31,8 +32,11 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private Vector2 mapOffset = new Vector2(0.05f, 0.05f);
     [SerializeField] private Vector2 doorOffset = new Vector2(0.05f, 0.05f);
     [SerializeField] private GameObject mapObject;
+     private GameObject mapHUDObject;
+    [SerializeField] private float mapScale = 0.7f;
     [SerializeField] private GameObject roomMap;
     [SerializeField] private GameObject startRoomMap;
+    [SerializeField] private GameObject chestRoomMap;
     [SerializeField] private GameObject bossRoomMap;
     [SerializeField] private GameObject doorMap;
     [SerializeField] private GameObject nodeMap;
@@ -51,11 +55,14 @@ public class MazeGenerator : MonoBehaviour
     private GameObject[,] roomsGBMatrix;
     private GameObject[,] mapGBMatrix;
 
-    private int startRoomPosI, startRoomPosJ;
+    private int startRoomPosI, startRoomPosJ, bossRoomPosI, bossRoomPosJ, chestRoomPosI, chestRoomPosJ;
+
+    private GameObject playerMapInstantiated;
     
 
     void Start()
     {
+        mapHUDObject = mapObject.transform.Find("HUDRotateOffset/HUDMoveOffset/HUD").gameObject;
 
         GetSeeds();
 
@@ -193,27 +200,29 @@ public class MazeGenerator : MonoBehaviour
 
 
         //---------MAP-----------
-    
+
+        mapObject.transform.localScale = new Vector3(1f, 1f, 1f);
+
 
         GameObject roomsMap = new GameObject();
         roomsMap.name = "RoomsMap";
         roomsMap.transform.position = Vector3.zero;
-        roomsMap.transform.parent = mapObject.transform;
+        roomsMap.transform.parent = mapHUDObject.transform;
 
         GameObject doorsMap = new GameObject();
         doorsMap.name = "DoorsMap";
         doorsMap.transform.position = Vector3.zero;
-        doorsMap.transform.parent = mapObject.transform;
+        doorsMap.transform.parent = mapHUDObject.transform;
 
         GameObject nodesMap = new GameObject();
         nodesMap.name = "NodesMap";
         nodesMap.transform.position = Vector3.zero;
-        nodesMap.transform.parent = mapObject.transform;
+        nodesMap.transform.parent = mapHUDObject.transform;
         
         GameObject playerMap = new GameObject();
         playerMap.name = "playerMap";
         playerMap.transform.position = Vector3.zero;
-        playerMap.transform.parent = mapObject.transform;
+        playerMap.transform.parent = mapHUDObject.transform;
 
 
 
@@ -227,7 +236,7 @@ public class MazeGenerator : MonoBehaviour
             {
                 if (Matrix[i, j] != 0)
                 {
-                    Debug.Log("Pos: " + i + " " + j + "Val: " + Matrix[i, j]);
+                    //Debug.Log("Pos: " + i + " " + j + "Val: " + Matrix[i, j]);
                     if (maxValue.z < Matrix[i, j])
                     {
                         maxValue = new Vector3(i, j, Matrix[i, j]);
@@ -268,7 +277,7 @@ public class MazeGenerator : MonoBehaviour
                         mapGBMatrix[i, j] = Instantiate(startRoomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
                         mapGBMatrix[i, j].name = "Start: " + i + " " + j;
 
-                        Instantiate(playerMapGB, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, playerMap.transform);
+                        playerMapInstantiated = Instantiate(playerMapGB, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, playerMap.transform);
 
                         startRoomPosI = i;
                         startRoomPosJ = j;
@@ -284,6 +293,8 @@ public class MazeGenerator : MonoBehaviour
                         roomScript.posI = i;
                         roomScript.posJ = j;
 
+                        bossRoomPosI = i;
+                        bossRoomPosJ = j;
 
                         //------MAP--------
                         mapGBMatrix[i, j] = Instantiate(bossRoomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
@@ -319,11 +330,43 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
+        chestRoomPosI = Random.Range(0, gridDimensionX * 2 - 1);
+        chestRoomPosJ = Random.Range(0, gridDimensionZ * 2 - 1);
+
+        while (roomsGBMatrix[chestRoomPosI, chestRoomPosJ] == null 
+            || chestRoomPosI == startRoomPosI || chestRoomPosJ == startRoomPosJ
+            || chestRoomPosI == bossRoomPosI || chestRoomPosJ == bossRoomPosJ)
+        {
+            chestRoomPosI = Random.Range(0, gridDimensionX * 2 - 1);
+            chestRoomPosJ = Random.Range(0, gridDimensionZ * 2 - 1);
+        }
+
+        var roomObject = roomsGBMatrix[chestRoomPosI, chestRoomPosJ];
+        Destroy(roomObject);
+        roomsGBMatrix[chestRoomPosI, chestRoomPosJ] = Instantiate(chestRoom, new Vector3((chestRoomPosI * roomOffset.x) / 2f, 0, (chestRoomPosJ * roomOffset.y) / 2f), Quaternion.identity, rooms.transform);
+        roomsGBMatrix[chestRoomPosI, chestRoomPosJ].name = "Chest: " + chestRoomPosI + " " + chestRoomPosJ;
+        var chestRoomScript = roomsGBMatrix[chestRoomPosI, chestRoomPosJ].GetComponent<RoomScript>();
+        chestRoomScript.posI = chestRoomPosI;
+        chestRoomScript.posJ = chestRoomPosJ;
+
+
+        var roomMapObject = mapGBMatrix[chestRoomPosI, chestRoomPosJ];
+        Destroy(roomMapObject);
+        mapGBMatrix[chestRoomPosI, chestRoomPosJ] = Instantiate(chestRoomMap, new Vector3((chestRoomPosI * mapOffset.x) / 2f, (chestRoomPosJ * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
+        mapGBMatrix[chestRoomPosI, chestRoomPosJ].name = "Chest: " + chestRoomPosI + " " + chestRoomPosJ;
+
+        if (hideRooms)
+        {
+            mapGBMatrix[chestRoomPosI, chestRoomPosJ].SetActive(false);
+
+        }
+
+
         for (int i = 0; i < gridDimensionX * 2 - 1; i = i + 2)
         {
             for (int j = 0; j < gridDimensionZ * 2 - 1; j = j + 2)
             {
-                Debug.Log("Pos: " + i + " " + j);
+                //Debug.Log("Pos: " + i + " " + j);
 
                 //0 = Up, 1= Down, 2 = Right, 3 = Left
                 // true = puerta false = pared
@@ -440,8 +483,8 @@ public class MazeGenerator : MonoBehaviour
         rooms.transform.position = new Vector3(-gridDimensionX * roomOffset.x / 2, 0, -gridDimensionZ * roomOffset.y / 2);
 
         var startRoomPos = roomsGBMatrix[startRoomPosI, startRoomPosJ].transform.position;
-        playerGB.transform.position = new Vector3(startRoomPos.x, 1, startRoomPos.z);
-        mapObject.transform.position = new Vector3(startRoomPos.x, 1, startRoomPos.z + 0.5f);
+        playerGB.transform.position = new Vector3(startRoomPos.x + 2, 1, startRoomPos.z);
+        mapObject.transform.position = new Vector3(startRoomPos.x + 2, 1, startRoomPos.z + 1f);
         gunGB.transform.position = new Vector3(startRoomPos.x, 1, startRoomPos.z);
 
 
@@ -452,11 +495,11 @@ public class MazeGenerator : MonoBehaviour
         nodesMap.transform.localPosition = new Vector3(-gridDimensionX * mapOffset.x / 2, 0, -gridDimensionZ * mapOffset.y / 2);
         playerMap.transform.localPosition = new Vector3(-gridDimensionX * mapOffset.x / 2, 0, (-gridDimensionZ * mapOffset.y / 2) + playerOffset);
 
+        mapObject.transform.localScale = new Vector3(mapScale, mapScale, mapScale);
 
-        
+        playerMapInstantiated.transform.GetChild(0).GetComponent<PlayerMapMovement>().GetRoomsToMove(roomsMap, doorsMap);
 
-        
-
+        playerMap.transform.parent = mapObject.transform;
     }
 
     public void UpdateMap(int i, int j)

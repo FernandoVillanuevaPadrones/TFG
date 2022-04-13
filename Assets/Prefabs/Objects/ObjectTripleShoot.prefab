@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1452205339253731376}
   m_Layer: 0
   m_Name: ObjectTripleShoot
-  m_TagString: Untagged
+  m_TagString: ConsumableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452205339253731379}
-  m_LocalRotation: {x: -0, y: -0.6858442, z: -0, w: 0.7277485}
+  m_LocalRotation: {x: 0, y: -0.68584377, z: 0, w: 0.7277488}
   m_LocalPosition: {x: 2.16, y: 0.72, z: 0.42}
   m_LocalScale: {x: 0.21173, y: 0.21173, z: 0.21173}
   m_Children: []
