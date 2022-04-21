@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
 
     [Header("Menu")]
     [SerializeField] private GameObject menuGB;
+    [SerializeField] private GameObject menuGBOffset;
 
 
     private float _currentHealth;
@@ -42,12 +43,23 @@ public class Player : MonoBehaviour
 
     }
 
+    private void FixedUpdate()
+    {
+
+        menuGBOffset.transform.localEulerAngles = new Vector3(0, Camera.main.transform.localEulerAngles.y, 0);
+    }
     private void PauseMenu(InputAction.CallbackContext obj)
     {
         menuGB.SetActive(!menuGB.activeSelf);
 
         if (menuGB.activeSelf)
         {
+            /*
+            var position = new Vector3(Camera.main.transform.position.x, 1.151f, Camera.main.transform.position.z);
+            menuGB.transform.position = position + Camera.main.transform.forward * 2.4f;
+            
+            menuGB.transform.rotation = Quaternion.LookRotation(menuGB.transform.position - Camera.main.transform.position);
+            */
             Time.timeScale = 0;
         }
         else
