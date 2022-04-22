@@ -1190,6 +1190,17 @@
                 },
                 {
                     "name": "",
+                    "id": "1d6ff0da-ded6-4c6f-8b0b-f148d9c560ea",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "UseObject",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6d9f0998-1694-4112-85dc-70a2a031bc05",
                     "path": "<XRController>{RightHand}/Primary2DAxis",
                     "interactions": "Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)",

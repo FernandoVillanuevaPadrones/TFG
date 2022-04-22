@@ -43,4 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be4e107e2ca80d4ebfd618bf6e7046b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerScript: {fileID: 0}
+  _weaponScript: {fileID: 0}
   _velociMaterial: {fileID: 2100000, guid: 4b263bee6fca8cf448d8718d81bb388b, type: 2}

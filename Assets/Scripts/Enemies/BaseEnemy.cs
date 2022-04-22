@@ -34,6 +34,7 @@ public class BaseEnemy : MonoBehaviour
 
         if (_currentHealth == 0)
         {
+            GameManager.ChangeScore("enemy");
             Destroy(gameObject);
         }
     }

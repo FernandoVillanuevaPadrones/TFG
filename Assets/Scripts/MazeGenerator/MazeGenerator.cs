@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,8 +17,6 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private int gridDimensionX;
     [SerializeField] private int gridDimensionZ;
 
-    [SerializeField] private int minRooms;
-    [SerializeField] private int maxRooms;
 
     [SerializeField] private GameObject[] room;
     [SerializeField] private GameObject startRoom;
@@ -45,6 +42,8 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private GameObject playerMapGB;
     [SerializeField] private float playerOffset = 0.001f;
 
+    private int minRooms;
+    private int maxRooms;
 
     private int[,] Matrix;
     private int leftRooms;
@@ -59,9 +58,28 @@ public class MazeGenerator : MonoBehaviour
 
     private GameObject playerMapInstantiated;
     
+    private class availableRooms
+    {
+        public int posI;
+        public int posJ;
+    }
+
+    private List<availableRooms> availableRoomsList = new List<availableRooms>();
+
+
+    private int currentLevel;
 
     void Start()
     {
+        
+        currentLevel = PlayerPrefs.GetInt("Level");
+
+        Debug.Log("level: " + currentLevel);
+
+
+        minRooms = currentLevel + 2;
+        maxRooms = currentLevel + 4;
+
         mapHUDObject = mapObject.transform.Find("HUDRotateOffset/HUDMoveOffset/HUD").gameObject;
 
         GetSeeds();
@@ -105,20 +123,21 @@ public class MazeGenerator : MonoBehaviour
         leftRooms = Random.Range(minRooms, maxRooms + 1) - 1;
 
         PopulateMatrix();
-
     }
 
     private void PopulateMatrix()
     {
         // pares salas, impares puertas
 
+        
+
         for (int i = 2; i < gridDimensionX * 2 - 3; i = i + 2)
         {
             for (int j = 2; j < gridDimensionZ * 2 - 3; j = j + 2)
             {
-
                 if (Matrix[i,j] != 0)
                 {
+                    
                     int random = Random.Range(0, 80);
 
                     if (random < 20)
@@ -173,20 +192,22 @@ public class MazeGenerator : MonoBehaviour
                             Matrix[i, j - 1] = 1; //puerta por si hay una sala al lado 
                         }
                     }
-
                     if (leftRooms <= 0 )
                     {
+   
                         return;
                     }
                 }
             }
         }
-
+        
         // volvemos a generar en caso de que queden salas
         if (leftRooms > 0)
         {
+
             PopulateMatrix(); 
         }
+
 
     }
 
@@ -251,8 +272,7 @@ public class MazeGenerator : MonoBehaviour
                 
             }
         }
-
-        
+    
         for (int i = 0; i < gridDimensionX * 2 - 1; i++)
         {
             for (int j = 0; j < gridDimensionZ * 2 - 1; j++)
@@ -316,6 +336,11 @@ public class MazeGenerator : MonoBehaviour
                         roomScript.posI = i;
                         roomScript.posJ = j;
 
+                        var availableRoom = new availableRooms();
+                        availableRoom.posI = i;
+                        availableRoom.posJ = j;
+                        availableRoomsList.Add(availableRoom);
+
                         //------MAP--------
                         mapGBMatrix[i, j] = Instantiate(roomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
                         mapGBMatrix[i, j].name = "Normal: " + i + " " + j;
@@ -329,18 +354,14 @@ public class MazeGenerator : MonoBehaviour
                 }                
             }
         }
+        
+        //I am using a custom class because is needed to get the exact i and j pos of the same room, if not, it can appear in an undesired room like the start one
+        var randomRoom = Random.Range(0, availableRoomsList.Count);
+        chestRoomPosI = availableRoomsList[randomRoom].posI;
+        chestRoomPosJ = availableRoomsList[randomRoom].posJ;
 
-        chestRoomPosI = Random.Range(0, gridDimensionX * 2 - 1);
-        chestRoomPosJ = Random.Range(0, gridDimensionZ * 2 - 1);
-
-        while (roomsGBMatrix[chestRoomPosI, chestRoomPosJ] == null 
-            || chestRoomPosI == startRoomPosI || chestRoomPosJ == startRoomPosJ
-            || chestRoomPosI == bossRoomPosI || chestRoomPosJ == bossRoomPosJ)
-        {
-            chestRoomPosI = Random.Range(0, gridDimensionX * 2 - 1);
-            chestRoomPosJ = Random.Range(0, gridDimensionZ * 2 - 1);
-        }
-
+        //The selected room is destroyed
+        // I do this because chest room is needed100% so I wait to create all the rooms so it is not missed in random probabilities
         var roomObject = roomsGBMatrix[chestRoomPosI, chestRoomPosJ];
         Destroy(roomObject);
         roomsGBMatrix[chestRoomPosI, chestRoomPosJ] = Instantiate(chestRoom, new Vector3((chestRoomPosI * roomOffset.x) / 2f, 0, (chestRoomPosJ * roomOffset.y) / 2f), Quaternion.identity, rooms.transform);
@@ -472,8 +493,8 @@ public class MazeGenerator : MonoBehaviour
                     Instantiate(nodeMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, nodesMap.transform);
                 }
             }
-        }*/
-
+        }
+        */
 
 
 
@@ -529,7 +550,5 @@ public class MazeGenerator : MonoBehaviour
             mapGBMatrix[i, j - 1].SetActive(true);
         }
     }
-
-
 
 }

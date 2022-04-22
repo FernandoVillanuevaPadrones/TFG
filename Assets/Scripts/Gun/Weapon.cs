@@ -36,6 +36,7 @@ public class Weapon : MonoBehaviour
     private float _currentDamage;
     private float _currentShootForce;
     private float _currentFireRate;
+    private int _currentNumberShoots;
     private bool _shooting = false;
 
     private GameObject leftBoquilla;
@@ -47,9 +48,25 @@ public class Weapon : MonoBehaviour
     }
     private void Start()
     {
-        _waitShoot = new WaitForSeconds(1 / _fireRate);
 
-        RestartStats();
+        //Saved Game = 0 (no game saved/like False), == 1 saved Game
+        if (PlayerPrefs.GetInt("SavedGame") == 0)
+        {
+            RestartStats();
+        }
+        else
+        {
+            _currentDamage = PlayerPrefs.GetFloat("GunDamage");
+            _currentShootForce = PlayerPrefs.GetFloat("GunShootForce");
+            _currentFireRate = PlayerPrefs.GetFloat("GunFireRate");
+            _currentNumberShoots = PlayerPrefs.GetInt("GunNumberShoots");
+        }
+
+        
+
+        _waitShoot = new WaitForSeconds(1 / _currentFireRate);
+
+        
 
         leftBoquilla = transform.Find("BoquillaIzq").gameObject;
         rightBoquilla = transform.Find("BoquillaDer").gameObject;
@@ -73,9 +90,10 @@ public class Weapon : MonoBehaviour
     }
     private IEnumerator Shoot()
     {
+        Debug.Log("Shoot: " + _currentNumberShoots);
         while (true)
         {
-            switch (_numberShoots)
+            switch (_currentNumberShoots)
             {
                 case 1:
                     Projectile projectileInstance = Instantiate(_bulletPrefab, _mainFirePoint.position, _mainFirePoint.rotation);
@@ -117,24 +135,24 @@ public class Weapon : MonoBehaviour
     }
     public void ChangeNumberShoots(int num)
     {
-        if (_numberShoots == 1 && num != 1)
+        if (_currentNumberShoots == 1 && num != 1)
         {
             leftBoquilla.SetActive(true);
             rightBoquilla.SetActive(true);
         }
-        else if (_numberShoots != 1 && num == 1)
+        else if (_currentNumberShoots != 1 && num == 1)
         {
             leftBoquilla.SetActive(false);
             rightBoquilla.SetActive(false);
         }
 
-        _numberShoots = Mathf.Clamp(num, 1, 3);
+        _currentNumberShoots = Mathf.Clamp(num, 1, 3);
 
         
     }
     public void ChangeFireRate(float num) {
         _currentFireRate += num;
-        _waitShoot = new WaitForSeconds(1 / _fireRate);
+        _waitShoot = new WaitForSeconds(1 / _currentFireRate);
     }
     public void ChangeDamage(float num) {
         _currentDamage += num;
@@ -145,5 +163,14 @@ public class Weapon : MonoBehaviour
         _currentDamage = _damage;
         _currentShootForce = _shootForce;
         _currentFireRate = _fireRate;
+        _currentNumberShoots = _numberShoots;
+    }
+
+    public void SaveStats()
+    {
+        PlayerPrefs.SetFloat("GunDamage", _currentDamage);
+        PlayerPrefs.SetFloat("GunShootForce", _currentShootForce);
+        PlayerPrefs.SetFloat("GunFireRate", _currentFireRate);
+        PlayerPrefs.SetInt("GunNumberShoots", _currentNumberShoots);
     }
 }

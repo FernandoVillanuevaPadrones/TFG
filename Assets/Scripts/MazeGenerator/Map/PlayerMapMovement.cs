@@ -73,10 +73,6 @@ public class PlayerMapMovement : MonoBehaviour
 
 
         hudMoveOffsetGB.transform.localPosition -= move * currentSpeedOffset;
-        Debug.Log(hudRotateOffsetGB);
-        Debug.Log(hudRotateOffsetGB.transform.localPosition);
-        //Debug.Log(move);
-
     }
 
     public void GetRoomsToMove(GameObject rooms, GameObject doors)
@@ -94,12 +90,10 @@ public class PlayerMapMovement : MonoBehaviour
     {
         if (other.transform.CompareTag("RoomMap"))
         {
-            Debug.Log("Cambia a Room");
             currentSpeedOffset = moveSpeedRoom;
         }
         else if (other.transform.CompareTag("DoorMap"))
         {
-            Debug.Log("Cambia a Door");
             currentSpeedOffset = moveSpeedDoor;
         }
     }

@@ -30,6 +30,7 @@ public class RoomScript : MonoBehaviour
             if (!mapUpdated)
             {
                 transform.parent.GetComponentInParent<MazeGenerator>().UpdateMap(posI, posJ);
+                GameManager.ChangeScore("room");
                 mapUpdated = true;
 
             }
