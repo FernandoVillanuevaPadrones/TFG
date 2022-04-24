@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f260f54921e6fc14db99e17e28bd2a6c, type: 3}
+  m_Name: DamageMinus
+  m_EditorClassIdentifier: 
+  type: 1
+  special: 0
+  _ammountToChange: -10
+  objectColor: {r: 1, g: 0.5226415, b: 0.5226415, a: 0}

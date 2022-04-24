@@ -99,16 +99,6 @@ public class Player : MonoBehaviour
 
     private void UseObject(InputAction.CallbackContext obj)
     {
-        /*
-        //Needed to know if is a consumable or another object like the map
-        if (!_leftDirectInteractor.hasSelection || !_leftDirectInteractor.interactablesSelected[0].transform.CompareTag("ConsumableObject"))
-        {
-            return;
-        }
-        else if (!_rightDirectInteractor.hasSelection || !_rightDirectInteractor.interactablesSelected[0].transform.CompareTag("ConsumableObject"))
-        {
-            return;
-        }*/
 
         if ((_leftDirectInteractor.hasSelection && _leftDirectInteractor.interactablesSelected[0].transform.CompareTag("ConsumableObject")) 
             || (_rightDirectInteractor.hasSelection && _rightDirectInteractor.interactablesSelected[0].transform.CompareTag("ConsumableObject")))
@@ -124,39 +114,39 @@ public class Player : MonoBehaviour
                 _currentObject = _rightDirectInteractor.selectTarget.GetComponent<Object>();
             }
 
-             
+            
             float _amountChange = _currentObject._ammountToChange;
 
             switch (_currentObject.type)
             {
-                case Object.ObjectType.fireRate:
+                case ScriptableObjectConsumable.ObjectType.fireRate:
                     _weaponScript.ChangeFireRate(_amountChange);
                     break;
-                case Object.ObjectType.damage:
+                case ScriptableObjectConsumable.ObjectType.damage:
                     _weaponScript.ChangeDamage(_amountChange);
                     break;
-                case Object.ObjectType.speed:
+                case ScriptableObjectConsumable.ObjectType.speed:
                     ChangeSpeed(_amountChange);
                     break;
-                case Object.ObjectType.health:
+                case ScriptableObjectConsumable.ObjectType.health:
                     ChangeHealth(_amountChange);
                     break;
-                case Object.ObjectType.cooldown:
+                case ScriptableObjectConsumable.ObjectType.cooldown:
                     break;
-                case Object.ObjectType.special:
+                case ScriptableObjectConsumable.ObjectType.special:
                     switch (_currentObject.special)
                     {
-                        case Object.SpecialType.Nothing:
+                        case ScriptableObjectConsumable.SpecialType.Nothing:
                             break;
-                        case Object.SpecialType.DoubleShoot:
+                        case ScriptableObjectConsumable.SpecialType.DoubleShoot:
                             _weaponScript.ChangeNumberShoots(2);
                             break;
-                        case Object.SpecialType.TripleShoot:
+                        case ScriptableObjectConsumable.SpecialType.TripleShoot:
                             _weaponScript.ChangeNumberShoots(3);
                             break;
-                        case Object.SpecialType.Infinity:
+                        case ScriptableObjectConsumable.SpecialType.Infinity:
                             break;
-                        case Object.SpecialType.BombShoot:
+                        case ScriptableObjectConsumable.SpecialType.BombShoot:
                             break;
                         default:
                             break;
@@ -166,6 +156,7 @@ public class Player : MonoBehaviour
                     break;
             }
 
+            Debug.Log("Destroying");
             Destroy(_currentObject.gameObject);
         }
     }

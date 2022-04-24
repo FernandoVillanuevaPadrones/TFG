@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 431962528}
-  m_IndirectSpecularColor: {r: 0.0038378797, g: 0.0036295622, b: 0.0027149692, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -311,29 +311,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 762874192}
     - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
-      propertyPath: maxRooms
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
-      propertyPath: minRooms
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
       propertyPath: playerGB
       value: 
       objectReference: {fileID: 5074745224505973912}
     - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
       propertyPath: mapObject
       value: 
       objectReference: {fileID: 350251373}
-    - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
-      propertyPath: currentSeed
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1740122262274448705, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
       propertyPath: m_Name
       value: Generator
