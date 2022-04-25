@@ -65,6 +65,7 @@ public class MazeGenerator : MonoBehaviour
     }
 
     private List<availableRooms> availableRoomsList = new List<availableRooms>();
+    private List<GameObject> allRoomsList = new List<GameObject>();
 
 
     private int currentLevel;
@@ -73,6 +74,7 @@ public class MazeGenerator : MonoBehaviour
     {
         
         currentLevel = PlayerPrefs.GetInt("Level");
+        currentLevel = 4;
 
         Debug.Log("level: " + currentLevel);
 
@@ -336,6 +338,8 @@ public class MazeGenerator : MonoBehaviour
                         roomScript.posI = i;
                         roomScript.posJ = j;
 
+                        
+
                         var availableRoom = new availableRooms();
                         availableRoom.posI = i;
                         availableRoom.posJ = j;
@@ -350,7 +354,10 @@ public class MazeGenerator : MonoBehaviour
                             mapGBMatrix[i, j].SetActive(false);
 
                         }
+
                     }                                                                             
+                    
+                    allRoomsList.Add(roomsGBMatrix[i, j]);
                 }                
             }
         }
@@ -364,12 +371,16 @@ public class MazeGenerator : MonoBehaviour
         // I do this because chest room is needed100% so I wait to create all the rooms so it is not missed in random probabilities
         var roomObject = roomsGBMatrix[chestRoomPosI, chestRoomPosJ];
         Destroy(roomObject);
+
+        allRoomsList.Remove(roomsGBMatrix[chestRoomPosI, chestRoomPosJ]);
+
         roomsGBMatrix[chestRoomPosI, chestRoomPosJ] = Instantiate(chestRoom, new Vector3((chestRoomPosI * roomOffset.x) / 2f, 0, (chestRoomPosJ * roomOffset.y) / 2f), Quaternion.identity, rooms.transform);
         roomsGBMatrix[chestRoomPosI, chestRoomPosJ].name = "Chest: " + chestRoomPosI + " " + chestRoomPosJ;
         var chestRoomScript = roomsGBMatrix[chestRoomPosI, chestRoomPosJ].GetComponent<RoomScript>();
         chestRoomScript.posI = chestRoomPosI;
         chestRoomScript.posJ = chestRoomPosJ;
 
+        allRoomsList.Add(roomsGBMatrix[chestRoomPosI, chestRoomPosJ]);
 
         var roomMapObject = mapGBMatrix[chestRoomPosI, chestRoomPosJ];
         Destroy(roomMapObject);
@@ -548,6 +559,26 @@ public class MazeGenerator : MonoBehaviour
         {
             mapGBMatrix[i, j - 2].SetActive(true);
             mapGBMatrix[i, j - 1].SetActive(true);
+        }
+    }
+
+
+    public void OpenAllDoors()
+    {
+        Debug.Log("Opening");
+
+        foreach (GameObject room in allRoomsList)
+        {
+            room.GetComponent<RoomScript>().OpenDoors();
+        }
+    }
+
+    public void CloseAllDoors()
+    {
+        Debug.Log("Closing");
+        foreach (GameObject room in allRoomsList)
+        {
+            room.GetComponent<RoomScript>().CloseDoors();
         }
     }
 

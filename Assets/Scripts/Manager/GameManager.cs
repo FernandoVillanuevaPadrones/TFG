@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     [Header("Materials")]
     [SerializeField] private Material _velociMaterial;
     public static Material velociMaterial;
+    
+    [Header("Generator")]
+    [SerializeField] private MazeGenerator generator;
 
     public static int currentLevel = 1;
 
@@ -23,13 +26,32 @@ public class GameManager : MonoBehaviour
 
 
     public static bool savedGame = false;
+    public static bool roomCleared = true;
 
-
+    public static bool closeDoors = false;
+    public static bool openDoors = false;
 
     private void Start()
     {
-        velociMaterial = _velociMaterial;
+        closeDoors = false;
+        openDoors = false;
+
+    velociMaterial = _velociMaterial;
         totalScore = PlayerPrefs.GetInt("Score");
+    }
+
+    private void Update()
+    {
+        if (closeDoors)
+        {
+            generator.CloseAllDoors();
+            closeDoors = false;
+        }
+        else if (openDoors)
+        {
+            generator.OpenAllDoors();
+            openDoors = false;
+        }
     }
     public static void HideVelociraptos()
     {
@@ -67,5 +89,6 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
         SceneManager.LoadScene("Generator");
     }
+
 
 }

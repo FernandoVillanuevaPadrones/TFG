@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lifeLineText;
     [SerializeField] private LifeLine lifeLineScript;
 
+
     private float _currentHealth;
     private float _currentSpeed;
 
@@ -156,7 +157,6 @@ public class Player : MonoBehaviour
                     break;
             }
 
-            Debug.Log("Destroying");
             Destroy(_currentObject.gameObject);
         }
     }
@@ -189,14 +189,14 @@ public class Player : MonoBehaviour
     {
         if (other.transform.CompareTag("Room"))
         {
-            
-            other.transform.GetComponentInParent<RoomScript>().CloseDoors();
+           other.transform.GetComponentInParent<RoomScript>().PlayerInRoom();
         }
         else if (other.transform.CompareTag("Capsule"))
         {
             other.transform.GetComponentInParent<Capsule>().NextAnimState();
         }
     }
+
 
     private void Dead()
     {

@@ -42,12 +42,15 @@ public class Weapon : MonoBehaviour
     private GameObject leftBoquilla;
     private GameObject rightBoquilla;
 
+    private AudioSource audioSource;
+
     protected virtual void Awake()
     {
         
     }
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
 
         //Saved Game = 0 (no game saved/like False), == 1 saved Game
         if (PlayerPrefs.GetInt("SavedGame") == 0)
@@ -121,7 +124,8 @@ public class Weapon : MonoBehaviour
                     projectileInstance6.Launch();
                     break;
                 
-            }            
+            }
+            audioSource.Play();
             yield return _waitShoot;
         }                  
     }

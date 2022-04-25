@@ -6,6 +6,7 @@ using UnityEngine;
 public class BossRoom : MonoBehaviour
 {
     [SerializeField] private Animator capsuleAnimator;
+    [SerializeField] private AudioSource capsuleAudio;
 
     private GameObject enemiesGB;
     private void Start()
@@ -24,5 +25,6 @@ public class BossRoom : MonoBehaviour
     private void BossKilled()
     {
         capsuleAnimator.SetBool("OpenFloor", true);
+        capsuleAudio.Play();
     }
 }

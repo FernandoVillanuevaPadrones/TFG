@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(ScriptableObjectConsumable), true)]
 public class CustomEditorConsumable : Editor
 {
@@ -39,3 +39,4 @@ public class CustomEditorConsumable : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

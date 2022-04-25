@@ -26,4 +26,5 @@ public class Capsule : MonoBehaviour
     {
         gameManagerScript.NextLevel();
     }
+
 }

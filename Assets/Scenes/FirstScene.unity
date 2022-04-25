@@ -1045,6 +1045,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 412857211}
+        m_TargetAssemblyTypeName: OwnAudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MenuClick
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &299043119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1205,6 +1217,74 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
+--- !u!1001 &412857210
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3192569722352393372, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363884274310453903, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363884274310453903, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15.131247
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363884274310453903, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -13.607622
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363884274310453903, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -14.076043
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363884274310453903, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363884274310453903, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363884274310453903, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363884274310453903, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363884274310453903, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363884274310453903, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363884274310453903, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+--- !u!114 &412857211 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3701857109218688100, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+  m_PrefabInstance: {fileID: 412857210}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f645f1f9460bcf44ab3a4d96910c319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &424358007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1893,6 +1973,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 412857211}
+        m_TargetAssemblyTypeName: OwnAudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MenuClick
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &641508455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2111,6 +2203,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 412857211}
+        m_TargetAssemblyTypeName: OwnAudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MenuClick
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &824101429
@@ -3923,6 +4027,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 412857211}
+        m_TargetAssemblyTypeName: OwnAudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MenuClick
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1915264970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4065,6 +4181,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 412857211}
+        m_TargetAssemblyTypeName: OwnAudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MenuClick
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1206417589}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine

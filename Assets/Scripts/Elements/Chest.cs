@@ -19,8 +19,13 @@ public class Chest : MonoBehaviour
     [Header("OBJECTS")]
     [SerializeField]
     private List<GameObject> allCapsules;
-    //[SerializeField]
-    //private ScriptableObjectConsumable[] scriptableObjectsConsumables;
+
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip OpenClip;
+    [SerializeField]
+    private AudioClip hideCapsulesClip;
+
     [SerializeField]
     private List<ScriptableObjectConsumable> scriptableObjectsList;
     [SerializeField] private float finalPosZObjects = 0.00198f;
@@ -31,23 +36,15 @@ public class Chest : MonoBehaviour
 
     private int posCaps = 0;
     private List<int> availablePos = new List<int> { 0,1,2,3,4,5};
-    private List<ScriptableObjectConsumable> availableScripts;
-    //private List<ScriptableObjectConsumable> availablePos = new List<int>();
+
+    private AudioSource audioSource;
+
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        OpenChest();
-        PlayerPrefs.SetInt("Level", 3);
-        /*
-        foreach (var item in allCapsules)
-        {
-            item.GetComponent<Object>().SetStats(scriptableObjectsList[posCaps]);
-            
-        }*/
-
+        audioSource = GetComponent<AudioSource>();
         var remain = 6;
-        
 
         while (remain > 0)
         {
@@ -64,14 +61,6 @@ public class Chest : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.CompareTag("Player"))
-        {
-            animator.SetBool("Open", true);
-        }       
-    }
-
     public void OpenChest()
     {
         StartCoroutine(OpenChestAnimation());
@@ -85,7 +74,10 @@ public class Chest : MonoBehaviour
             .DOLocalRotate(new Vector3(keyPlacedTransform.localEulerAngles.x, finalRotYChestKey, keyPlacedTransform.localEulerAngles.z), keyAnimDuration)
             .SetEase(keyEaseType);
         yield return chestTween.WaitForCompletion();
-         
+
+        audioSource.clip = OpenClip;
+        audioSource.Play();
+
         chestTween = ChestTopTransform
             .DORotate(new Vector3(finalRotXChestTop, 0f, 0f), chestAnimDuration)
             .SetEase(chestEaseType);
@@ -100,6 +92,7 @@ public class Chest : MonoBehaviour
                 chestTween = item.transform
                     .DOLocalMoveZ(finalPosZObjects, objectDuration)
                     .SetEase(objectsEaseType);
+                item.GetComponent<AudioSource>().Play();
                 yield return chestTween.WaitForCompletion();
                 item.GetComponent<OffsetGrab>().enabled = true;
             }
@@ -115,6 +108,8 @@ public class Chest : MonoBehaviour
                 chestTween = allCapsules[pos].transform
                         .DOLocalMoveZ(finalPosZObjects, objectDuration)
                         .SetEase(objectsEaseType);
+                allCapsules[pos].GetComponent<AudioSource>().Play();
+
                 yield return chestTween.WaitForCompletion();
                 allCapsules[pos].GetComponent<OffsetGrab>().enabled = true;
 
@@ -127,6 +122,7 @@ public class Chest : MonoBehaviour
             chestTween = allCapsules[pos].transform
                     .DOLocalMoveZ(finalPosZObjects, objectDuration)
                     .SetEase(objectsEaseType);
+            allCapsules[pos].GetComponent<AudioSource>().Play();
             yield return chestTween.WaitForCompletion();
             allCapsules[pos].GetComponent<OffsetGrab>().enabled = true;
         }
@@ -142,14 +138,22 @@ public class Chest : MonoBehaviour
     }
     private IEnumerator HideCapsulesAnim()
     {
-        yield return new WaitForSeconds(0.5f);
-        Tween chestTween;
-        foreach (var item in allCapsules)
+
+        //Oonly when there are more objects to pick
+        if (PlayerPrefs.GetInt("Level") >= 3)
         {
-            chestTween = item.transform
-                .DOLocalMoveZ(3.825664e-05f, objectDuration)
-                .SetEase(objectsEaseType);
-            item.GetComponent<OffsetGrab>().enabled = false;                   
+            yield return new WaitForSeconds(0.5f);
+            Tween chestTween;
+            foreach (var item in allCapsules)
+            {
+                chestTween = item.transform
+                    .DOLocalMoveZ(3.825664e-05f, objectDuration)
+                    .SetEase(objectsEaseType);
+                item.GetComponent<OffsetGrab>().enabled = false;                   
+            }
+            audioSource.clip = hideCapsulesClip;
+            audioSource.Play();
+
         }
 
     }

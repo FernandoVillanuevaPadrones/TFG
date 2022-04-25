@@ -18,34 +18,34 @@ public class RoomScript : MonoBehaviour
     private GameObject enemiesGB;
 
     private bool mapUpdated = false;
+    private bool openSoundedOnce = false;
+
+    private MazeGenerator mazeGeneratorScript;
 
     private void Start()
     {
         enemiesGB = transform.Find("Enemies").gameObject;
+        mazeGeneratorScript = transform.parent.GetComponentInParent<MazeGenerator>();
     }
     private void Update()
     {
         if (playerInRoom)
         {
-            if (!mapUpdated)
-            {
-                transform.parent.GetComponentInParent<MazeGenerator>().UpdateMap(posI, posJ);
-                GameManager.ChangeScore("room");
-                mapUpdated = true;
-
-            }
+            
             if (enemiesGB.transform.childCount == 0)
             {
-                OpenDoors();
-                playerInRoom = false;
+                
+                GameManager.openDoors = true;             
                 GameManager.HideVelociraptos(); 
             }
             else
             {
-                if (!enemiesShown)
+                if (!mapUpdated)
                 {
-                    
-
+                    GameManager.closeDoors = true;
+                }
+                if (!enemiesShown)
+                {                  
                     enemiesShown = true;
                     for (int i = 0; i < enemiesGB.transform.childCount; i++)
                     {
@@ -58,7 +58,30 @@ public class RoomScript : MonoBehaviour
                     }
                 }
             }
+
+            if (!mapUpdated) // Room not visited previously
+            {
+                mazeGeneratorScript.UpdateMap(posI, posJ);
+                GameManager.ChangeScore("room");
+                mapUpdated = true;
+                if (transform.tag != "StartRoom" && transform.tag != "ChestRoom")
+                {
+                    FindObjectOfType<OwnAudioManager>().Play("Doors");
+                }
+
+            }
         }
+        /*
+        Debug.Log(transform.name + " gm " + GameManager.roomCleared);
+        
+        if (!GameManager.roomCleared)
+        {
+            CloseDoors();
+        }
+        else
+        {
+            OpenDoors();
+        }*/
     }
     public void OpenDoors()
     {
@@ -66,16 +89,30 @@ public class RoomScript : MonoBehaviour
         {
             door.GetComponent<Animator>().SetBool("OpenDoor", true);
             door.GetComponent<Animator>().SetBool("CloseDoor", false);
+
         }
+
+        //Needed to play open sound but when going to a visited room we dont want to be played again
+        if (transform.tag != "ChestRoom" && !openSoundedOnce && playerInRoom)
+        {
+            FindObjectOfType<OwnAudioManager>().Play("Doors");
+            openSoundedOnce = true;          
+        }
+        playerInRoom = false;
+
     }
     public void CloseDoors()
     {
-        foreach (var door in doorsAnimators)
-        {
-            door.GetComponent<Animator>().SetBool("CloseDoor", true);
-            door.GetComponent<Animator>().SetBool("OpenDoor", false);
-        }
+            foreach (var door in doorsAnimators)
+            {
+                door.GetComponent<Animator>().SetBool("CloseDoor", true);
+                door.GetComponent<Animator>().SetBool("OpenDoor", false);
 
+            }                       
+    }
+
+    public void PlayerInRoom()
+    {
         playerInRoom = true;
     }
 
