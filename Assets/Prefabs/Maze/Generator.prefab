@@ -50,12 +50,12 @@ MonoBehaviour:
   gridDimensionX: 21
   gridDimensionZ: 11
   room:
-  - {fileID: 3394120307819553891, guid: 379f82ae1d649684082b0bdbda7322aa, type: 3}
-  - {fileID: 4119189995694916109, guid: 1613f8e019fe39345a09011d814e328d, type: 3}
+  - {fileID: 8879253031191609659, guid: 379f82ae1d649684082b0bdbda7322aa, type: 3}
+  - {fileID: 6304200797656363237, guid: 1613f8e019fe39345a09011d814e328d, type: 3}
   startRoom: {fileID: 3924194409187397504, guid: bf5b4c2c79738c64d9d554a222b82d33, type: 3}
   chestRoom: {fileID: 3727044323620382517, guid: d3dc8e4369a42384491cf5076f567524, type: 3}
   bossRoom:
-  - {fileID: 1886895783488081112, guid: 74a4cb57d3b0115448e5a1ced034c56d, type: 3}
+  - {fileID: 8174031818120769943, guid: 92c46d83a3e8d2340862853d722b5ee8, type: 3}
   hideRooms: 1
   mapOffset: {x: 0.02, y: 0.02}
   doorOffset: {x: 0.02, y: 0.02}

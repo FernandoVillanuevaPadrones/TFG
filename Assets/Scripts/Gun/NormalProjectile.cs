@@ -31,14 +31,14 @@ public class NormalProjectile : Projectile
             //other.gameObject.GetComponent<BaseEnemy>().DoDamage(_weapon.GetDamage());
             
 
-            other.gameObject.GetComponentInParent<BaseEnemy>().DoDamage(_weapon.GetDamage());
+            other.gameObject.GetComponentInParent<BaseEnemyNav>().DoDamage(_weapon.GetDamage());
             Destroy(gameObject);
         }
         else if (other.transform.tag == "VelociRaptor")
         {
-            var enemyScript = other.gameObject.GetComponentInParent<VelociRapt>();
+            var enemyScript = other.gameObject.GetComponentInParent<VelociRaptNav>();
             enemyScript.DoDamage(_weapon.GetDamage());
-            if (enemyScript.currentState == VelociRapt.State.Idle)
+            if (enemyScript.currentState == VelociRaptNav.State.Idle)
             {
                 enemyScript.GetAlerted();
             }

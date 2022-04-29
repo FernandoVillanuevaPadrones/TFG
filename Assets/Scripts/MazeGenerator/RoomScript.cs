@@ -49,10 +49,9 @@ public class RoomScript : MonoBehaviour
                     enemiesShown = true;
                     for (int i = 0; i < enemiesGB.transform.childCount; i++)
                     {
-                        Debug.Log("Hijos: " + enemiesGB.transform.childCount);
                         if (enemiesGB.transform.GetChild(i).tag == "VelociRaptorMain")
                         {
-                            StartCoroutine(enemiesGB.transform.GetChild(i).GetComponent<VelociRapt>().Show());
+                            StartCoroutine(enemiesGB.transform.GetChild(i).GetComponent<VelociRaptNav>().Show());
                             break;
                         }                   
                     }

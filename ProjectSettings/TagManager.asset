@@ -28,8 +28,8 @@ TagManager:
   - Player
   - SecondGrab
   - Unwalkable
-  - 
-  - 
+  - Enemy
+  - Walkable
   - 
   - 
   - 

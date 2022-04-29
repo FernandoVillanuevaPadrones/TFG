@@ -53,8 +53,11 @@ public class Player : MonoBehaviour
             _currentSpeed = PlayerPrefs.GetFloat("PlayerSpeed");
         }
 
+
+        //QUitar
         _currentHealth = _health;
         _currentSpeed = _speed;
+
 
         lifeLineText.text = _currentHealth.ToString();
 
