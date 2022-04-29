@@ -18,7 +18,7 @@ public class BossRoom : MonoBehaviour
     {
         if (enemiesGB.transform.childCount == 0)
         {
-            BossKilled();
+            //BossKilled();
         }
     }
 
