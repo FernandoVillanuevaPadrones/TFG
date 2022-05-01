@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f260f54921e6fc14db99e17e28bd2a6c, type: 3}
-  m_Name: TripleShoot
+  m_Name: TripleShoot 1
   m_EditorClassIdentifier: 
   type: 5
   special: 2

@@ -35,9 +35,16 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lifeLineText;
     [SerializeField] private LifeLine lifeLineScript;
 
+    [Header("MazeGenerator")]
+    [SerializeField] private MazeGenerator mazeScript;
+
 
     private float _currentHealth;
     private float _currentSpeed;
+
+    // 0 false, 1 true
+    [HideInInspector]
+    public static int showMapUpgrade = 0;
 
     private void Start()
     {
@@ -46,13 +53,19 @@ public class Player : MonoBehaviour
         {
             _currentHealth = _health;
             _currentSpeed = _speed;
+            showMapUpgrade = 0;
         }
         else
         {
             _currentHealth = PlayerPrefs.GetFloat("PlayerHealth");
             _currentSpeed = PlayerPrefs.GetFloat("PlayerSpeed");
+            showMapUpgrade = PlayerPrefs.GetInt("ShowMapUpgrade");
         }
 
+        if (showMapUpgrade == 1)
+        {
+            mazeScript.ShowAllMap();
+        }
 
         //QUitar
         _currentHealth = _health;
@@ -149,8 +162,14 @@ public class Player : MonoBehaviour
                             _weaponScript.ChangeNumberShoots(3);
                             break;
                         case ScriptableObjectConsumable.SpecialType.Infinity:
+                            _weaponScript.InfinityShoots();
                             break;
                         case ScriptableObjectConsumable.SpecialType.BombShoot:
+                            break;
+                        case ScriptableObjectConsumable.SpecialType.ShowMap:
+                            showMapUpgrade = 1;
+                            PlayerPrefs.SetInt("ShowMapUpgrade", 1);
+                            mazeScript.ShowAllMap();
                             break;
                         default:
                             break;
@@ -222,5 +241,7 @@ public class Player : MonoBehaviour
         PlayerPrefs.SetFloat("PlayerHealth", _currentHealth);
         PlayerPrefs.SetFloat("PlayerSpeed", _currentSpeed);
         PlayerPrefs.SetInt("Score", GameManager.GetScore());
+        PlayerPrefs.SetInt("ShowMapUpgrade", showMapUpgrade);
+        PlayerPrefs.SetInt("SavedGame", 1);
     }
 }

@@ -125,6 +125,8 @@ public class Weapon : MonoBehaviour
                     break;
                 
             }
+            Debug.Log(GameManager.soundEffectLevel);
+            audioSource.volume = GameManager.soundEffectLevel;
             audioSource.Play();
             yield return _waitShoot;
         }                  
@@ -160,6 +162,13 @@ public class Weapon : MonoBehaviour
     }
     public void ChangeDamage(float num) {
         _currentDamage += num;
+    }
+
+    public void InfinityShoots()
+    {
+        _currentDamage = _currentDamage / 10f;
+        _currentFireRate = _currentFireRate * 10f;
+        _waitShoot = new WaitForSeconds(1 / _currentFireRate);
     }
 
     public void RestartStats()

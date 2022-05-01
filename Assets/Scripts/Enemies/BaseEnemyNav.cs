@@ -42,10 +42,15 @@ public class BaseEnemyNav : MonoBehaviour
     }
     private void RestartStats()
     {
-        _currentHealth = _health;
-        _currentDamage = _damage;
+        _currentHealth = _health * LevelMultiplier();
+        _currentDamage = _damage * LevelMultiplier();
         _currentSpeed = _speed;
         navAgent.speed = _currentSpeed;
+    }
+
+    public float LevelMultiplier()
+    {
+        return (PlayerPrefs.GetInt("Level") - 1 )/10f + 1  ;
     }
 
     public void DoDamage(float damage)

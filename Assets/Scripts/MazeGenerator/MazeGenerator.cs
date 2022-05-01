@@ -74,7 +74,9 @@ public class MazeGenerator : MonoBehaviour
     {
         
         currentLevel = PlayerPrefs.GetInt("Level");
-        currentLevel = 50;
+        //QUITAR
+        PlayerPrefs.SetInt("Level", 2);
+        //currentLevel = 4;
 
         Debug.Log("level: " + currentLevel);
 
@@ -91,6 +93,8 @@ public class MazeGenerator : MonoBehaviour
         Generate();
 
     }
+
+
 
     private void GetSeeds()
     {
@@ -443,7 +447,7 @@ public class MazeGenerator : MonoBehaviour
                     if (Matrix[i, j] != 0)
                     {
                         mapGBMatrix[i, j + 1] = Instantiate(doorMap, new Vector3((i * doorOffset.x) / 2f, ((j + 1) * doorOffset.y) / 2f, 0), Quaternion.identity, doorsMap.transform);
-                        mapGBMatrix[i, j + 1].name = i + " " + j + 1;
+                        mapGBMatrix[i, j + 1].name = i + " " + (j + 1);
                         mapGBMatrix[i, j + 1].transform.Rotate(0f, 0f, 90f);
 
                         if (hideRooms)
@@ -536,26 +540,22 @@ public class MazeGenerator : MonoBehaviour
 
     public void UpdateMap(int i, int j)
     {
-        // Si la de la izq tiene sala pongo puerta sino se pone pared
         if ( i!= 0 && mapGBMatrix[i - 2, j] != null)
         {
             mapGBMatrix[i - 2, j].SetActive(true);
             mapGBMatrix[i - 1, j].SetActive(true);
         }
-        // si la de arriba tiene sala pongo puerta sino se pone pared
         if ((j != gridDimensionZ * 2 - 2) && mapGBMatrix[i, j + 2] != null)
         {
             mapGBMatrix[i, j + 2].SetActive(true);
             mapGBMatrix[i, j + 1].SetActive(true);
         }
-        // Si la de la derecha tiene sala quito pared sino se pone, pero la puerta se quita siempre ya que la pone la otra sala
-        if ((i != gridDimensionX * 2 - 2) && Matrix[i + 2, j] != 0)
+        if ((i != gridDimensionX * 2 - 2) && mapGBMatrix[i + 2, j] != null)
         {
             mapGBMatrix[i + 2, j].SetActive(true);
             mapGBMatrix[i + 1, j].SetActive(true);
         }
-        // si la de abajo tiene sala quito pared sino se pone , pero la puerta se quita siempre
-        if (j != 0 && Matrix[i, j - 2] != 0)
+        if (j != 0 && mapGBMatrix[i, j - 2] != null)
         {
             mapGBMatrix[i, j - 2].SetActive(true);
             mapGBMatrix[i, j - 1].SetActive(true);
@@ -565,8 +565,22 @@ public class MazeGenerator : MonoBehaviour
 
 
 
+
     }
 
+    public void ShowAllMap()
+    {
+        for (int i = 0; i < gridDimensionX  * 2 - 1; i++)
+        {
+            for (int j = 0; j < gridDimensionZ * 2 - 1; j++)
+            {
+                if (mapGBMatrix[i, j] != null)
+                {
+                    mapGBMatrix[i, j].SetActive(true);
+                }
+            }
+        }
+    }
 
     public void OpenAllDoors()
     {

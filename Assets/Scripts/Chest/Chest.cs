@@ -76,6 +76,7 @@ public class Chest : MonoBehaviour
         yield return chestTween.WaitForCompletion();
 
         audioSource.clip = OpenClip;
+        audioSource.volume = GameManager.soundEffectLevel;
         audioSource.Play();
 
         chestTween = ChestTopTransform
@@ -92,6 +93,9 @@ public class Chest : MonoBehaviour
                 chestTween = item.transform
                     .DOLocalMoveZ(finalPosZObjects, objectDuration)
                     .SetEase(objectsEaseType);
+
+                item.GetComponent<AudioSource>().volume = GameManager.soundEffectLevel;
+
                 item.GetComponent<AudioSource>().Play();
                 yield return chestTween.WaitForCompletion();
                 item.GetComponent<OffsetGrab>().enabled = true;
@@ -108,6 +112,8 @@ public class Chest : MonoBehaviour
                 chestTween = allCapsules[pos].transform
                         .DOLocalMoveZ(finalPosZObjects, objectDuration)
                         .SetEase(objectsEaseType);
+
+                allCapsules[pos].GetComponent<AudioSource>().volume = GameManager.soundEffectLevel;
                 allCapsules[pos].GetComponent<AudioSource>().Play();
 
                 yield return chestTween.WaitForCompletion();
@@ -122,6 +128,8 @@ public class Chest : MonoBehaviour
             chestTween = allCapsules[pos].transform
                     .DOLocalMoveZ(finalPosZObjects, objectDuration)
                     .SetEase(objectsEaseType);
+
+            allCapsules[pos].GetComponent<AudioSource>().volume = GameManager.soundEffectLevel;
             allCapsules[pos].GetComponent<AudioSource>().Play();
             yield return chestTween.WaitForCompletion();
             allCapsules[pos].GetComponent<OffsetGrab>().enabled = true;
@@ -152,6 +160,7 @@ public class Chest : MonoBehaviour
                 item.GetComponent<OffsetGrab>().enabled = false;                   
             }
             audioSource.clip = hideCapsulesClip;
+            audioSource.volume = GameManager.soundEffectLevel;
             audioSource.Play();
 
         }

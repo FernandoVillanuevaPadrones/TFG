@@ -12,7 +12,7 @@ public class Menu : MonoBehaviour
     private void Start()
     {
         //PlayerPrefs.SetInt("SavedGame", 0);
-        Debug.Log(PlayerPrefs.GetInt("SavedGame"));
+
         if (SceneManager.GetActiveScene().name == "FirstScene" && PlayerPrefs.GetInt("SavedGame") == 0)
         {                    
                 continueButton.interactable = false;

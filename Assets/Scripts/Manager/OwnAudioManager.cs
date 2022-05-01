@@ -9,12 +9,20 @@ public class OwnAudioManager : MonoBehaviour
     private void Awake()
     {
         
+        
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
 
-            s.source.volume = s.volume;
+            if (s.isMusic)
+            {
+                s.source.volume = GameManager.musicLevel;
+            }
+            else
+            {
+                s.source.volume = GameManager.soundEffectLevel;
+            }
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
@@ -28,5 +36,21 @@ public class OwnAudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+    }
+
+    public void LevelsChanged()
+    {
+        foreach (Sound s in sounds)
+        {
+            if (s.isMusic)
+            {
+                s.source.volume = GameManager.musicLevel;
+            }
+            else
+            {
+                s.source.volume = GameManager.soundEffectLevel;
+            }
+
+        }
     }
 }

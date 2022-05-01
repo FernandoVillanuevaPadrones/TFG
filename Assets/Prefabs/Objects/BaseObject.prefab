@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1284658597395432824}
   - component: {fileID: 1284658597395432825}
   - component: {fileID: 1284658597395432822}
-  - component: {fileID: 1284658597395432823}
   m_Layer: 0
   m_Name: BaseObject
   m_TagString: ConsumableObject
@@ -230,18 +229,3 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
---- !u!114 &1284658597395432823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1284658597395432820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6397a738dcd56a444bcd2328df4fdccf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  special: 0
-  _ammountToChange: 0

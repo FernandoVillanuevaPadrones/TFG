@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,6 +31,25 @@ public class GameManager : MonoBehaviour
 
     public static bool closeDoors = false;
     public static bool openDoors = false;
+
+    public static float musicLevel = 1f;
+    public static float soundEffectLevel = 1f;
+
+    private void Awake()
+    {
+        if (PlayerPrefs.GetFloat("MusicLevel") == 0f)
+        {
+            PlayerPrefs.SetFloat("MusicLevel", musicLevel);
+            PlayerPrefs.SetFloat("EffectLevel", soundEffectLevel);
+        }
+        else
+        {
+            musicLevel = PlayerPrefs.GetFloat("MusicLevel") * 100;
+            soundEffectLevel = PlayerPrefs.GetFloat("EffectLevel") * 100;
+        }
+    }
+
+
 
     private void Start()
     {
@@ -88,6 +108,19 @@ public class GameManager : MonoBehaviour
         _weaponScript.SaveStats();
         PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
         SceneManager.LoadScene("Generator");
+    }
+
+    public void MusicLevelChanged(Slider musicSlider)
+    {
+        musicLevel = musicSlider.value / 100f;
+        PlayerPrefs.SetFloat("MusicLevel", musicLevel); 
+    }
+
+    public void SoundEffectLevelChanged(Slider effectSlider)
+    {
+        soundEffectLevel = effectSlider.value / 100f;
+        PlayerPrefs.SetFloat("EffectLevel", soundEffectLevel);
+
     }
 
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class ScriptableObjectConsumable : ScriptableObject
 {
     public enum ObjectType { fireRate, damage, speed, health, cooldown, special }
-    public enum SpecialType { Nothing, DoubleShoot, TripleShoot, Infinity, BombShoot, HolyShoot }
+    public enum SpecialType { Nothing, DoubleShoot, TripleShoot, Infinity, BombShoot, HolyShoot, ShowMap }
 
     public ObjectType type = ObjectType.fireRate;
     public SpecialType special = SpecialType.Nothing;

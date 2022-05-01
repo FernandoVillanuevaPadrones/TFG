@@ -2869,7 +2869,7 @@ BoxCollider:
   m_GameObject: {fileID: 6012336676537114100}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.0000001, y: 0.99999994, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -4166,6 +4166,7 @@ MonoBehaviour:
   projectile: {fileID: 5479930378691971246, guid: 405e8a2a0c8c81140a0d6f3c1e149ee9, type: 3}
   projectileDamage: -20
   rollingDamage: -10
+  boxCollider: {fileID: 4059915820416072446}
   projectPointsAttack:
   - {fileID: 1081855123}
   - {fileID: 1637451675}

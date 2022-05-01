@@ -26,7 +26,7 @@ public class Object : MonoBehaviour
         this._ammountToChange = objectStats._ammountToChange;
         this.type = objectStats.type;
         this.special = objectStats.special;
-        objectRenderer.material.color = objectStats.objectColor;
+       // objectRenderer.material.color = objectStats.objectColor;
     }
 
 

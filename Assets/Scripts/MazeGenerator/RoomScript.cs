@@ -77,17 +77,7 @@ public class RoomScript : MonoBehaviour
             //needed to move always the map
             mazeGeneratorScript.UpdateMap(posI, posJ);
         }
-        /*
-        Debug.Log(transform.name + " gm " + GameManager.roomCleared);
-        
-        if (!GameManager.roomCleared)
-        {
-            CloseDoors();
-        }
-        else
-        {
-            OpenDoors();
-        }*/
+
     }
     public void OpenDoors()
     {
@@ -101,6 +91,7 @@ public class RoomScript : MonoBehaviour
         //Needed to play open sound but when going to a visited room we dont want to be played again
         if (transform.tag != "ChestRoom" && !openSoundedOnce && playerInRoom)
         {
+
             FindObjectOfType<OwnAudioManager>().Play("Doors");
             openSoundedOnce = true;          
         }

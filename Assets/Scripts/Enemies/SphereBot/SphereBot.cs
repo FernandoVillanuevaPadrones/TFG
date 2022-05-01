@@ -14,6 +14,11 @@ public class SphereBot : BaseEnemyNav
     [SerializeField] private float projectileDamage = -20f;
     [SerializeField] private float rollingDamage = -10f;
 
+
+    [SerializeField] private BoxCollider boxCollider;
+
+
+
     [SerializeField] private Transform[] projectPointsAttack;
     [SerializeField] private Transform[] projectPointsJumpAttack;
 
@@ -32,7 +37,12 @@ public class SphereBot : BaseEnemyNav
 
         animator = GetComponentInChildren<Animator>();
 
+        Debug.Log("DAMAGE pre: " + LevelMultiplier());
+        Debug.Log("level: " + PlayerPrefs.GetInt("Level"));
 
+        projectileDamage *= LevelMultiplier();
+        rollingDamage *= LevelMultiplier();
+        Debug.Log("DAMAGE: " + projectileDamage);
     }
 
 
@@ -44,6 +54,8 @@ public class SphereBot : BaseEnemyNav
             isDoingAction = true;
             rolling = false;
             running = false;
+            //so the player can not kill the boss from outside of the room
+            boxCollider.enabled = true;
             Stop();
 
             randomAction = Random.Range(0, 4);
@@ -106,7 +118,7 @@ public class SphereBot : BaseEnemyNav
 
     IEnumerator WaitForNextRolling()
     {           
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
         GoToPlayer();
                      
     }

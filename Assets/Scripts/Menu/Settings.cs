@@ -11,6 +11,13 @@ public class Settings : MonoBehaviour
     [SerializeField] private TextMeshProUGUI soundEffectNumber;
     [SerializeField] private Slider soundEffectSlider;
 
+    private void Start()
+    {
+        musicSlider.value = GameManager.musicLevel;
+        soundEffectSlider.value = GameManager.soundEffectLevel;
+
+    }
+
     private void Update()
     {
         musicNumber.text = (int) musicSlider.value + "%";
