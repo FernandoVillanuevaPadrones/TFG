@@ -2749,6 +2749,7 @@ GameObject:
   - component: {fileID: 8738521623443580623}
   - component: {fileID: 1722286102094135977}
   - component: {fileID: 8319338972748860674}
+  - component: {fileID: 4740261409482841269}
   m_Layer: 0
   m_Name: LP_Door_snaps
   m_TagString: Wall
@@ -2838,6 +2839,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &4740261409482841269
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508222646476987304}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2797169, y: 2.052752, z: 1.4714357}
+  m_Center: {x: 0.0069100354, y: 1.0237606, z: 3.0000074}
 --- !u!1 &1617543661528927895
 GameObject:
   m_ObjectHideFlags: 0
@@ -3588,6 +3602,7 @@ GameObject:
   - component: {fileID: 7619243767651608630}
   - component: {fileID: 9146854448489499925}
   - component: {fileID: 4433110319213304333}
+  - component: {fileID: 3911846867893069723}
   m_Layer: 0
   m_Name: LP_Door_snaps
   m_TagString: Untagged
@@ -3677,6 +3692,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &3911846867893069723
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035338504462986182}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.27971685, y: 2.052752, z: 1.4714353}
+  m_Center: {x: 0.0069100335, y: 1.0237606, z: 3.0000067}
 --- !u!1 &2067819331086936970
 GameObject:
   m_ObjectHideFlags: 0
@@ -6196,6 +6224,7 @@ GameObject:
   - component: {fileID: 8060190056091081003}
   - component: {fileID: 1927514689851262745}
   - component: {fileID: 5031939033546806590}
+  - component: {fileID: 5403660066926483437}
   m_Layer: 0
   m_Name: LP_Door_snaps
   m_TagString: Wall
@@ -6285,6 +6314,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &5403660066926483437
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2567351970455894052}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.27971685, y: 2.052752, z: 1.4714353}
+  m_Center: {x: 0.0069100335, y: 1.0237606, z: 3.0000067}
 --- !u!1 &2592430883233278333
 GameObject:
   m_ObjectHideFlags: 0
@@ -6297,6 +6339,7 @@ GameObject:
   - component: {fileID: 7377720440120563996}
   - component: {fileID: 3102407203570356985}
   - component: {fileID: 8151750852810097278}
+  - component: {fileID: 7183276794337964601}
   m_Layer: 0
   m_Name: LP_Door_snaps
   m_TagString: Wall
@@ -6386,6 +6429,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &7183276794337964601
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2592430883233278333}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.27971697, y: 2.052752, z: 1.471436}
+  m_Center: {x: 0.0069138515, y: 1.0237606, z: 3.000007}
 --- !u!1 &2621170235493165442
 GameObject:
   m_ObjectHideFlags: 0
@@ -6507,6 +6563,7 @@ GameObject:
   - component: {fileID: 4756320187151816607}
   - component: {fileID: 3324636168197889360}
   - component: {fileID: 3307434448117944605}
+  - component: {fileID: 4768831397511949157}
   m_Layer: 0
   m_Name: LP_Door_snaps
   m_TagString: Untagged
@@ -6596,6 +6653,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &4768831397511949157
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2632470475174905744}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.27971697, y: 2.052752, z: 1.471436}
+  m_Center: {x: 0.006909083, y: 1.0237606, z: 3.000007}
 --- !u!1 &2807806143523392632
 GameObject:
   m_ObjectHideFlags: 0
@@ -20194,6 +20264,7 @@ GameObject:
   - component: {fileID: 271980379699037652}
   - component: {fileID: 3208362793640182296}
   - component: {fileID: 8493871845585823031}
+  - component: {fileID: 3595749326149139274}
   m_Layer: 0
   m_Name: LP_Door_snaps
   m_TagString: Untagged
@@ -20283,6 +20354,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &3595749326149139274
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8121997869278357937}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.27971706, y: 2.052752, z: 1.4714364}
+  m_Center: {x: 0.0069081313, y: 1.0237606, z: 3.000009}
 --- !u!1 &8201474651804800792
 GameObject:
   m_ObjectHideFlags: 0
@@ -20722,6 +20806,7 @@ GameObject:
   - component: {fileID: 4794231553907508433}
   - component: {fileID: 2448805442703898539}
   - component: {fileID: 8869276061116286755}
+  - component: {fileID: 721198881587068654}
   m_Layer: 0
   m_Name: LP_Door_snaps
   m_TagString: Wall
@@ -20811,6 +20896,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &721198881587068654
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8352423075246206461}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.27971706, y: 2.052752, z: 1.4714364}
+  m_Center: {x: 0.0069109923, y: 1.0237606, z: 3.0000083}
 --- !u!1 &8384868959131535589
 GameObject:
   m_ObjectHideFlags: 0
@@ -20823,6 +20921,7 @@ GameObject:
   - component: {fileID: 5462892718820472974}
   - component: {fileID: 4812404638817139279}
   - component: {fileID: 5347211905415362607}
+  - component: {fileID: 8630592471954515521}
   m_Layer: 0
   m_Name: LP_Door_snaps
   m_TagString: Untagged
@@ -20912,6 +21011,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &8630592471954515521
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8384868959131535589}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2797169, y: 2.052752, z: 1.4714357}
+  m_Center: {x: 0.0069100354, y: 1.0237606, z: 3.0000076}
 --- !u!1 &8453232021936034824
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,18 +17,29 @@ public class BaseEnemyNav : MonoBehaviour
     private float _currentSpeed;
 
     private Transform player => GameObject.Find("XR Origin").transform;
+
     [HideInInspector]
     public NavMeshAgent navAgent;
+
+    [HideInInspector]
+    public bool playerInRoom = false;
 
     public virtual void Start()
     {
         navAgent = GetComponent<NavMeshAgent>();
+
+        //It starts disabled because when creating the maze the nav Agent prevents the object to move the enemy correctly and enabling it later fixes it
+        navAgent.enabled = true;
         navAgent.baseOffset = navAgentOffset;
 
         RestartStats();
         
     }
 
+    public void PlayerInRoom()
+    {
+        playerInRoom = true;
+    }
     private void RestartStats()
     {
         _currentHealth = _health;

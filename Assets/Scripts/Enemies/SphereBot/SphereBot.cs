@@ -12,6 +12,7 @@ public class SphereBot : BaseEnemyNav
     [SerializeField] private float projectileSpeed = 1f;
     [SerializeField] private SphereProjectile projectile;
     [SerializeField] private float projectileDamage = -20f;
+    [SerializeField] private float rollingDamage = -10f;
 
     [SerializeField] private Transform[] projectPointsAttack;
     [SerializeField] private Transform[] projectPointsJumpAttack;
@@ -38,7 +39,7 @@ public class SphereBot : BaseEnemyNav
 
     private void Update()
     {
-        if (!isDoingAction)
+        if (!isDoingAction && playerInRoom)
         {
             isDoingAction = true;
             rolling = false;
@@ -159,5 +160,11 @@ public class SphereBot : BaseEnemyNav
         animator.SetBool(boolName, false);
     }
 
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag("Player"))
+        {
+            other.gameObject.GetComponentInParent<Player>().ChangeHealth(rollingDamage);
+        }
+    }
 }

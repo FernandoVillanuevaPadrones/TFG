@@ -74,7 +74,7 @@ public class MazeGenerator : MonoBehaviour
     {
         
         currentLevel = PlayerPrefs.GetInt("Level");
-        currentLevel = 4;
+        currentLevel = 50;
 
         Debug.Log("level: " + currentLevel);
 
@@ -82,7 +82,7 @@ public class MazeGenerator : MonoBehaviour
         minRooms = currentLevel + 2;
         maxRooms = currentLevel + 4;
 
-        mapHUDObject = mapObject.transform.Find("HUDRotateOffset/HUDMoveOffset/HUD").gameObject;
+        mapHUDObject = mapObject.transform.Find("HUDMoveOffset/HUDRotateOffset/HUD").gameObject;
 
         GetSeeds();
 
@@ -537,29 +537,34 @@ public class MazeGenerator : MonoBehaviour
     public void UpdateMap(int i, int j)
     {
         // Si la de la izq tiene sala pongo puerta sino se pone pared
-        if (mapGBMatrix[i - 2, j] != null)
+        if ( i!= 0 && mapGBMatrix[i - 2, j] != null)
         {
             mapGBMatrix[i - 2, j].SetActive(true);
             mapGBMatrix[i - 1, j].SetActive(true);
         }
         // si la de arriba tiene sala pongo puerta sino se pone pared
-        if (mapGBMatrix[i, j + 2] != null)
+        if ((j != gridDimensionZ * 2 - 2) && mapGBMatrix[i, j + 2] != null)
         {
             mapGBMatrix[i, j + 2].SetActive(true);
             mapGBMatrix[i, j + 1].SetActive(true);
         }
         // Si la de la derecha tiene sala quito pared sino se pone, pero la puerta se quita siempre ya que la pone la otra sala
-        if (Matrix[i + 2, j] != 0)
+        if ((i != gridDimensionX * 2 - 2) && Matrix[i + 2, j] != 0)
         {
             mapGBMatrix[i + 2, j].SetActive(true);
             mapGBMatrix[i + 1, j].SetActive(true);
         }
         // si la de abajo tiene sala quito pared sino se pone , pero la puerta se quita siempre
-        if (Matrix[i, j - 2] != 0)
+        if (j != 0 && Matrix[i, j - 2] != 0)
         {
             mapGBMatrix[i, j - 2].SetActive(true);
             mapGBMatrix[i, j - 1].SetActive(true);
         }
+
+        mapHUDObject.GetComponent<ZoomMap>().MoveMapTo(i,j);
+
+
+
     }
 
 

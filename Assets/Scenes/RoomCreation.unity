@@ -18299,6 +18299,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room3
       objectReference: {fileID: 0}
+    - target: {fileID: 6304200797656363237, guid: 1613f8e019fe39345a09011d814e328d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6304200797656363238, guid: 1613f8e019fe39345a09011d814e328d, type: 3}
       propertyPath: m_RootOrder
       value: 9

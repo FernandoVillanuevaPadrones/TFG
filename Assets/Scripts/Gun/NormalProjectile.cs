@@ -31,7 +31,7 @@ public class NormalProjectile : Projectile
             //other.gameObject.GetComponent<BaseEnemy>().DoDamage(_weapon.GetDamage());
             
 
-            other.gameObject.GetComponentInParent<BaseEnemyNav>().DoDamage(_weapon.GetDamage());
+            other.gameObject.GetComponent<DamageRedirector>().RedirectDamage(_weapon.GetDamage());
             Destroy(gameObject);
         }
         else if (other.transform.tag == "VelociRaptor")
@@ -42,6 +42,7 @@ public class NormalProjectile : Projectile
             {
                 enemyScript.GetAlerted();
             }
+            Destroy(gameObject);
         }
     }
 }

@@ -13,11 +13,11 @@ public class RoomScript : MonoBehaviour
     [HideInInspector]
     public int posI, posJ;
 
-    private bool enemiesShown = false;
+    private bool enemiesAdvised = false;
     private bool playerInRoom = false;
     private GameObject enemiesGB;
 
-    private bool mapUpdated = false;
+    private bool RoomVisited = false;
     private bool openSoundedOnce = false;
 
     private MazeGenerator mazeGeneratorScript;
@@ -40,35 +40,42 @@ public class RoomScript : MonoBehaviour
             }
             else
             {
-                if (!mapUpdated)
+                if (!RoomVisited)
                 {
                     GameManager.closeDoors = true;
                 }
-                if (!enemiesShown)
+                if (!enemiesAdvised)
                 {                  
-                    enemiesShown = true;
+                    enemiesAdvised = true;
                     for (int i = 0; i < enemiesGB.transform.childCount; i++)
                     {
-                        if (enemiesGB.transform.GetChild(i).tag == "VelociRaptorMain")
+                        if (enemiesGB.transform.GetChild(i).tag == "Enemies/VelociRaptorMain")
                         {
                             StartCoroutine(enemiesGB.transform.GetChild(i).GetComponent<VelociRaptNav>().Show());
                             break;
-                        }                   
+                        }
+                        else if (enemiesGB.transform.GetChild(i).tag == "Enemies/SphereBot")
+                        {
+                            enemiesGB.transform.GetChild(i).GetComponent<BaseEnemyNav>().PlayerInRoom();
+                        }
                     }
                 }
             }
 
-            if (!mapUpdated) // Room not visited previously
+            if (!RoomVisited) // Room not visited previously
             {
-                mazeGeneratorScript.UpdateMap(posI, posJ);
+                
                 GameManager.ChangeScore("room");
-                mapUpdated = true;
+                RoomVisited = true;
                 if (transform.tag != "StartRoom" && transform.tag != "ChestRoom")
                 {
                     FindObjectOfType<OwnAudioManager>().Play("Doors");
                 }
 
             }
+
+            //needed to move always the map
+            mazeGeneratorScript.UpdateMap(posI, posJ);
         }
         /*
         Debug.Log(transform.name + " gm " + GameManager.roomCleared);

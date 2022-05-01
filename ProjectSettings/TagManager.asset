@@ -17,6 +17,8 @@ TagManager:
   - DoorMap
   - StartRoom
   - ChestRoom
+  - Enemies/SphereBot
+  - Enemies/VelociRaptorMain
   layers:
   - Default
   - TransparentFX

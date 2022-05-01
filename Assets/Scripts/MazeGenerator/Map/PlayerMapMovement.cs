@@ -16,7 +16,7 @@ public class PlayerMapMovement : MonoBehaviour
     private GameObject XROriginGB;
 
     private GameObject[] mapsRoomsToMove = new GameObject[2];
-    private GameObject hudMoveOffsetGB;
+    private GameObject HUDGB;
     private GameObject hudRotateOffsetGB;
 
     private float currentSpeedOffset;
@@ -32,58 +32,16 @@ public class PlayerMapMovement : MonoBehaviour
     private void FixedUpdate()
     {
 
-        // Parent para seguir al cuerpo en caso de que rote con el mando
-        Vector3 eulerRotation = new Vector3(transform.parent.localEulerAngles.x, transform.parent.localEulerAngles.y, XROriginGB.transform.localEulerAngles.y);
-        transform.parent.localRotation = Quaternion.Euler(-eulerRotation);
+       
+        transform.localScale = HUDGB.transform.localScale;
 
-        /*
-        // Rotar en funcion de la camara
-        eulerRotation = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, cameraObject.transform.localEulerAngles.y + angleCameraOffset);
-        transform.localRotation = Quaternion.Euler(-eulerRotation);
-        */
-
-        var leftHandValue = moveInput.action?.ReadValue<Vector2>() ?? Vector2.zero;
-        Vector3 move = new Vector3(leftHandValue.x, leftHandValue.y, 0);
-
-        //transform.localPosition += move * moveSpeedOffset;
-
-        
-
-        transform.localScale = hudMoveOffsetGB.transform.localScale;
-
-        /*
-        if (mapsRoomsToMove.Length != 0)
-        {
-            eulerRotation = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, cameraObject.transform.localEulerAngles.y + angleCameraOffset);
-            hudCameraOffsetGB.transform.localRotation = Quaternion.Euler(eulerRotation);
-
-            foreach (var item in mapsRoomsToMove)
-            {
-                item.transform.position -= move * currentSpeedOffset;
-
-                Debug.Log(item.transform.up);
-                
-            }
-        }*/
-
-        eulerRotation = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, cameraObject.transform.localEulerAngles.y + angleCameraOffset);
-        hudRotateOffsetGB.transform.localRotation = Quaternion.Euler(eulerRotation);
-
-
-
-
-        hudMoveOffsetGB.transform.localPosition -= move * currentSpeedOffset;
     }
 
     public void GetRoomsToMove(GameObject rooms, GameObject doors)
     {
-        mapsRoomsToMove[0] = rooms;
-        mapsRoomsToMove[1] = doors;
-       
         // Map/HUDRotateOffset/HUDMoveOffset/HUD/RoomsMap
         // Esto esta en HUD asi que cogemos Map
-        hudMoveOffsetGB = rooms.transform.parent.parent.gameObject;
-        hudRotateOffsetGB = hudMoveOffsetGB.transform.parent.gameObject;
+        HUDGB = rooms.transform.parent.parent.gameObject;
     }
 
     private void OnTriggerEnter(Collider other)

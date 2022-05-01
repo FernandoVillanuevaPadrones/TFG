@@ -950,6 +950,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 350251374}
     - target: {fileID: 1930830823785474406, guid: f69d6854535216247bce30f0ca644683, type: 3}
+      propertyPath: _speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930830823785474406, guid: f69d6854535216247bce30f0ca644683, type: 3}
       propertyPath: _weaponScript
       value: 
       objectReference: {fileID: 1602114971}

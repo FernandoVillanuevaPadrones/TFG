@@ -7,6 +7,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ZoomMap : MonoBehaviour
 {
+
+    [SerializeField] private float moveSpaceX = 0.02f;
+    [SerializeField] private float moveSpaceY = 0.02f;
+
     [SerializeField] private float mapScaleSpeed;
     [SerializeField] private float minScale = 1f;
     [SerializeField] private float maxScale = 4f;
@@ -16,6 +20,10 @@ public class ZoomMap : MonoBehaviour
     private OffsetGrab mapGrabScript;
     private bool canZoom = false;
     private bool doingZoom;
+
+    private int lastRoomI = 0;
+    private int lastRoomJ = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +35,11 @@ public class ZoomMap : MonoBehaviour
         mapGrabScript.onSelectEntered.AddListener(MapGrabbed);
         mapGrabScript.onSelectExited.AddListener(MapReleased);
 
-       
-    }
+        lastRoomI = 0;
+        lastRoomJ = 0;
+
+
+}
     private void MapReleased(XRBaseInteractor arg0)
     {
             canZoom = false;      
@@ -86,5 +97,41 @@ public class ZoomMap : MonoBehaviour
         }
 
         yield return null;
+    }
+
+    internal void MoveMapTo(int newRoomI, int newRoomJ)
+    {
+        //this happens at the start
+        if (lastRoomI == 0 && lastRoomJ == 0)
+        {
+            lastRoomI = newRoomI;
+            lastRoomJ = newRoomJ;
+            return;
+        }
+
+        // Antigua sala esta a la izquierda, mover hacia la izq
+        if (newRoomI == (lastRoomI + 2) && newRoomJ == lastRoomJ)
+        {
+            transform.localPosition -= new Vector3(moveSpaceX, 0f, 0f);
+        }
+        // Antigua sala esta a la derecha, mover hacia la der
+        else if (newRoomI == (lastRoomI - 2) && newRoomJ == lastRoomJ)
+        {
+            transform.localPosition += new Vector3(moveSpaceX, 0f, 0f);
+        }
+        // Antigua Sala esta abajo, movemos hacia abajo
+        else if (newRoomJ == (lastRoomJ + 2) && newRoomI == lastRoomI )
+        {
+            transform.localPosition -= new Vector3(0f, moveSpaceY, 0f);
+
+        }
+        // si la de abajo tiene sala quito pared sino se pone , pero la puerta se quita siempre
+        else if (newRoomJ == (lastRoomJ - 2) && newRoomI == lastRoomI)
+        {
+            transform.localPosition += new Vector3(0f, moveSpaceY, 0f);
+        }
+
+        lastRoomI = newRoomI;
+        lastRoomJ = newRoomJ;
     }
 }
