@@ -37,12 +37,8 @@ public class SphereBot : BaseEnemyNav
 
         animator = GetComponentInChildren<Animator>();
 
-        Debug.Log("DAMAGE pre: " + LevelMultiplier());
-        Debug.Log("level: " + PlayerPrefs.GetInt("Level"));
-
         projectileDamage *= LevelMultiplier();
         rollingDamage *= LevelMultiplier();
-        Debug.Log("DAMAGE: " + projectileDamage);
     }
 
 

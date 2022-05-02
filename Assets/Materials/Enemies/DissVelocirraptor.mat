@@ -101,7 +101,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - DissolveProgressFloat: 1
+    - DissolveProgressFloat: 0.995
     - Vector1_10131b7e714549d6be08f1af5b0d963c: 0
     - Vector1_4c948f6429074e7fb665c87260d0fa1e: 0
     - Vector1_62ced55d9fd14b73afeb59d345499d75: 0.05
