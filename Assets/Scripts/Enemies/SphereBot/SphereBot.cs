@@ -39,13 +39,14 @@ public class SphereBot : BaseEnemyNav
 
         projectileDamage *= LevelMultiplier();
         rollingDamage *= LevelMultiplier();
+        boxCollider.enabled = false;
     }
 
 
 
     private void Update()
     {
-        if (!isDoingAction && playerInRoom)
+        if (!isDoingAction && playerInRoom )
         {
             isDoingAction = true;
             rolling = false;
@@ -131,6 +132,7 @@ public class SphereBot : BaseEnemyNav
                 foreach (var point in projectPointsAttack)
                 {
                     SphereProjectile instance = Instantiate(projectile, point.position, point.rotation);
+                    instance.enemyParent = gameObject;
                     instance.projectileDamage = projectileDamage;
                     instance.Launch(projectileSpeed); 
                 }
@@ -140,6 +142,7 @@ public class SphereBot : BaseEnemyNav
                 foreach (var point in projectPointsJumpAttack)
                 {
                     SphereProjectile instance = Instantiate(projectile, point.position, point.rotation);
+                    instance.enemyParent = gameObject;
                     instance.projectileDamage = projectileDamage;
                     instance.Launch(projectileSpeed);
                 }

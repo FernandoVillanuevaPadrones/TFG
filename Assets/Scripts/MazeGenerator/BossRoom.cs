@@ -9,6 +9,8 @@ public class BossRoom : MonoBehaviour
     [SerializeField] private AudioSource capsuleAudio;
 
     private GameObject enemiesGB;
+
+    private bool sound = false;
     private void Start()
     {
         enemiesGB = transform.Find("Enemies").gameObject;
@@ -16,9 +18,10 @@ public class BossRoom : MonoBehaviour
     }
     private void Update()
     {
-        if (enemiesGB.transform.childCount == 0)
+        if (enemiesGB.transform.childCount == 0 && !sound)
         {
             BossKilled();
+            sound = true;
         }
     }
 

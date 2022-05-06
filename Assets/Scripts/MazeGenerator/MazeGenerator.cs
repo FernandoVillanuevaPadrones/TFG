@@ -23,6 +23,11 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private GameObject chestRoom;
     [SerializeField] private GameObject[] bossRoom;
 
+    [Header("ENEMIES")]
+    [SerializeField] private GameObject[] normalEnemies;
+    [SerializeField] private GameObject[] bossEnemies;
+
+
 
     [Header("MAP SETTINGS")]
     public bool hideRooms = true;
@@ -57,6 +62,7 @@ public class MazeGenerator : MonoBehaviour
     private int startRoomPosI, startRoomPosJ, bossRoomPosI, bossRoomPosJ, chestRoomPosI, chestRoomPosJ;
 
     private GameObject playerMapInstantiated;
+
     
     private class availableRooms
     {
@@ -74,11 +80,6 @@ public class MazeGenerator : MonoBehaviour
     {
         
         currentLevel = PlayerPrefs.GetInt("Level");
-        //QUITAR
-        PlayerPrefs.SetInt("Level", 2);
-        //currentLevel = 4;
-
-        Debug.Log("level: " + currentLevel);
 
 
         minRooms = currentLevel + 2;
@@ -299,6 +300,7 @@ public class MazeGenerator : MonoBehaviour
                         roomScript.posI = i;
                         roomScript.posJ = j;
 
+
                         //------MAP--------
                         mapGBMatrix[i, j] = Instantiate(startRoomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
                         mapGBMatrix[i, j].name = "Start: " + i + " " + j;
@@ -321,6 +323,9 @@ public class MazeGenerator : MonoBehaviour
 
                         bossRoomPosI = i;
                         bossRoomPosJ = j;
+
+                        Instantiate(bossEnemies[Random.Range(0, bossEnemies.Length)], roomsGBMatrix[i, j].transform.Find("Enemies"));
+
 
                         //------MAP--------
                         mapGBMatrix[i, j] = Instantiate(bossRoomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
@@ -348,6 +353,15 @@ public class MazeGenerator : MonoBehaviour
                         availableRoom.posI = i;
                         availableRoom.posJ = j;
                         availableRoomsList.Add(availableRoom);
+
+                        var randomEnemy = Random.Range(0, normalEnemies.Length);
+
+                        //instance the number of copies of the random enemy, stablished in the stats of the enemy
+                        for (int u = 0; u < normalEnemies[randomEnemy].GetComponent<BaseEnemyNav>().numberOfEnemiesSameRoom; u++)
+                        {
+                            Instantiate(normalEnemies[randomEnemy], roomsGBMatrix[i, j].transform.Find("Enemies"));
+                        }
+
 
                         //------MAP--------
                         mapGBMatrix[i, j] = Instantiate(roomMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, roomsMap.transform);
@@ -524,7 +538,7 @@ public class MazeGenerator : MonoBehaviour
         gunGB.transform.position = new Vector3(startRoomPos.x, 1, startRoomPos.z);
 
 
-        //-------MAp----------
+        //-------MAP----------
         
         roomsMap.transform.localPosition = new Vector3(-gridDimensionX * mapOffset.x / 2, 0, -gridDimensionZ * mapOffset.y / 2);
         doorsMap.transform.localPosition = new Vector3(-gridDimensionX * doorOffset.x / 2, 0, -gridDimensionZ * doorOffset.y / 2);

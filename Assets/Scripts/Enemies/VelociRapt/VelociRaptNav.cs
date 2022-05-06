@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class VelociRaptNav : BaseEnemyNav
 {
+    [Header("VELOC STATS")]
     [SerializeField] private float alertRadius = 1f;
     [SerializeField] private float timeToTurn;
     [SerializeField] private float showSpeed = 0.1f;
@@ -18,17 +19,25 @@ public class VelociRaptNav : BaseEnemyNav
     private Animator animator;
     private string threatenString = "Threaten";
     private string runString = "Run";
-    private Vector3 objetivePos;
+    private bool randomPos = false;
+
 
     public override void Start()
     {
         base.Start();
         animator = GetComponent<Animator>();
         velociMaterial.SetFloat("DissolveProgressFloat", 1f);
+        
     }
 
     void Update()
     {
+        if (!randomPos)
+        {
+            //needed to give the enemy a random pos inside the room. Can not be done earlier bc of navagent and room position changing
+            randomPos = true;
+            transform.position = GetRandomPos(transform.position, 7f);
+        }
 
         if (currentState == State.Attack)
         {

@@ -6,23 +6,29 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class BaseEnemyNav : MonoBehaviour
 {
+    [Header("BASE ENEMY STATS")]
     [SerializeField] private float _health;
     [SerializeField] private float _damage;
     [SerializeField] private float _speed = 3.5f;
     [SerializeField] private float navAgentOffset;
+    [SerializeField] private GameObject firstAidPrefab;
+    [SerializeField] private int probabilityAid = 10;
+    public int numberOfEnemiesSameRoom = 3;
 
 
     private float _currentHealth;
     private float _currentDamage;
     private float _currentSpeed;
 
-    private Transform player => GameObject.Find("XR Origin").transform;
+    [HideInInspector]
+    public Transform player => GameObject.Find("XR Origin").transform;
 
     [HideInInspector]
     public NavMeshAgent navAgent;
 
     [HideInInspector]
     public bool playerInRoom = false;
+
 
     public virtual void Start()
     {
@@ -34,6 +40,11 @@ public class BaseEnemyNav : MonoBehaviour
 
         RestartStats();
         
+    }
+
+    public void SetNavOffset(float num)
+    {
+        navAgent.baseOffset = num;
     }
 
     public void PlayerInRoom()
@@ -62,6 +73,14 @@ public class BaseEnemyNav : MonoBehaviour
         if (_currentHealth == 0)
         {
             GameManager.ChangeScore("enemy");
+
+            if (Random.Range(0, probabilityAid) == 0)
+            {
+                Instantiate(firstAidPrefab, transform.position, Quaternion.identity);
+
+            }
+
+            FindObjectOfType<OwnAudioManager>().Play("DieEnemy");
             Destroy(gameObject);
         }
     }
@@ -99,7 +118,7 @@ public class BaseEnemyNav : MonoBehaviour
         navAgent.speed = speed;
     }
 
-    private Vector3 GetPlayerPos()
+    public Vector3 GetPlayerPos()
     {
         return new Vector3(player.position.x, 0, player.position.z);
     }
@@ -114,8 +133,22 @@ public class BaseEnemyNav : MonoBehaviour
     public virtual void Stop()
     {
         navAgent.isStopped = true;
+    }
 
-
+    public Vector3 GetRandomPos(Vector3 center, float range)
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            Vector3 randomPoint = center + Random.insideUnitSphere * range;
+            NavMeshHit hit;
+            Debug.DrawRay(navAgent.destination, Vector3.up, Color.blue, 10.0f);
+            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+            {
+                return hit.position;
+                
+            }
+        }
+        return  Vector3.zero;
     }
 
 

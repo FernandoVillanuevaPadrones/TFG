@@ -1844,7 +1844,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3801832915748054260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.7048, y: -0.027999997, z: 2.972}
+  m_LocalPosition: {x: 0, y: 0.617, z: 0}
   m_LocalScale: {x: 0.80586, y: 0.80586, z: 0.80586}
   m_Children:
   - {fileID: 5617340506253162612}
@@ -1946,6 +1946,9 @@ MonoBehaviour:
   _damage: -10
   _speed: 2
   navAgentOffset: 0
+  firstAidPrefab: {fileID: 6195592631567584285, guid: cb05cac24ef31c44eae557fb6d026bfa, type: 3}
+  probabilityAid: 10
+  numberOfEnemiesSameRoom: 3
   navAgent: {fileID: 0}
   playerInRoom: 0
   alertRadius: 10

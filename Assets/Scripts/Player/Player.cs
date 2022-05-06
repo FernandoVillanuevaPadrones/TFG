@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         //Saved Game = 0 (no game saved/like False), == 1 saved Game
+        
         if (PlayerPrefs.GetInt("SavedGame") == 0)
         {
             _currentHealth = _health;
@@ -62,14 +63,6 @@ public class Player : MonoBehaviour
             showMapUpgrade = PlayerPrefs.GetInt("ShowMapUpgrade");
         }
 
-        if (showMapUpgrade == 1)
-        {
-            mazeScript.ShowAllMap();
-        }
-
-        //QUitar
-        _currentHealth = _health;
-        _currentSpeed = _speed;
 
 
         lifeLineText.text = _currentHealth.ToString();
@@ -122,7 +115,7 @@ public class Player : MonoBehaviour
         {
             Object _currentObject;
 
-            if (_leftDirectInteractor.hasSelection && _leftDirectInteractor.interactablesSelected[0].transform.CompareTag("ConsumableObject"))
+            if (_leftDirectInteractor.hasSelection)
             {
                 _currentObject = _leftDirectInteractor.selectTarget.GetComponent<Object>();
             }
@@ -180,6 +173,20 @@ public class Player : MonoBehaviour
             }
 
             Destroy(_currentObject.gameObject);
+        }
+
+        else if ((_leftDirectInteractor.hasSelection && _leftDirectInteractor.interactablesSelected[0].transform.CompareTag("FirstAid"))
+            || (_rightDirectInteractor.hasSelection && _rightDirectInteractor.interactablesSelected[0].transform.CompareTag("FirstAid")))
+        {
+            ChangeHealth(50f);
+            if (_leftDirectInteractor.hasSelection)
+            {
+                Destroy(_leftDirectInteractor.selectTarget.gameObject);
+            }
+            else
+            {
+                Destroy(_rightDirectInteractor.selectTarget.gameObject);
+            }
         }
     }
 

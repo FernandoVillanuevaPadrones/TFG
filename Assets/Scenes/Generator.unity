@@ -896,6 +896,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3701857109218688100, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: sounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701857109218688100, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: sounds.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: de77ff76cd4e2b3419412f1eda4da2db, type: 3}
+    - target: {fileID: 3701857109218688100, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: sounds.Array.data[2].name
+      value: DieEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701857109218688100, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: sounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6909cfd15f4187d4ba30eea92fcdd1db, type: 3}
+    - target: {fileID: 3701857109218688100, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: sounds.Array.data[3].name
+      value: Capsule
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701857109218688100, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: sounds.Array.data[2].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701857109218688100, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: sounds.Array.data[3].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701857109218688100, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: sounds.Array.data[2].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701857109218688100, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
+      propertyPath: sounds.Array.data[3].volume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8363884274310453903, guid: 7ca462b19c9ef9a42bd056451a531ccc, type: 3}
       propertyPath: m_RootOrder
       value: 1

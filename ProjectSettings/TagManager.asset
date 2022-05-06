@@ -19,6 +19,9 @@ TagManager:
   - ChestRoom
   - Enemies/SphereBot
   - Enemies/VelociRaptorMain
+  - EnemyBody
+  - FirstAid
+  - Bullet
   layers:
   - Default
   - TransparentFX

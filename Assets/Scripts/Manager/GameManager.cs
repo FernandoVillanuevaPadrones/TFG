@@ -56,21 +56,24 @@ public class GameManager : MonoBehaviour
         closeDoors = false;
         openDoors = false;
 
-    velociMaterial = _velociMaterial;
+        velociMaterial = _velociMaterial;
         totalScore = PlayerPrefs.GetInt("Score");
     }
 
     private void Update()
     {
-        if (closeDoors)
+        if (SceneManager.GetActiveScene().name != "FirstScene")
         {
-            generator.CloseAllDoors();
-            closeDoors = false;
-        }
-        else if (openDoors)
-        {
-            generator.OpenAllDoors();
-            openDoors = false;
+            if (closeDoors)
+            {
+                generator.CloseAllDoors();
+                closeDoors = false;
+            }
+            else if (openDoors)
+            {
+                generator.OpenAllDoors();
+                openDoors = false;
+            }
         }
     }
     public static void HideVelociraptos()

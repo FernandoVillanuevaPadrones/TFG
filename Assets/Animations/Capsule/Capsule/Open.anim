@@ -4990,7 +4990,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 7.4333334
-    functionName: StopNextAnimState
+    functionName: NextLevel
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -28,9 +28,11 @@ public class NormalProjectile : Projectile
     {
         if (other.transform.tag == "Enemy")
         {
-            //other.gameObject.GetComponent<BaseEnemy>().DoDamage(_weapon.GetDamage());
-            
+            other.gameObject.GetComponent<BaseEnemyNav>().DoDamage(_weapon.GetDamage());
+            Destroy(gameObject);
 
+        }
+        else if(other.transform.tag == "EnemyBody"){
             other.gameObject.GetComponent<DamageRedirector>().RedirectDamage(_weapon.GetDamage());
             Destroy(gameObject);
         }
@@ -44,5 +46,11 @@ public class NormalProjectile : Projectile
             }
             Destroy(gameObject);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Coll con " + collision.transform.name);
+        Destroy(gameObject);
     }
 }

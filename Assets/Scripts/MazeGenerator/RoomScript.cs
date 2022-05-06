@@ -49,15 +49,15 @@ public class RoomScript : MonoBehaviour
                     enemiesAdvised = true;
                     for (int i = 0; i < enemiesGB.transform.childCount; i++)
                     {
+                        enemiesGB.transform.GetChild(i).GetComponent<BaseEnemyNav>().PlayerInRoom();
                         if (enemiesGB.transform.GetChild(i).tag == "Enemies/VelociRaptorMain")
                         {
                             StartCoroutine(enemiesGB.transform.GetChild(i).GetComponent<VelociRaptNav>().Show());
+                            enemiesGB.transform.GetChild(i).GetComponent<VelociRaptNav>().PlayerInRoom();
+
                             break;
                         }
-                        else if (enemiesGB.transform.GetChild(i).tag == "Enemies/SphereBot")
-                        {
-                            enemiesGB.transform.GetChild(i).GetComponent<BaseEnemyNav>().PlayerInRoom();
-                        }
+
                     }
                 }
             }
