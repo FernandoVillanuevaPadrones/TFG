@@ -80,6 +80,7 @@ public class MazeGenerator : MonoBehaviour
     {
         
         currentLevel = PlayerPrefs.GetInt("Level");
+        currentLevel = 10;
 
         minRooms = currentLevel + 2;
         maxRooms = currentLevel + 4;
@@ -518,6 +519,8 @@ public class MazeGenerator : MonoBehaviour
         playerGB.transform.position = new Vector3(startRoomPos.x + 2, 1, startRoomPos.z);
         mapObject.transform.position = new Vector3(startRoomPos.x + 2, 1, startRoomPos.z + 1f);
         gunGB.transform.position = new Vector3(startRoomPos.x, 1, startRoomPos.z);
+
+        GameManager.roomsPlaced = true;
 
 
         //-------MAP----------

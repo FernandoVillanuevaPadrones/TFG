@@ -13,7 +13,13 @@ public class GameManager : MonoBehaviour
     [Header("Materials")]
     [SerializeField] private Material _velociMaterial;
     public static Material velociMaterial;
-    
+    [SerializeField] private static float showSpeed = 0.005f;
+
+    public static bool canVelociBehaviour = true;
+    public static bool startVelociBehaviour = false;
+
+
+
     [Header("Generator")]
     [SerializeField] private MazeGenerator generator;
 
@@ -24,6 +30,8 @@ public class GameManager : MonoBehaviour
     private static int bossScore = 20;
 
     private static int totalScore = 0;
+
+    public static bool roomsPlaced = false;
 
 
     public static bool savedGame = false;
@@ -74,11 +82,65 @@ public class GameManager : MonoBehaviour
                 generator.OpenAllDoors();
                 openDoors = false;
             }
+
+            if (canVelociBehaviour && startVelociBehaviour)
+            {
+                Debug.Log("HOLASA");
+                StartCoroutine(ShowVelocirraptors());
+                StartCoroutine(StartVelociBehaviour());
+                startVelociBehaviour = false;
+            }
+            else if(!canVelociBehaviour)
+            {
+                StopAllCoroutines();
+                canVelociBehaviour = true;
+                StartCoroutine(HideVelocirraptos());
+            }
+
         }
+        
     }
-    public static void HideVelociraptos()
+
+    
+    public IEnumerator StartVelociBehaviour()
     {
-        velociMaterial.SetFloat("DissolveProgressFloat", 1f);
+        while (canVelociBehaviour)
+        {
+            yield return new WaitForSeconds(Random.Range(7, 10));
+            StartCoroutine(HideVelocirraptos());
+            yield return new WaitForSeconds(Random.Range(7, 10));
+            StartCoroutine(ShowVelocirraptors());
+        }
+
+    }
+
+
+
+    public static IEnumerator HideVelocirraptos()
+    {
+        //velociMaterial.SetFloat("DissolveProgressFloat", 1f);
+
+        var currentFloat = velociMaterial.GetFloat("DissolveProgressFloat");
+        while (currentFloat <= 1f)
+        {
+            currentFloat = velociMaterial.GetFloat("DissolveProgressFloat");
+            velociMaterial.SetFloat("DissolveProgressFloat", currentFloat + showSpeed);
+            yield return new WaitForSeconds(0f);
+        }
+
+        yield return null;
+    }
+
+    public static IEnumerator ShowVelocirraptors()
+    {
+        var currentFloat = velociMaterial.GetFloat("DissolveProgressFloat");
+        while (currentFloat >= 0.01f)
+        {
+            currentFloat = velociMaterial.GetFloat("DissolveProgressFloat");
+            velociMaterial.SetFloat("DissolveProgressFloat", currentFloat - showSpeed);
+            yield return new WaitForSeconds(0f);
+        }
+        yield return null;
     }
 
     public static void ChangeScore(string type)

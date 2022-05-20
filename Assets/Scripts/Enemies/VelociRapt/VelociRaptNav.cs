@@ -7,7 +7,7 @@ public class VelociRaptNav : BaseEnemyNav
     [Header("VELOC STATS")]
     [SerializeField] private float alertRadius = 1f;
     [SerializeField] private float timeToTurn;
-    [SerializeField] private float showSpeed = 0.1f;
+    [SerializeField] private float showSpeed = 0.005f;
     [SerializeField] private Material velociMaterial;
 
 
@@ -30,7 +30,7 @@ public class VelociRaptNav : BaseEnemyNav
         
     }
 
-    void Update()
+    public override void Update()
     {
         if (!randomPos)
         {
@@ -38,31 +38,38 @@ public class VelociRaptNav : BaseEnemyNav
             randomPos = true;
             transform.position = GetRandomPos(transform.position, 7f);
         }
+        if (playerInRoom)
+        {
 
-        if (currentState == State.Attack)
-        {
-            GoToPlayer();
-            currentState = State.Running;
-        }
-        else if (currentState == State.Running)
-        {
-            
-            if (navAgent.remainingDistance == 0f)
+            if (currentState == State.Attack)
             {
-                currentState = State.Turn;
-                animator.SetBool(threatenString, false);
-                animator.SetBool(runString, false);
+                GoToPlayer();
+                currentState = State.Running;
+            }
+            else if (currentState == State.Running)
+            {
+            
+                if (navAgent.remainingDistance == 0f)
+                {
+                    currentState = State.Turn;
+                    animator.SetBool(threatenString, false);
+                    animator.SetBool(runString, false);
+
+                }
+            }
+            else if (currentState == State.Turn)
+            {
+
+                StartCoroutine(Timer(timeToTurn));
 
             }
-        }
-        else if (currentState == State.Turn)
-        {
-
-            StartCoroutine(Timer(timeToTurn));
 
         }
+
+
 
     }
+
 
     private IEnumerator Timer(float time)
     {
@@ -72,6 +79,7 @@ public class VelociRaptNav : BaseEnemyNav
         animator.SetBool(runString, true);
     }
 
+    /*
     public IEnumerator Show()
     {
         var currentFloat = velociMaterial.GetFloat("DissolveProgressFloat");
@@ -83,7 +91,7 @@ public class VelociRaptNav : BaseEnemyNav
         }
 
         yield return null;
-    }
+    }*/
 
 
     public void GetAlerted()

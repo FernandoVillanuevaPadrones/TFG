@@ -36,7 +36,8 @@ public class RoomScript : MonoBehaviour
             {
                 
                 GameManager.openDoors = true;             
-                GameManager.HideVelociraptos(); 
+                GameManager.canVelociBehaviour = false;             
+                //GameManager.HideVelocirraptos(); 
             }
             else
             {
@@ -52,7 +53,9 @@ public class RoomScript : MonoBehaviour
                         enemiesGB.transform.GetChild(i).GetComponent<BaseEnemyNav>().PlayerInRoom();
                         if (enemiesGB.transform.GetChild(i).tag == "Enemies/VelociRaptorMain")
                         {
-                            StartCoroutine(enemiesGB.transform.GetChild(i).GetComponent<VelociRaptNav>().Show());
+                            //StartCoroutine(enemiesGB.transform.GetChild(i).GetComponent<VelociRaptNav>().Show());
+                            //StartCoroutine(GameManager.ShowVelocirraptors());
+                            GameManager.startVelociBehaviour = true;
                             enemiesGB.transform.GetChild(i).GetComponent<VelociRaptNav>().PlayerInRoom();
 
                             break;

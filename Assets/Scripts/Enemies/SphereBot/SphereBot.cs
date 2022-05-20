@@ -44,8 +44,10 @@ public class SphereBot : BaseEnemyNav
 
 
 
-    private void Update()
+    public override void Update()
     {
+        base.Update();
+
         if (!isDoingAction && playerInRoom )
         {
             isDoingAction = true;
