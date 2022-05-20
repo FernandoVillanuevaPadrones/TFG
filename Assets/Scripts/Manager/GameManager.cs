@@ -44,8 +44,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            musicLevel = PlayerPrefs.GetFloat("MusicLevel") * 100;
-            soundEffectLevel = PlayerPrefs.GetFloat("EffectLevel") * 100;
+            musicLevel = PlayerPrefs.GetFloat("MusicLevel");
+            soundEffectLevel = PlayerPrefs.GetFloat("EffectLevel");
         }
     }
 
@@ -115,13 +115,13 @@ public class GameManager : MonoBehaviour
 
     public void MusicLevelChanged(Slider musicSlider)
     {
-        musicLevel = musicSlider.value / 100f;
+        musicLevel = musicSlider.value;
         PlayerPrefs.SetFloat("MusicLevel", musicLevel); 
     }
 
     public void SoundEffectLevelChanged(Slider effectSlider)
     {
-        soundEffectLevel = effectSlider.value / 100f;
+        soundEffectLevel = effectSlider.value;
         PlayerPrefs.SetFloat("EffectLevel", soundEffectLevel);
 
     }

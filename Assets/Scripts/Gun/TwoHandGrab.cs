@@ -156,6 +156,7 @@ public class TwoHandGrab : XRGrabInteractable
         leftAttachTransform.localRotation = initialLeftRotation;
         base.OnSelectExited(interactor);
 
+        /*
         if (lastMainSelector == "RightHand Controller")
         {
             rightHandMainObjectGB.SetActive(false);
@@ -165,7 +166,15 @@ public class TwoHandGrab : XRGrabInteractable
         {
             leftHandMainObjectGB.SetActive(false);
             leftHandPlayerGB.SetActive(true);
-        }
+        }*/
+
+        rightHandMainObjectGB.SetActive(false);
+        rightHandPlayerGB.SetActive(true);
+        leftHandMainObjectGB.SetActive(false);
+        leftHandPlayerGB.SetActive(true);
+
+        rightHandSecondGunGB.SetActive(false);      
+        leftHandSecondGunGB.SetActive(false);
     }
 
     /// <summary>

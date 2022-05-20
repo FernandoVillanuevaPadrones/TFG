@@ -49,10 +49,33 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+    isMusic: 0
     source: {fileID: 0}
   - name: MenuClick
     clip: {fileID: 8300000, guid: cdef143461bce004db3ee589c48cb362, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: DieEnemy
+    clip: {fileID: 8300000, guid: de77ff76cd4e2b3419412f1eda4da2db, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: BackGround
+    clip: {fileID: 8300000, guid: 457d33e175094274fa825dccb05e797f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    isMusic: 1
+    source: {fileID: 0}
+  - name: HeartBeat
+    clip: {fileID: 8300000, guid: 60421d1b5496e514caa522e6f4a796d9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    isMusic: 0
     source: {fileID: 0}

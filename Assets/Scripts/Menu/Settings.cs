@@ -20,7 +20,7 @@ public class Settings : MonoBehaviour
 
     private void Update()
     {
-        musicNumber.text = (int) musicSlider.value + "%";
-        soundEffectNumber.text = (int) soundEffectSlider.value + "%";
+        musicNumber.text = (int) (musicSlider.value * 100f) + "%";
+        soundEffectNumber.text = (int) (soundEffectSlider.value * 100f) + "%";
     }
 }

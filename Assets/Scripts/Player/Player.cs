@@ -32,12 +32,18 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
 
     [Header("HealthHUD")]
-    [SerializeField] private TextMeshProUGUI lifeLineText;
-    [SerializeField] private LifeLine lifeLineScript;
+    [SerializeField] private TextMeshProUGUI[] lifeLineTexts;
+    [SerializeField] private LifeLine[] lifeLineScripts;
 
     [Header("MazeGenerator")]
     [SerializeField] private MazeGenerator mazeScript;
 
+    [Header("MazeGenerator")]
+    [SerializeField] private GameObject shieldGB;
+
+    private AudioSource audioSource;
+
+    private bool invincible = false;
 
     private float _currentHealth;
     private float _currentSpeed;
@@ -49,7 +55,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         //Saved Game = 0 (no game saved/like False), == 1 saved Game
-        
+ 
         if (PlayerPrefs.GetInt("SavedGame") == 0)
         {
             _currentHealth = _health;
@@ -65,16 +71,18 @@ public class Player : MonoBehaviour
 
 
 
-        lifeLineText.text = _currentHealth.ToString();
+        foreach (var text in lifeLineTexts)
+        {
+            text.text = _currentHealth.ToString();
 
-
-        
-
+        }
+      
         _actionContinuous.moveSpeed = _currentSpeed;
         _useObjectInput.action.started += UseObject;
 
         _menuInput.action.started += PauseMenu;
-    
+
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -198,19 +206,82 @@ public class Player : MonoBehaviour
 
     public void ChangeHealth(float num)
     {
-        _currentHealth += num;
-        Debug.Log("Current health: " + _currentHealth);       
-        _currentHealth = Mathf.Clamp(_currentHealth, 0f, _health);
 
-        lifeLineText.text = _currentHealth.ToString();
-        lifeLineScript.ChangeLineSpeed(_currentHealth);
-
-        if (_currentHealth <= 0f)
+        if (!invincible)
         {
-            Dead();
-            PauseGame();
+            invincible = true;
+            var lastHealth = _currentHealth;
+            _currentHealth += num;
+            Debug.Log("Current health: " + _currentHealth);       
+            _currentHealth = Mathf.Clamp(_currentHealth, 0f, _health);
+
+            if (lastHealth > _currentHealth) // Was Damaged
+            {
+                audioSource.Play();
+
+            }
+
+            foreach (var text in lifeLineTexts)
+            {
+                text.text = _currentHealth.ToString();
+
+            }
+            foreach (var script in lifeLineScripts)
+            {
+                script.ChangeLineSpeed(_currentHealth);
+            }
+
+            if (_currentHealth <= 30f)
+            {
+                var audioManager = FindObjectOfType<OwnAudioManager>();
+
+                if (!audioManager.SeeIfPlaying("HeartBeat"))
+                {
+                    Debug.Log("Play HeartBeat");
+                    audioManager.Play("HeartBeat");
+                }
+
+            }
+            else
+            {
+                var audioManager = FindObjectOfType<OwnAudioManager>();
+                if (audioManager.SeeIfPlaying("HeartBeat"))
+                {
+                    Debug.Log("Stop HeartBeat");
+                    audioManager.Stop("HeartBeat");
+                }
+            }
+
+            if (_currentHealth <= 0f)
+            {
+                FindObjectOfType<OwnAudioManager>().Stop("HeartBeat");
+                Dead();
+                PauseGame();
+
+            }
+            else if (lastHealth > _currentHealth) // Was Damaged
+            {
+                StartCoroutine(StartInvincible());
+            }
 
         }
+
+    }
+
+    IEnumerator StartInvincible()
+    {
+        shieldGB.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        shieldGB.SetActive(false);
+        yield return new WaitForSeconds(0.75f);
+        shieldGB.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        shieldGB.SetActive(false);
+        yield return new WaitForSeconds(0.25f);
+        shieldGB.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        shieldGB.SetActive(false);
+        invincible = false;
 
     }
 

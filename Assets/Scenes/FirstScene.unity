@@ -805,12 +805,36 @@ MonoBehaviour:
   m_HandleRect: {fileID: 277734419}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 516911851}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: MusicLevelChanged
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 250985014}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 412857211}
+        m_TargetAssemblyTypeName: OwnAudioManager, Assembly-CSharp
+        m_MethodName: ChangeValues
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &277734418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,6 +1675,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 505417262}
   m_CullTransparentMesh: 1
+--- !u!114 &516911851 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3461057933417753029, guid: 709fd6a8985996f49af865fb16a3a33f, type: 3}
+  m_PrefabInstance: {fileID: 340556890}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be4e107e2ca80d4ebfd618bf6e7046b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &582574451
 GameObject:
   m_ObjectHideFlags: 0
@@ -3041,12 +3076,36 @@ MonoBehaviour:
   m_HandleRect: {fileID: 505417263}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 516911851}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SoundEffectLevelChanged
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1052287211}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 412857211}
+        m_TargetAssemblyTypeName: OwnAudioManager, Assembly-CSharp
+        m_MethodName: ChangeValues
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1206417589
 GameObject:
   m_ObjectHideFlags: 0

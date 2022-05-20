@@ -11,12 +11,12 @@ public class Menu : MonoBehaviour
 
     private void Start()
     {
-        //PlayerPrefs.SetInt("SavedGame", 0);
 
         if (SceneManager.GetActiveScene().name == "FirstScene" && PlayerPrefs.GetInt("SavedGame") == 0)
-        {                    
-                continueButton.interactable = false;
-                continueButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;           
+        {
+            Debug.Log("Entra: " + PlayerPrefs.GetInt("SavedGame"));
+            continueButton.interactable = false;
+            continueButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;           
         }
     }
 
@@ -25,12 +25,14 @@ public class Menu : MonoBehaviour
         PlayerPrefs.SetInt("SavedGame", 0);
         PlayerPrefs.SetInt("Level", 1);
         PlayerPrefs.SetInt("Score", 0);
+        Time.timeScale = 1f;
 
         SceneManager.LoadScene("Generator");
     }
 
     public void ContinueGame()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Generator");
     }
 

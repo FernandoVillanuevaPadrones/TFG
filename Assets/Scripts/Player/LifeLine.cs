@@ -13,25 +13,27 @@ public class LifeLine : MonoBehaviour
 
     public void ChangeLineSpeed(float currentHealth)
     {
+        Debug.Log("Anim: " + animator);
+
         if (currentHealth >= 80)
         {
-            animator.speed = 1;
+            GetComponent<Animator>().speed = 1;
         }
         else if (currentHealth >= 60)
         {
-            animator.speed = 1.5f;
+            GetComponent<Animator>().speed = 1.5f;
         }
         else if (currentHealth >= 40)
         {
-            animator.speed = 2f;
+            GetComponent<Animator>().speed = 2f;
         }
         else if (currentHealth >= 20)
         {
-            animator.speed = 3f;
+            GetComponent<Animator>().speed = 3f;
         }
         else
         {
-            animator.speed = 4f;
+            GetComponent<Animator>().speed = 4f;
         }
     }
 }

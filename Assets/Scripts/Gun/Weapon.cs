@@ -44,10 +44,7 @@ public class Weapon : MonoBehaviour
 
     private AudioSource audioSource;
 
-    protected virtual void Awake()
-    {
-        
-    }
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -93,7 +90,6 @@ public class Weapon : MonoBehaviour
     }
     private IEnumerator Shoot()
     {
-        Debug.Log("Shoot: " + _currentNumberShoots);
         while (true)
         {
             switch (_currentNumberShoots)

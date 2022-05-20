@@ -21,7 +21,7 @@ public class BaseEnemyNav : MonoBehaviour
     private float _currentSpeed;
 
     [HideInInspector]
-    public Transform player => GameObject.Find("XR Origin").transform;
+    public Transform player => GameObject.Find("XR Origin/Camera Offset/Main Camera").transform;
 
     [HideInInspector]
     public NavMeshAgent navAgent;

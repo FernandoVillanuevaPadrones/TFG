@@ -81,7 +81,6 @@ public class MazeGenerator : MonoBehaviour
         
         currentLevel = PlayerPrefs.GetInt("Level");
 
-
         minRooms = currentLevel + 2;
         maxRooms = currentLevel + 4;
 
@@ -264,7 +263,6 @@ public class MazeGenerator : MonoBehaviour
             {
                 if (Matrix[i, j] != 0)
                 {
-                    //Debug.Log("Pos: " + i + " " + j + "Val: " + Matrix[i, j]);
                     if (maxValue.z < Matrix[i, j])
                     {
                         maxValue = new Vector3(i, j, Matrix[i, j]);
@@ -416,7 +414,6 @@ public class MazeGenerator : MonoBehaviour
         {
             for (int j = 0; j < gridDimensionZ * 2 - 1; j = j + 2)
             {
-                //Debug.Log("Pos: " + i + " " + j);
 
                 //0 = Up, 1= Down, 2 = Right, 3 = Left
                 // true = puerta false = pared
@@ -511,21 +508,6 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
-        //Nodes
-        /*
-        for (int i = 0; i < gridDimensionX * 2 - 1; i++)
-        {
-            for (int j = 0; j < gridDimensionZ * 2 - 1; j++)
-            {
-                if (mapGBMatrix[i, j] == null)
-                {
-                    Instantiate(nodeMap, new Vector3((i * mapOffset.x) / 2f, (j * mapOffset.y) / 2f, 0), Quaternion.identity, nodesMap.transform);
-                }
-            }
-        }
-        */
-
-
 
         //Centrar
 
@@ -598,8 +580,6 @@ public class MazeGenerator : MonoBehaviour
 
     public void OpenAllDoors()
     {
-        Debug.Log("Opening");
-
         foreach (GameObject room in allRoomsList)
         {
             room.GetComponent<RoomScript>().OpenDoors();
@@ -608,7 +588,6 @@ public class MazeGenerator : MonoBehaviour
 
     public void CloseAllDoors()
     {
-        Debug.Log("Closing");
         foreach (GameObject room in allRoomsList)
         {
             room.GetComponent<RoomScript>().CloseDoors();

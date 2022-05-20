@@ -55,7 +55,7 @@ public class CamaraVolador : BaseEnemyNav
 
             if (followPlayer)
             {
-                transform.LookAt(player.position);
+                transform.LookAt(player.position - new Vector3(0f, 0.5f, 0f));
 
                 if (!isBoss)
                 {
