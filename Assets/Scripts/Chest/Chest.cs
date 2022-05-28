@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 using DG.Tweening;
 
 
@@ -15,6 +16,7 @@ public class Chest : MonoBehaviour
     [SerializeField] private float finalRotYChestKey = 0f;
     [SerializeField] private float keyAnimDuration = 2f;
     [SerializeField] private Ease keyEaseType;
+    [SerializeField] private VisualEffect smokeEffect;
 
     [Header("OBJECTS")]
     [SerializeField]
@@ -57,7 +59,7 @@ public class Chest : MonoBehaviour
             
         }
 
-
+        OpenChest();
 
     }
 
@@ -82,6 +84,8 @@ public class Chest : MonoBehaviour
         chestTween = ChestTopTransform
             .DORotate(new Vector3(finalRotXChestTop, 0f, 0f), chestAnimDuration)
             .SetEase(chestEaseType);
+
+        smokeEffect.Play();
         yield return chestTween.WaitForCompletion();
 
 

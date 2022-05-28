@@ -42,7 +42,7 @@ public class CamaraVolador : BaseEnemyNav
 
     }
 
-    public override void Update()
+    private void Update()
     {   
         if (playerInRoom || !isBoss)
         {

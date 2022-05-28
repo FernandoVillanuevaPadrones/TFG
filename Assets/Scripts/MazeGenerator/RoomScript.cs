@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class RoomScript : MonoBehaviour
 {
     [Header("0 = Up, 1= Down, 2 = Right, 3 = Left")]
     public GameObject[] walls;
     public GameObject[] doors;
+    public VisualEffect[] smokeEffects;
 
     [SerializeField] private Animator[] doorsAnimators;
 
@@ -89,6 +91,11 @@ public class RoomScript : MonoBehaviour
             door.GetComponent<Animator>().SetBool("OpenDoor", true);
             door.GetComponent<Animator>().SetBool("CloseDoor", false);
 
+        }
+
+        foreach (var effect in smokeEffects)
+        {
+            effect.Play();
         }
 
         //Needed to play open sound but when going to a visited room we dont want to be played again

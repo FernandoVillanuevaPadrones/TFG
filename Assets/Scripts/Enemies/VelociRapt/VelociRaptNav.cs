@@ -30,7 +30,7 @@ public class VelociRaptNav : BaseEnemyNav
         
     }
 
-    public override void Update()
+    void Update()
     {
         if (!randomPos)
         {

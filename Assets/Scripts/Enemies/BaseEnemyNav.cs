@@ -34,21 +34,12 @@ public class BaseEnemyNav : MonoBehaviour
     {
         navAgent = GetComponent<NavMeshAgent>();
 
-        
+        //It starts disabled because when creating the maze the nav Agent prevents the object to move the enemy correctly and enabling it later fixes it
+        navAgent.enabled = true;
+        navAgent.baseOffset = navAgentOffset;
 
         RestartStats();
         
-    }
-
-    public virtual void Update()
-    {
-        if (GameManager.roomsPlaced)
-        {
-            //It starts disabled because when creating the maze the nav Agent prevents the object to move the enemy correctly and enabling it later fixes it
-            navAgent.enabled = true;
-            navAgent.baseOffset = navAgentOffset;
-
-        }
     }
 
     public void SetNavOffset(float num)

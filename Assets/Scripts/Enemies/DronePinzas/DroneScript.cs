@@ -27,7 +27,7 @@ public class DroneScript : BaseEnemyNav
     }
 
 
-    public override void Update()
+    private void Update()
     {
         if (!randomPos)
         {

@@ -85,7 +85,6 @@ public class GameManager : MonoBehaviour
 
             if (canVelociBehaviour && startVelociBehaviour)
             {
-                Debug.Log("HOLASA");
                 StartCoroutine(ShowVelocirraptors());
                 StartCoroutine(StartVelociBehaviour());
                 startVelociBehaviour = false;

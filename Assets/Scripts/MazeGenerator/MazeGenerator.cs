@@ -80,7 +80,6 @@ public class MazeGenerator : MonoBehaviour
     {
         
         currentLevel = PlayerPrefs.GetInt("Level");
-        currentLevel = 10;
 
         minRooms = currentLevel + 2;
         maxRooms = currentLevel + 4;
