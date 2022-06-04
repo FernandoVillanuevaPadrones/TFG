@@ -18,17 +18,20 @@ public class DroneScript : BaseEnemyNav
     private bool spin = false;
     private bool randomPos = false;
 
+    private AudioSource audioSource;
 
     public override void Start()
     {
         base.Start();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         collider.enabled = false;
     }
 
 
     private void Update()
     {
+        audioSource.volume = GameManager.soundEffectLevel;
         if (!randomPos)
         {
             //needed to give the enemy a random pos inside the room. Can not be done earlier bc of navagent and room position changing
@@ -46,6 +49,10 @@ public class DroneScript : BaseEnemyNav
             {
                 if (dist != Mathf.Infinity && navAgent.pathStatus == NavMeshPathStatus.PathComplete && GetComponent<NavMeshAgent>().remainingDistance == 0)//Arrived.
                 {
+                    if (!audioSource.isPlaying)
+                    {
+                        audioSource.Play();
+                    }
                     Wonder();
                     totalWonders++;
                 }
@@ -55,6 +62,8 @@ public class DroneScript : BaseEnemyNav
                 totalWonders = 0;
                 animator.SetBool("Spin", false);
                 spin = false;
+
+                audioSource.Stop();
             }
         }
     }
@@ -66,6 +75,8 @@ public class DroneScript : BaseEnemyNav
 
             animator.SetBool("Spin", true);
             spin = true;
+
+
         }
     }
 

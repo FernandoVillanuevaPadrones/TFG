@@ -41,7 +41,6 @@ public class SphereProjectile : MonoBehaviour
         }
         else if(other.transform.tag != "Room" && other.transform.tag != "Enemy" && other.transform.tag != "Bullet")
         {
-            Debug.Log("destroy con " + other.transform.tag + " " + other.transform.name);
             Destroy(gameObject);
         }
     }

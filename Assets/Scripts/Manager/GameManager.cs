@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(7, 10));
             StartCoroutine(HideVelocirraptos());
-            yield return new WaitForSeconds(Random.Range(7, 10));
+            yield return new WaitForSeconds(Random.Range(2, 6));
             StartCoroutine(ShowVelocirraptors());
         }
 

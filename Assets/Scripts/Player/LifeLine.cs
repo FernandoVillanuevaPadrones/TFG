@@ -13,7 +13,6 @@ public class LifeLine : MonoBehaviour
 
     public void ChangeLineSpeed(float currentHealth)
     {
-        Debug.Log("Anim: " + animator);
 
         if (currentHealth >= 80)
         {

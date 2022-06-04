@@ -18,7 +18,13 @@ public class SphereBot : BaseEnemyNav
     [SerializeField] private BoxCollider boxCollider;
 
 
+    [Header("Sounds")]
+    [SerializeField] private AudioSource stepsAudioSource;
+    [SerializeField] private AudioSource shootAudioSource;
+    [SerializeField] private AudioSource rollAudioSource;
+    [SerializeField] private AudioSource phaseAudioSource;
 
+    [Header("Projectiles")]
     [SerializeField] private Transform[] projectPointsAttack;
     [SerializeField] private Transform[] projectPointsJumpAttack;
 
@@ -31,6 +37,8 @@ public class SphereBot : BaseEnemyNav
     private int lastAction = -1;
     private Animator animator;
 
+    
+
     public override void Start()
     {
         base.Start();
@@ -40,12 +48,19 @@ public class SphereBot : BaseEnemyNav
         projectileDamage *= LevelMultiplier();
         rollingDamage *= LevelMultiplier();
         boxCollider.enabled = false;
+
     }
 
 
 
     private void Update()
     {
+
+        rollAudioSource.volume = GameManager.soundEffectLevel;
+        phaseAudioSource.volume = GameManager.soundEffectLevel; 
+        shootAudioSource.volume = GameManager.soundEffectLevel; 
+        stepsAudioSource.volume = GameManager.soundEffectLevel; 
+
         if (!isDoingAction && playerInRoom )
         {
             isDoingAction = true;
@@ -67,7 +82,7 @@ public class SphereBot : BaseEnemyNav
 
             lastAction = randomAction;
 
-            Debug.Log(randomAction);
+            phaseAudioSource.Play();
 
             if (randomAction == 0)
             {
@@ -75,6 +90,10 @@ public class SphereBot : BaseEnemyNav
                 ChangeAgentSpeed(rollingSpeed);
                 rolling = true;
                 GoToPlayer();
+
+                rollAudioSource.loop = true;
+                rollAudioSource.Play();
+
 
                 StartCoroutine(WaitForNextRolling());
 
@@ -92,7 +111,10 @@ public class SphereBot : BaseEnemyNav
                 animator.SetBool("Run", true);
                 ChangeAgentSpeed(walkSpeed);
                 running = true;
-                
+
+                stepsAudioSource.loop = true;
+                stepsAudioSource.Play();
+
             }
 
 
@@ -104,6 +126,7 @@ public class SphereBot : BaseEnemyNav
             //When rolling the enemy will go to the player pos, but not all the time, just to the current position, and when reaching to the next one etc
             if (navAgent.remainingDistance <= 0.1)
             {
+
                 StartCoroutine(WaitForNextRolling());
             }
         }
@@ -114,8 +137,10 @@ public class SphereBot : BaseEnemyNav
     }
 
     IEnumerator WaitForNextRolling()
-    {           
+    {
+        rollAudioSource.Stop();
         yield return new WaitForSeconds(0.7f);
+        rollAudioSource.Play();
         GoToPlayer();
                      
     }
@@ -127,6 +152,8 @@ public class SphereBot : BaseEnemyNav
     {
         while (attacking)
         {
+            shootAudioSource.Play();
+
             if (animator.GetBool("Attack") || animator.GetBool("Run"))
             {
                 foreach (var point in projectPointsAttack)
@@ -168,6 +195,10 @@ public class SphereBot : BaseEnemyNav
     public void FinishedAnimation(string boolName)
     {
         isDoingAction = false;
+        rollAudioSource.Stop();
+        phaseAudioSource.Stop();
+        shootAudioSource.Stop();
+        stepsAudioSource.Stop();
         animator.SetBool(boolName, false);
     }
 

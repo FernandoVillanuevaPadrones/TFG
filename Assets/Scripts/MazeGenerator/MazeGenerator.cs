@@ -357,7 +357,8 @@ public class MazeGenerator : MonoBehaviour
                         //instance the number of copies of the random enemy, stablished in the stats of the enemy
                         for (int u = 0; u < normalEnemies[randomEnemy].GetComponent<BaseEnemyNav>().numberOfEnemiesSameRoom; u++)
                         {
-                            Instantiate(normalEnemies[randomEnemy], roomsGBMatrix[i, j].transform.Find("Enemies"));
+                            GameObject enemy = Instantiate(normalEnemies[randomEnemy], roomsGBMatrix[i, j].transform.Find("Enemies"));
+                            enemy.transform.name = enemy.transform.name + " " + u;
                         }
 
 

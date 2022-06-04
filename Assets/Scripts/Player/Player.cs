@@ -212,7 +212,6 @@ public class Player : MonoBehaviour
             invincible = true;
             var lastHealth = _currentHealth;
             _currentHealth += num;
-            Debug.Log("Current health: " + _currentHealth);       
             _currentHealth = Mathf.Clamp(_currentHealth, 0f, _health);
 
             if (lastHealth > _currentHealth) // Was Damaged
@@ -237,7 +236,6 @@ public class Player : MonoBehaviour
 
                 if (!audioManager.SeeIfPlaying("HeartBeat"))
                 {
-                    Debug.Log("Play HeartBeat");
                     audioManager.Play("HeartBeat");
                 }
 
@@ -247,7 +245,6 @@ public class Player : MonoBehaviour
                 var audioManager = FindObjectOfType<OwnAudioManager>();
                 if (audioManager.SeeIfPlaying("HeartBeat"))
                 {
-                    Debug.Log("Stop HeartBeat");
                     audioManager.Stop("HeartBeat");
                 }
             }

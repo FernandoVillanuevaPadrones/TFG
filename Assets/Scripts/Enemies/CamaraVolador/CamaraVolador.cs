@@ -27,6 +27,8 @@ public class CamaraVolador : BaseEnemyNav
     private bool movingSmall = false;
     private int maxSpawns = 5;
 
+    private AudioSource audioSource;
+
     public override void Start()
     {
         base.Start();
@@ -39,11 +41,13 @@ public class CamaraVolador : BaseEnemyNav
         boxCollider = GetComponent<BoxCollider>();
         boxCollider.enabled = false;
 
+        audioSource = GetComponent<AudioSource>();
 
     }
 
     private void Update()
-    {   
+    {
+        audioSource.volume = GameManager.soundEffectLevel;
         if (playerInRoom || !isBoss)
         {
             boxCollider.enabled = true;
@@ -111,6 +115,8 @@ public class CamaraVolador : BaseEnemyNav
         ballgb.projectileDamage = GetCurrentDamageStat();
         ballgb.Launch(projectileSpeed);
 
+        audioSource.Play();
+
         yield return new WaitForSeconds(1f);
         StartCoroutine(Spawner());
 
@@ -132,6 +138,9 @@ public class CamaraVolador : BaseEnemyNav
         
         smallballgb.projectileDamage = GetCurrentDamageStat();
         smallballgb.Launch(projectileSpeed);
+
+        audioSource.Play();
+
         shootedSmall = true;
         
         navAgent.destination = GetRandomPos(transform.position, rangeRandomPos);

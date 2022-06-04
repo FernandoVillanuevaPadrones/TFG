@@ -121,7 +121,6 @@ public class Weapon : MonoBehaviour
                     break;
                 
             }
-            Debug.Log(GameManager.soundEffectLevel);
             audioSource.volume = GameManager.soundEffectLevel;
             audioSource.Play();
             yield return _waitShoot;

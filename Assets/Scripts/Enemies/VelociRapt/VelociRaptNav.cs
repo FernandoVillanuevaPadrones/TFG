@@ -10,7 +10,9 @@ public class VelociRaptNav : BaseEnemyNav
     [SerializeField] private float showSpeed = 0.005f;
     [SerializeField] private Material velociMaterial;
 
-
+    [Header("Sounds")]
+    [SerializeField] private AudioSource alertSource;
+    [SerializeField] private AudioSource stepsSource;
 
     public enum State { Idle, Attack, Alert, Turn, Running }
 
@@ -32,6 +34,9 @@ public class VelociRaptNav : BaseEnemyNav
 
     void Update()
     {
+        alertSource.volume = GameManager.soundEffectLevel;
+        stepsSource.volume = GameManager.soundEffectLevel;
+
         if (!randomPos)
         {
             //needed to give the enemy a random pos inside the room. Can not be done earlier bc of navagent and room position changing
@@ -40,16 +45,19 @@ public class VelociRaptNav : BaseEnemyNav
         }
         if (playerInRoom)
         {
-
             if (currentState == State.Attack)
             {
-                GoToPlayer();
+                //GoToPlayer();
+                navAgent.destination = GetRandomPos(GetPlayerPos(), 0.2f);
+
+                stepsSource.loop = true;
+                stepsSource.Play();
                 currentState = State.Running;
             }
             else if (currentState == State.Running)
             {
-            
-                if (navAgent.remainingDistance == 0f)
+                Debug.Log(transform.name + " " + navAgent.remainingDistance);
+                if (navAgent.remainingDistance <= 0.2f)
                 {
                     currentState = State.Turn;
                     animator.SetBool(threatenString, false);
@@ -59,8 +67,12 @@ public class VelociRaptNav : BaseEnemyNav
             }
             else if (currentState == State.Turn)
             {
+                //Llamarlo solo una vez
+                if (stepsSource.isPlaying)
+                {
+                    StartCoroutine(Timer(timeToTurn));
 
-                StartCoroutine(Timer(timeToTurn));
+                }
 
             }
 
@@ -73,33 +85,26 @@ public class VelociRaptNav : BaseEnemyNav
 
     private IEnumerator Timer(float time)
     {
+        stepsSource.Stop();
         yield return new WaitForSeconds(time);
         currentState = State.Running;
-        GoToPlayer();
+        //GoToPlayer();
+
+        navAgent.destination = GetRandomPos(GetPlayerPos(), 0.2f);
+        
         animator.SetBool(runString, true);
+        stepsSource.Play();
+
     }
-
-    /*
-    public IEnumerator Show()
-    {
-        var currentFloat = velociMaterial.GetFloat("DissolveProgressFloat");
-        while (currentFloat >= 0.01f)
-        {
-            currentFloat = velociMaterial.GetFloat("DissolveProgressFloat");
-            velociMaterial.SetFloat("DissolveProgressFloat", currentFloat - showSpeed);
-            yield return new WaitForSeconds(0f);
-        }
-
-        yield return null;
-    }*/
-
 
     public void GetAlerted()
     {
         //transform.LookAt(base.GetPlayerPos()..transform);
-        currentState = State.Alert;
+        //currentState = State.Alert;
         animator.SetBool(threatenString, true);
         animator.SetBool(runString, true);
+
+        alertSource.PlayDelayed(1f);
     }
 
     public void AlertOthers()

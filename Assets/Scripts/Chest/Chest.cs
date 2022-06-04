@@ -59,7 +59,6 @@ public class Chest : MonoBehaviour
             
         }
 
-        OpenChest();
 
     }
 

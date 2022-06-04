@@ -39,7 +39,6 @@ public class RoomScript : MonoBehaviour
                 
                 GameManager.openDoors = true;             
                 GameManager.canVelociBehaviour = false;             
-                //GameManager.HideVelocirraptos(); 
             }
             else
             {
@@ -55,12 +54,7 @@ public class RoomScript : MonoBehaviour
                         enemiesGB.transform.GetChild(i).GetComponent<BaseEnemyNav>().PlayerInRoom();
                         if (enemiesGB.transform.GetChild(i).tag == "Enemies/VelociRaptorMain")
                         {
-                            //StartCoroutine(enemiesGB.transform.GetChild(i).GetComponent<VelociRaptNav>().Show());
-                            //StartCoroutine(GameManager.ShowVelocirraptors());
                             GameManager.startVelociBehaviour = true;
-                            enemiesGB.transform.GetChild(i).GetComponent<VelociRaptNav>().PlayerInRoom();
-
-                            break;
                         }
 
                     }
@@ -93,10 +87,6 @@ public class RoomScript : MonoBehaviour
 
         }
 
-        foreach (var effect in smokeEffects)
-        {
-            effect.Play();
-        }
 
         //Needed to play open sound but when going to a visited room we dont want to be played again
         if (transform.tag != "ChestRoom" && !openSoundedOnce && playerInRoom)
@@ -104,6 +94,10 @@ public class RoomScript : MonoBehaviour
 
             FindObjectOfType<OwnAudioManager>().Play("Doors");
             openSoundedOnce = true;          
+            foreach (var effect in smokeEffects)
+            {
+                effect.Play();
+            }
         }
         playerInRoom = false;
 
