@@ -56,7 +56,6 @@ public class VelociRaptNav : BaseEnemyNav
             }
             else if (currentState == State.Running)
             {
-                Debug.Log(transform.name + " " + navAgent.remainingDistance);
                 if (navAgent.remainingDistance <= 0.2f)
                 {
                     currentState = State.Turn;

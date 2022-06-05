@@ -169,10 +169,5 @@ public class CamaraVolador : BaseEnemyNav
         }
     }
 
-    /*
-    public void Shoot()
-    {
-        Instantiate(ballGB, transform.position, transform.localRotation);
-    }*/
 
 }
