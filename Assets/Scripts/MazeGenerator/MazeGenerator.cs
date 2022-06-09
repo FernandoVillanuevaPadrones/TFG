@@ -81,6 +81,8 @@ public class MazeGenerator : MonoBehaviour
         
         currentLevel = PlayerPrefs.GetInt("Level");
 
+        currentLevel = 7;
+
         minRooms = currentLevel + 2;
         maxRooms = currentLevel + 4;
 
@@ -352,13 +354,87 @@ public class MazeGenerator : MonoBehaviour
                         availableRoom.posJ = j;
                         availableRoomsList.Add(availableRoom);
 
-                        var randomEnemy = Random.Range(0, normalEnemies.Length);
 
-                        //instance the number of copies of the random enemy, stablished in the stats of the enemy
-                        for (int u = 0; u < normalEnemies[randomEnemy].GetComponent<BaseEnemyNav>().numberOfEnemiesSameRoom; u++)
+                        //if level less than 3 only one type of enemy is instantiated
+
+                        // if less than 6 or equal, a total of 4 enemies of two types
+
+                        // if not a total of 6 of 3 different enemies
+
+                        Debug.Log("Curr " + currentLevel);
+
+                        if (currentLevel <= 3)
                         {
-                            GameObject enemy = Instantiate(normalEnemies[randomEnemy], roomsGBMatrix[i, j].transform.Find("Enemies"));
-                            enemy.transform.name = enemy.transform.name + " " + u;
+                            var randomEnemy = Random.Range(0, normalEnemies.Length);
+                            for (int u = 0; u < normalEnemies[randomEnemy].GetComponent<BaseEnemyNav>().numberOfEnemiesSameRoom; u++)
+                            {
+                                GameObject enemy = Instantiate(normalEnemies[randomEnemy], roomsGBMatrix[i, j].transform.Find("Enemies"));
+                                enemy.transform.name = enemy.transform.name + " " + u;
+                            }
+                        }
+                        else if (currentLevel <= 6)
+                        {
+                            var randomEnemy = Random.Range(0, normalEnemies.Length);
+                            var lastRandomEnemy = randomEnemy;
+                            for (int u = 0; u < 2; u++)
+                            {
+                                GameObject enemy = Instantiate(normalEnemies[randomEnemy], roomsGBMatrix[i, j].transform.Find("Enemies"));
+                                enemy.transform.name = enemy.transform.name + " " + u;
+                            }
+
+                            randomEnemy = Random.Range(0, normalEnemies.Length);
+                            while (randomEnemy == lastRandomEnemy)
+                            {
+                                randomEnemy = Random.Range(0, normalEnemies.Length);
+                            }
+
+                            for (int u = 0; u < 2; u++)
+                            {
+                                GameObject enemy = Instantiate(normalEnemies[randomEnemy], roomsGBMatrix[i, j].transform.Find("Enemies"));
+                                enemy.transform.name = enemy.transform.name + " " + u;
+                            }
+                        }
+                        else
+                        {
+                            var randomEnemy = Random.Range(0, normalEnemies.Length);
+
+                            var firstRandomEnemy = randomEnemy;
+                            
+                            for (int u = 0; u < 2; u++)
+                            {
+                                GameObject enemy = Instantiate(normalEnemies[randomEnemy], roomsGBMatrix[i, j].transform.Find("Enemies"));
+                                enemy.transform.name = enemy.transform.name + " " + u;
+                            }
+
+                            randomEnemy = Random.Range(0, normalEnemies.Length);
+                            while (randomEnemy == firstRandomEnemy)
+                            {
+                                randomEnemy = Random.Range(0, normalEnemies.Length);
+                            }
+
+                            var secondEnemy = randomEnemy;
+                            for (int u = 0; u < 2; u++)
+                            {
+                                GameObject enemy = Instantiate(normalEnemies[randomEnemy], roomsGBMatrix[i, j].transform.Find("Enemies"));
+                                enemy.transform.name = enemy.transform.name + " " + u;
+                            }
+
+                            randomEnemy = Random.Range(0, normalEnemies.Length);
+                            while (randomEnemy == firstRandomEnemy || randomEnemy == secondEnemy)
+                            {
+                                randomEnemy = Random.Range(0, normalEnemies.Length);
+                            }
+
+                            for (int u = 0; u < 2; u++)
+                            {
+                                GameObject enemy = Instantiate(normalEnemies[randomEnemy], roomsGBMatrix[i, j].transform.Find("Enemies"));
+                                enemy.transform.name = enemy.transform.name + " " + u;
+                            }
+
+                            Debug.Log("1 " + firstRandomEnemy);
+                            Debug.Log("2 " + secondEnemy);
+                            Debug.Log("3 " + randomEnemy);
+
                         }
 
 

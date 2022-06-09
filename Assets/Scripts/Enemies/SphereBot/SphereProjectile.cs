@@ -35,7 +35,7 @@ public class SphereProjectile : MonoBehaviour
 
         if (other.transform.tag == "Player")
         {
-
+            Debug.Log("dmg " + projectileDamage);
             other.transform.GetComponentInParent<Player>().ChangeHealth(projectileDamage);
             Destroy(gameObject);
         }

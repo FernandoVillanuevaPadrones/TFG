@@ -50,7 +50,6 @@ public class NormalProjectile : Projectile
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Coll con " + collision.transform.name);
         Destroy(gameObject);
     }
 }

@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject menuGBOffset;
     [SerializeField] private GameObject deadMenu;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI highestScoreText;
 
     [Header("HealthHUD")]
     [SerializeField] private TextMeshProUGUI[] lifeLineTexts;
@@ -207,6 +208,7 @@ public class Player : MonoBehaviour
     public void ChangeHealth(float num)
     {
 
+
         if (!invincible)
         {
             invincible = true;
@@ -300,6 +302,16 @@ public class Player : MonoBehaviour
         deadMenu.SetActive(true);
         scoreText.text = "Score: " + GameManager.GetScore().ToString();
 
+        var highestScore = PlayerPrefs.GetInt("HighestScore");
+
+        if (highestScore <= GameManager.GetScore())
+        {
+            highestScore = GameManager.GetScore();
+            PlayerPrefs.SetInt("HighestScore", GameManager.GetScore());
+        }
+
+        highestScoreText.text = "Highest Score: " + highestScore;
+
 
         //Needed in order to not get an error due to having twice the same function added to the button
         _useObjectInput.action.started -= UseObject;
@@ -318,5 +330,13 @@ public class Player : MonoBehaviour
         PlayerPrefs.SetInt("Score", GameManager.GetScore());
         PlayerPrefs.SetInt("ShowMapUpgrade", showMapUpgrade);
         PlayerPrefs.SetInt("SavedGame", 1);
+
+        var highestScore = PlayerPrefs.GetInt("HighestScore");
+
+        if (highestScore <= GameManager.GetScore())
+        {
+            highestScore = GameManager.GetScore();
+            PlayerPrefs.SetInt("HighestScore", GameManager.GetScore());
+        }
     }
 }

@@ -15,7 +15,8 @@ public class SphereBot : BaseEnemyNav
     [SerializeField] private float rollingDamage = -10f;
 
 
-    [SerializeField] private BoxCollider boxCollider;
+    [SerializeField] private BoxCollider boxColliderTrigger;
+    [SerializeField] private BoxCollider boxColliderCollision;
 
 
     [Header("Sounds")]
@@ -47,7 +48,8 @@ public class SphereBot : BaseEnemyNav
 
         projectileDamage *= LevelMultiplier();
         rollingDamage *= LevelMultiplier();
-        boxCollider.enabled = false;
+        boxColliderTrigger.enabled = false;
+        boxColliderCollision.enabled = false;
 
     }
 
@@ -67,7 +69,9 @@ public class SphereBot : BaseEnemyNav
             rolling = false;
             running = false;
             //so the player can not kill the boss from outside of the room
-            boxCollider.enabled = true;
+            boxColliderTrigger.enabled = true;
+            boxColliderCollision.enabled = true;
+
             Stop();
 
             randomAction = Random.Range(0, 4);
@@ -204,8 +208,10 @@ public class SphereBot : BaseEnemyNav
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Roll coll: " + other.transform.name);
         if (other.transform.CompareTag("Player"))
         {
+
             other.gameObject.GetComponentInParent<Player>().ChangeHealth(rollingDamage);
         }
     }

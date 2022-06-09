@@ -105,7 +105,6 @@ public class BusterDrone : BaseEnemyNav
                     transform.position = Vector3.MoveTowards(transform.position, GetPlayerPos(), -2f * Time.deltaTime); 
                 }
 
-                Debug.Log("h " + currentHeight);
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, currentHeight, transform.position.z), 1f * Time.deltaTime);
 
                 if (canShoot)
