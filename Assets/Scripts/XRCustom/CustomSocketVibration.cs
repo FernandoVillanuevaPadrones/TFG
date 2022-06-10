@@ -32,7 +32,6 @@ public class CustomSocketVibration : XRSocketInteractor
     protected override void OnSelectExiting(XRBaseInteractable interactable)
     {
         base.OnSelectExiting(interactable);
-        Debug.Log(firstInteractableSelected.firstInteractorSelecting.transform.name);
 
     }
 

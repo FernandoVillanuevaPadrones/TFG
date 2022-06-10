@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
     [Header("MazeGenerator")]
     [SerializeField] private GameObject shieldGB;
 
+    [SerializeField] private GameObject heliGB;
+
     private AudioSource audioSource;
 
     private bool invincible = false;
@@ -53,6 +55,8 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public static int showMapUpgrade = 0;
 
+    private int hasHeli = 0;
+
     private void Start()
     {
         //Saved Game = 0 (no game saved/like False), == 1 saved Game
@@ -62,12 +66,20 @@ public class Player : MonoBehaviour
             _currentHealth = _health;
             _currentSpeed = _speed;
             showMapUpgrade = 0;
+            
         }
         else
         {
             _currentHealth = PlayerPrefs.GetFloat("PlayerHealth");
             _currentSpeed = PlayerPrefs.GetFloat("PlayerSpeed");
             showMapUpgrade = PlayerPrefs.GetInt("ShowMapUpgrade");
+            hasHeli = PlayerPrefs.GetInt("HasHeli");
+            if (hasHeli == 1)
+            {
+                heliGB.SetActive(true);
+                heliGB.transform.localScale = Vector3.one;
+                RobotHelicoptero.canLookCamera = true;
+            }
         }
 
 
@@ -123,7 +135,7 @@ public class Player : MonoBehaviour
             || (_rightDirectInteractor.hasSelection && _rightDirectInteractor.interactablesSelected[0].transform.CompareTag("ConsumableObject")))
         {
             Object _currentObject;
-
+            var hasSelection = "LeftHand";
             if (_leftDirectInteractor.hasSelection)
             {
                 _currentObject = _leftDirectInteractor.selectTarget.GetComponent<Object>();
@@ -131,6 +143,7 @@ public class Player : MonoBehaviour
             else
             {
                 _currentObject = _rightDirectInteractor.selectTarget.GetComponent<Object>();
+                hasSelection = "RightHand";
             }
 
             
@@ -172,6 +185,19 @@ public class Player : MonoBehaviour
                             showMapUpgrade = 1;
                             PlayerPrefs.SetInt("ShowMapUpgrade", 1);
                             mazeScript.ShowAllMap();
+                            break;
+                        case ScriptableObjectConsumable.SpecialType.HelicRobot:
+                            heliGB.SetActive(true);
+                            if (hasSelection == "LeftHand")
+                            {
+                                RobotHelicoptero.onLeftHand = true;
+                            }
+                            else
+                            {
+                                RobotHelicoptero.onRightHand = true;
+                            }
+                            RobotHelicoptero.doInitialAnimation = true;
+                            hasHeli = 1;
                             break;
                         default:
                             break;
@@ -329,6 +355,7 @@ public class Player : MonoBehaviour
         PlayerPrefs.SetFloat("PlayerSpeed", _currentSpeed);
         PlayerPrefs.SetInt("Score", GameManager.GetScore());
         PlayerPrefs.SetInt("ShowMapUpgrade", showMapUpgrade);
+        PlayerPrefs.SetInt("HasHeli", hasHeli);
         PlayerPrefs.SetInt("SavedGame", 1);
 
         var highestScore = PlayerPrefs.GetInt("HighestScore");

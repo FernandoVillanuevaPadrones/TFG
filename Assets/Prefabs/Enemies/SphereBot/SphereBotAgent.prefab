@@ -1842,6 +1842,36 @@ Transform:
   m_Father: {fileID: 8943514233983325105}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -0.000012139793, y: -0.0000043052632, z: 0.24617463}
+--- !u!1 &3157105381343728907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6440118863973663472}
+  m_Layer: 0
+  m_Name: ShootedPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6440118863973663472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3157105381343728907}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.94, z: -0.114}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7786587316179787876}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3209624597715358257
 GameObject:
   m_ObjectHideFlags: 0
@@ -4121,6 +4151,7 @@ Transform:
   m_LocalScale: {x: 1.495719, y: 1.0113126, z: 0.64707446}
   m_Children:
   - {fileID: 7769502999663766427}
+  - {fileID: 6440118863973663472}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

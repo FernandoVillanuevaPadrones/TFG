@@ -10,6 +10,9 @@ public class SphereProjectile : MonoBehaviour
     public float projectileDamage;
     [HideInInspector]
     public GameObject enemyParent;
+    [HideInInspector]
+    public bool isAllied = false;
+
 
 
     private void Awake()
@@ -32,16 +35,45 @@ public class SphereProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Enemy bullet
+        if (!isAllied)
+        {
+            if (other.transform.tag == "Player")
+            {
+                other.transform.GetComponentInParent<Player>().ChangeHealth(projectileDamage);
+                Destroy(gameObject);
+            }
+            else if(other.transform.tag != "Room" && other.transform.tag != "Enemy" && other.transform.tag != "Bullet")
+            {
+                Destroy(gameObject);
 
-        if (other.transform.tag == "Player")
-        {
-            Debug.Log("dmg " + projectileDamage);
-            other.transform.GetComponentInParent<Player>().ChangeHealth(projectileDamage);
-            Destroy(gameObject);
+            }
         }
-        else if(other.transform.tag != "Room" && other.transform.tag != "Enemy" && other.transform.tag != "Bullet")
+        //Robot projectile
+        else
         {
-            Destroy(gameObject);
+            Debug.Log("taggg " + other.transform.tag);
+            if (other.transform.tag == "Enemy")
+            {
+                other.gameObject.GetComponent<BaseEnemyNav>().DoDamage(projectileDamage);
+                Destroy(gameObject);
+
+            }
+            else if (other.transform.tag == "EnemyBody")
+            {
+                other.gameObject.GetComponent<DamageRedirector>().RedirectDamage(projectileDamage);
+                Destroy(gameObject);
+            }
+            else if (other.transform.tag == "VelociRaptor")
+            {
+                var enemyScript = other.gameObject.GetComponentInParent<VelociRaptNav>();
+                enemyScript.DoDamage(projectileDamage);
+                if (enemyScript.currentState == VelociRaptNav.State.Idle)
+                {
+                    enemyScript.GetAlerted();
+                }
+                Destroy(gameObject);
+            }
         }
     }
 

@@ -10700,7 +10700,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5200387621170898045}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.06, y: 2.777, z: 0.15}
+  m_LocalPosition: {x: 2.06, y: 2.581, z: 0.15}
   m_LocalScale: {x: 1.5277872, y: 1.5277872, z: 1.5277872}
   m_Children:
   - {fileID: 5121753407025335846}
@@ -10748,10 +10748,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 183a071bd576ba142b3f140cd17a4b73, type: 2}
   - {fileID: 11400000, guid: 9b95ef5686a4b344489aad5f8cdc27ae, type: 2}
   - {fileID: 11400000, guid: 636f137af6473e642a4bbd8a390c57f0, type: 2}
-  - {fileID: 11400000, guid: ad9518cbf13e3f64aa630f8f7ed7fafd, type: 2}
-  - {fileID: 11400000, guid: 4e30896919f060b49966d83078393d63, type: 2}
+  - {fileID: 11400000, guid: 5c4663821b3091c4da3c9afbc94bd099, type: 2}
   - {fileID: 11400000, guid: a9a969a14e89de24eaef77f5526cf52b, type: 2}
   - {fileID: 11400000, guid: 4508ec809e172704bb937c2f3162d6cd, type: 2}
+  - {fileID: 11400000, guid: ad9518cbf13e3f64aa630f8f7ed7fafd, type: 2}
+  - {fileID: 11400000, guid: 4e30896919f060b49966d83078393d63, type: 2}
+  - {fileID: 11400000, guid: cdb2e135301c2e1448a119e9f8b01aac, type: 2}
   finalPosZObjects: 0.00198
   objectDuration: 0.75
   objectsEaseType: 15
@@ -14217,7 +14219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6423368598864087809}
   m_LocalRotation: {x: 0.099265315, y: 0.7001044, z: -0.7001047, w: 0.09926539}
-  m_LocalPosition: {x: 1.278, y: 2.574, z: 0.329}
+  m_LocalPosition: {x: 1.278, y: 2.378, z: 0.329}
   m_LocalScale: {x: 152.77881, y: 152.77878, z: 152.77872}
   m_Children:
   - {fileID: 6423368599098428729}
@@ -21585,7 +21587,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7844562103533944237}
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.186, y: 1.53, z: -0.984}
+  m_LocalPosition: {x: 1.186, y: 1.3340001, z: -0.984}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6398234499065534103}
