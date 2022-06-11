@@ -26,6 +26,13 @@ public class Hand : MonoBehaviour
     void Update()
     {
         AnimateHand();
+        Debug.Log("grip " + gripCurrent);
+    }
+
+    public void ResetPos()
+    {
+        gripTarget = 0;
+        triggerTarget = 0;
     }
 
     internal void setGrip(float v)

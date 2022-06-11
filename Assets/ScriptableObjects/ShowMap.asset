@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ShowMap
   m_EditorClassIdentifier: 
   type: 5
-  special: 2
+  special: 6
   _ammountToChange: 0
   objectColor: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}

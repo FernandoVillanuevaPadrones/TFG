@@ -8,10 +8,11 @@ using TMPro;
 public class Menu : MonoBehaviour
 {
     [SerializeField] private Button continueButton;
-
+    [SerializeField]
+    private Animator faderAnimator;
     private void Start()
     {
-
+        faderAnimator.SetBool("FadeOut", true);
         if (SceneManager.GetActiveScene().name == "FirstScene" && PlayerPrefs.GetInt("SavedGame") == 0)
         {
             Debug.Log("Entra: " + PlayerPrefs.GetInt("SavedGame"));
@@ -22,9 +23,9 @@ public class Menu : MonoBehaviour
 
     public void StartGame()
     {
-        PlayerPrefs.SetInt("SavedGame", 0);
-        PlayerPrefs.SetInt("Level", 1);
-        PlayerPrefs.SetInt("Score", 0);
+        faderAnimator.SetBool("FadeIn", true);
+
+        ResetAll();
         Time.timeScale = 1f;
 
         SceneManager.LoadScene("Generator");
@@ -38,6 +39,7 @@ public class Menu : MonoBehaviour
 
     public void MainMenu()
     {
+        faderAnimator.SetBool("FadeIn", true);
         PlayerPrefs.SetInt("SavedGame", 1);
         SceneManager.LoadScene("FirstScene");
     }
@@ -49,8 +51,17 @@ public class Menu : MonoBehaviour
 
     public void PlayAgain()
     {
+        faderAnimator.SetBool("FadeIn", true);
+        ResetAll();
+        SceneManager.LoadScene("Generator");
+    }
+
+    private void ResetAll()
+    {
         PlayerPrefs.SetInt("SavedGame", 0);
         PlayerPrefs.SetInt("Level", 1);
-        SceneManager.LoadScene("Generator");
+        PlayerPrefs.SetInt("Score", 0);
+        PlayerPrefs.SetInt("HasHeli", 0);
+        PlayerPrefs.SetInt("ShowMapUpgrade", 0);
     }
 }

@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
             _currentHealth = _health;
             _currentSpeed = _speed;
             showMapUpgrade = 0;
-            
+            hasHeli = 0;
         }
         else
         {

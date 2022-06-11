@@ -161,7 +161,7 @@ public class Weapon : MonoBehaviour
 
     public void InfinityShoots()
     {
-        _currentDamage = _currentDamage / 10f;
+        _currentDamage = _currentDamage / 50f;
         _currentFireRate = _currentFireRate * 10f;
         _waitShoot = new WaitForSeconds(1 / _currentFireRate);
     }

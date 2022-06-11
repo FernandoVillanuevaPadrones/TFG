@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     [SerializeField] private Player _playerScript;
     [SerializeField] private Weapon _weaponScript;
+    [SerializeField]
+    private Animator faderAnimator;
 
     [Header("Materials")]
     [SerializeField] private Material _velociMaterial;
@@ -168,6 +170,7 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
+        faderAnimator.SetBool("FadeIn", true);
         _playerScript.SaveStats();
         _weaponScript.SaveStats();
         PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);

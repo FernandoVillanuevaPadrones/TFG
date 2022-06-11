@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Heli
   m_EditorClassIdentifier: 
   type: 5
-  special: 2
+  special: 7
   _ammountToChange: 0
   objectColor: {r: 0, g: 0, b: 0, a: 1}

@@ -10,6 +10,8 @@ public class MazeGenerator : MonoBehaviour
     private GameObject playerGB;
     [SerializeField]
     private GameObject gunGB;
+    [SerializeField]
+    private Animator faderAnimator;
 
     [Header("MAZE SETTINGS")]
     [SerializeField] private Vector2 roomOffset = new Vector2(24.22f, 24.22f);    
@@ -75,11 +77,25 @@ public class MazeGenerator : MonoBehaviour
 
 
     private int currentLevel;
+    private int showMapUpgrade;
 
     void Start()
     {
+      
+       
+        /*
+        Debug.Log("show " + showMapUpgrade);
+        PlayerPrefs.SetInt("SavedGame", 0);
+        currentLevel = 1;
+        PlayerPrefs.SetInt("Level", 1);
+        PlayerPrefs.SetInt("HasHeli", 0);
+        PlayerPrefs.SetInt("ShowMapUpgrade", 0);
+        */
+        
+        showMapUpgrade = PlayerPrefs.GetInt("ShowMapUpgrade");
         
         currentLevel = PlayerPrefs.GetInt("Level");
+
 
         minRooms = currentLevel + 2;
         maxRooms = currentLevel + 4;
@@ -429,9 +445,6 @@ public class MazeGenerator : MonoBehaviour
                                 enemy.transform.name = enemy.transform.name + " " + u;
                             }
 
-                            Debug.Log("1 " + firstRandomEnemy);
-                            Debug.Log("2 " + secondEnemy);
-                            Debug.Log("3 " + randomEnemy);
 
                         }
 
@@ -609,6 +622,14 @@ public class MazeGenerator : MonoBehaviour
         playerMapInstantiated.transform.GetChild(0).GetComponent<PlayerMapMovement>().GetRoomsToMove(roomsMap, doorsMap);
 
         playerMap.transform.parent = mapObject.transform;
+
+
+        if (showMapUpgrade == 1)
+        {
+            ShowAllMap();
+        }
+
+        faderAnimator.SetBool("FadeOut", true);
     }
 
     public void UpdateMap(int i, int j)

@@ -37,6 +37,15 @@ public class CustomEditorConsumable : Editor
 
         EditorGUILayout.PropertyField(objectColor);
         serializedObject.ApplyModifiedProperties();
+
+
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(script);
+            //EditorSceneManager.MarkSceneDirty(castedTarget.gameObject.scene);
+        }
+
     }
+    
 }
 #endif

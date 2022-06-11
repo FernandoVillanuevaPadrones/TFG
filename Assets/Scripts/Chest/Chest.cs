@@ -41,20 +41,39 @@ public class Chest : MonoBehaviour
 
     private AudioSource audioSource;
 
-
+    private int hasMapUpgrade = 0;
+    private int hasHeli = 0;
+    private int currentLevel;
     private void Start()
     {
+        currentLevel = PlayerPrefs.GetInt("Level");
+        currentLevel = 6;
+
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+
+        hasMapUpgrade = PlayerPrefs.GetInt("ShowMapUpgrade");
+        hasHeli = PlayerPrefs.GetInt("HasHeli");
+
         var remain = 6;
 
         while (remain > 0)
         {
-            remain--;
-            var pos = Random.Range(0, scriptableObjectsList.Count);     
+            var pos = Random.Range(0, scriptableObjectsList.Count);
+
+            if (hasHeli == 1 && scriptableObjectsList[pos].name == "Heli")
+            {
+                continue;
+            }
+            else if(hasMapUpgrade == 1 && scriptableObjectsList[pos].name == "ShowMap")
+            {
+                continue;
+            }
+
             allCapsules[posCaps].GetComponent<Object>().SetStats(scriptableObjectsList[pos]); ;
             scriptableObjectsList.RemoveAt(pos);
             posCaps++;
+            remain--;
             
             
         }
@@ -89,7 +108,7 @@ public class Chest : MonoBehaviour
 
 
 
-        if (PlayerPrefs.GetInt("Level") >= 6)
+        if (currentLevel >= 6)
         {
             foreach (var item in allCapsules)
             {
@@ -104,7 +123,7 @@ public class Chest : MonoBehaviour
                 item.GetComponent<OffsetGrab>().enabled = true;
             }
         }
-        else if (PlayerPrefs.GetInt("Level") >= 3)
+        else if (currentLevel >= 3)
         {
             var remain = 3;
 
@@ -151,7 +170,7 @@ public class Chest : MonoBehaviour
     {
 
         //Oonly when there are more objects to pick
-        if (PlayerPrefs.GetInt("Level") >= 3)
+        if (currentLevel >= 3)
         {
             yield return new WaitForSeconds(0.5f);
             Tween chestTween;

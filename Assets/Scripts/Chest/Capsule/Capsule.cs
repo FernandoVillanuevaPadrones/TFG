@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Capsule : MonoBehaviour
 {
     private Animator capsuleAnimator;
     private GameManager gameManagerScript;
+    
 
     private void Start()
     {
@@ -25,6 +27,11 @@ public class Capsule : MonoBehaviour
     public void NextLevel()
     {
         gameManagerScript.NextLevel();
+    }
+
+    public void asdsa(UnityEvent sd)
+    {
+        sd.Invoke();
     }
 
 }

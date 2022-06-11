@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: InfinityShoots
   m_EditorClassIdentifier: 
   type: 5
-  special: 2
+  special: 3
   _ammountToChange: 0
   objectColor: {r: 0.050980393, g: 0.246529, b: 0.246529, a: 1}
