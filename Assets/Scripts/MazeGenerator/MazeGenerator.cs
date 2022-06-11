@@ -95,7 +95,11 @@ public class MazeGenerator : MonoBehaviour
         showMapUpgrade = PlayerPrefs.GetInt("ShowMapUpgrade");
         
         currentLevel = PlayerPrefs.GetInt("Level");
+        if (currentLevel == 0)
+        {
+            currentLevel = 1;
 
+        }
 
         minRooms = currentLevel + 2;
         maxRooms = currentLevel + 4;
@@ -143,6 +147,7 @@ public class MazeGenerator : MonoBehaviour
 
         //Number rooms
         leftRooms = Random.Range(minRooms, maxRooms + 1) - 1;
+
 
         PopulateMatrix();
     }
@@ -293,6 +298,7 @@ public class MazeGenerator : MonoBehaviour
                 
             }
         }
+
     
         for (int i = 0; i < gridDimensionX * 2 - 1; i++)
         {
@@ -375,7 +381,6 @@ public class MazeGenerator : MonoBehaviour
 
                         // if not a total of 6 of 3 different enemies
 
-                        Debug.Log("Curr " + currentLevel);
 
                         if (currentLevel <= 3)
                         {
@@ -465,7 +470,9 @@ public class MazeGenerator : MonoBehaviour
                 }                
             }
         }
-        
+
+
+
         //I am using a custom class because is needed to get the exact i and j pos of the same room, if not, it can appear in an undesired room like the start one
         var randomRoom = Random.Range(0, availableRoomsList.Count);
         chestRoomPosI = availableRoomsList[randomRoom].posI;
@@ -477,7 +484,6 @@ public class MazeGenerator : MonoBehaviour
         Destroy(roomObject);
 
         allRoomsList.Remove(roomsGBMatrix[chestRoomPosI, chestRoomPosJ]);
-
         roomsGBMatrix[chestRoomPosI, chestRoomPosJ] = Instantiate(chestRoom, new Vector3((chestRoomPosI * roomOffset.x) / 2f, 0, (chestRoomPosJ * roomOffset.y) / 2f), Quaternion.identity, rooms.transform);
         roomsGBMatrix[chestRoomPosI, chestRoomPosJ].name = "Chest: " + chestRoomPosI + " " + chestRoomPosJ;
         var chestRoomScript = roomsGBMatrix[chestRoomPosI, chestRoomPosJ].GetComponent<RoomScript>();
@@ -497,7 +503,7 @@ public class MazeGenerator : MonoBehaviour
 
         }
 
-
+        
         for (int i = 0; i < gridDimensionX * 2 - 1; i = i + 2)
         {
             for (int j = 0; j < gridDimensionZ * 2 - 1; j = j + 2)

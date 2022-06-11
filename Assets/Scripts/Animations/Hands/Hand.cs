@@ -26,7 +26,6 @@ public class Hand : MonoBehaviour
     void Update()
     {
         AnimateHand();
-        Debug.Log("grip " + gripCurrent);
     }
 
     public void ResetPos()

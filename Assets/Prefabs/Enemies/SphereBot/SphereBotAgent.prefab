@@ -4189,8 +4189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e77c2de991a504497bc1b6a0b36c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
-  _damage: -10
+  _health: 300
+  _damage: -20
   _speed: 3.5
   navAgentOffset: -0.3
   firstAidPrefab: {fileID: 6195592631567584285, guid: cb05cac24ef31c44eae557fb6d026bfa, type: 3}
@@ -4198,7 +4198,7 @@ MonoBehaviour:
   numberOfEnemiesSameRoom: 3
   navAgent: {fileID: 0}
   playerInRoom: 0
-  rollingSpeed: 2.5
+  rollingSpeed: 3
   walkSpeed: 1
   attackInterval: 0.05
   projectileSpeed: 3

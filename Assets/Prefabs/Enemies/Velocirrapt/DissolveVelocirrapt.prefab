@@ -1947,7 +1947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 100
   _damage: -10
-  _speed: 2
+  _speed: 5
   navAgentOffset: 0
   firstAidPrefab: {fileID: 6195592631567584285, guid: cb05cac24ef31c44eae557fb6d026bfa, type: 3}
   probabilityAid: 10

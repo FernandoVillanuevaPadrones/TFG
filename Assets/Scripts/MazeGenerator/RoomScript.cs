@@ -8,7 +8,7 @@ public class RoomScript : MonoBehaviour
     [Header("0 = Up, 1= Down, 2 = Right, 3 = Left")]
     public GameObject[] walls;
     public GameObject[] doors;
-    public VisualEffect[] smokeEffects;
+    public ParticleSystem [] smokeEffects;
 
     [SerializeField] private Animator[] doorsAnimators;
 
@@ -96,7 +96,7 @@ public class RoomScript : MonoBehaviour
             openSoundedOnce = true;          
             foreach (var effect in smokeEffects)
             {
-                effect.Play();
+               effect.Play();
             }
         }
         playerInRoom = false;

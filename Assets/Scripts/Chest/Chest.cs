@@ -16,7 +16,7 @@ public class Chest : MonoBehaviour
     [SerializeField] private float finalRotYChestKey = 0f;
     [SerializeField] private float keyAnimDuration = 2f;
     [SerializeField] private Ease keyEaseType;
-    [SerializeField] private VisualEffect smokeEffect;
+    [SerializeField] private ParticleSystem smokeEffect;
 
     [Header("OBJECTS")]
     [SerializeField]
@@ -47,7 +47,6 @@ public class Chest : MonoBehaviour
     private void Start()
     {
         currentLevel = PlayerPrefs.GetInt("Level");
-        currentLevel = 6;
 
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();

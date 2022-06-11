@@ -32,8 +32,11 @@ public class PlayerMapMovement : MonoBehaviour
     private void FixedUpdate()
     {
 
-       
-        transform.localScale = HUDGB.transform.localScale;
+        if (HUDGB != null)
+        {
+            transform.localScale = HUDGB.transform.localScale;
+
+        }
 
     }
 
