@@ -1115,7 +1115,7 @@ PrefabInstance:
       objectReference: {fileID: 350251373}
     - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
       propertyPath: currentSeed
-      value: 1045370838
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1740122262274448704, guid: 6411ef6a3a3ed7c4dbac8b0fc01752de, type: 3}
       propertyPath: faderAnimator

@@ -228,7 +228,7 @@ public class Player : MonoBehaviour
     public void ChangeSpeed(float changeSpeed)
     {
         _actionContinuous.moveSpeed += changeSpeed;
-        _actionContinuous.moveSpeed = Mathf.Clamp(_actionContinuous.moveSpeed, 1f, 3f);
+        _actionContinuous.moveSpeed = Mathf.Clamp(_actionContinuous.moveSpeed, 1f, 4f);
     }
 
     public void ChangeHealth(float num)
