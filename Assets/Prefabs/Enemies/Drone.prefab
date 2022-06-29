@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 387a596d46264ff4b9a706efb1018d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 50
+  _health: 150
   _damage: -20
   _speed: 6
   navAgentOffset: 0

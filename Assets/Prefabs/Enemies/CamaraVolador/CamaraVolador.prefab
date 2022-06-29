@@ -2401,7 +2401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1083d7fcf765160498e6654dc13651e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 400
+  _health: 1000
   _damage: -50
   _speed: 3.5
   navAgentOffset: 0.58

@@ -1945,7 +1945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce19f4a4439910e408c1beef9130235a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  _health: 250
   _damage: -10
   _speed: 5
   navAgentOffset: 0

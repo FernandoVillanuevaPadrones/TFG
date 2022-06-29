@@ -157,6 +157,11 @@ public class Weapon : MonoBehaviour
     }
     public void ChangeDamage(float num) {
         _currentDamage += num;
+
+        if (_currentDamage <= 0)
+        {
+            _currentDamage = 5;
+        }
     }
 
     public void InfinityShoots()
